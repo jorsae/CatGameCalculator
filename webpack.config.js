@@ -4,7 +4,8 @@ const path = require('path');
 
 module.exports = {
     entry: {
-        'classes': glob.sync('./src/js/classes/*.js')
+        'classes': glob.sync('./src/js/classes/*.js'),
+        'test': './src/js/test.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
