@@ -109,6 +109,17 @@ describe('Crafting', () => {
         assert.deepEqual(c.craftingList, expected);
     });
 
+    it('setCraftingItem: Adding one item, then setting it to 0, removes the item', () => {
+        var recipes = recipe.getCraftingRecipes();
+        
+        var c = new crafting.Crafting(recipes);
+        c.setCraftingItem('Needles', 1);
+        c.setCraftingItem('Needles', 0);
+        
+        var expected = new Map();
+        assert.deepEqual(c.craftingList, expected);
+    });
+
     it('getCraftingRequirements: Get crafting recipe for item with quantity higher than 1', () => {
         var recipes = recipe.getCraftingRecipes();
         var needles = recipes.get('Needles');

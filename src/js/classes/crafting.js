@@ -15,10 +15,21 @@ export class Crafting{
 
         var oldQuantity = this.craftingList.get(name);
         if(oldQuantity === undefined){
-            this.craftingList.set(name, quantity);
+            if(quantity === 0){
+                this.craftingList.delete(name);
+            }
+            else{
+                this.craftingList.set(name, quantity);
+            }
         }
         else{
-            this.craftingList.set(name, oldQuantity + quantity);
+            var totalQuantity = oldQuantity + quantity;
+            if(totalQuantity === 0){
+                this.craftingList.delete(name);
+            }
+            else{
+                this.craftingList.set(name, oldQuantity + quantity);
+            }
         }
     }
 
@@ -29,7 +40,12 @@ export class Crafting{
             return;
         }
 
-        this.craftingList.set(name, quantity);
+        if(quantity === 0){
+            this.craftingList.delete(name);
+        }
+        else{
+            this.craftingList.set(name, quantity);
+        }
     }
 
     setCraftingTime(time){
