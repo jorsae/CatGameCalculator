@@ -5,7 +5,7 @@ var rarity = require('./rarity');
  * i.e: String, Cotton, Firestone, etc.
  */
 export class CraftingItem{
-    constructor(name, craftingTime, baseCost, rarity, sortingOrder, quantity = 1, craftingRequirements = null){
+    constructor(name, craftingTime, baseCost, rarity, sortingOrder, craftingRequirements = null, quantity = 1){
         this.name = name;
         this.craftingTime = craftingTime;
         this.baseCost = baseCost;

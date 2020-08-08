@@ -1,7 +1,10 @@
 var assert = require('assert');
 var craftingMethod = require('../../src/js/classes/craftingMethod');
 var craftingItem = require('../../src/js/classes/craftingItem');
-var rarity = require('../../src/js/classes/rarity')
+var utility = require('../../src/js/utility/utility');
+var recipe = require('../../src/js/normal/recipes');
+var rarity = require('../../src/js/classes/rarity');
+const { AssertionError } = require('assert');
 
 describe('Test for CraftingItem', () => {
     it('CraftingItem variables', () => {
@@ -40,24 +43,24 @@ describe('Test for CraftingItem', () => {
 
     it('CraftingItem: getCraftingMethod basic', () => {
         // 50min to craft, needs 19 in 30minutes. Craft 19x 1times
-        const item = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.LEGENDARY, 1, quantity=19);
+        const item = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.LEGENDARY, 1, null, quantity=19);
         const method = [new craftingMethod.CraftingMethod(19, 1)];
         assert.deepEqual(item.getCraftingMethod(30), method);
         
         // 2min to craft, needs 30 in 30minutes. Craft: 2x 15times
-        const item2 = new craftingItem.CraftingItem("craftingItem", 2, 100, rarity.Rarity.LEGENDARY, 2, quantity=30);
+        const item2 = new craftingItem.CraftingItem("craftingItem", 2, 100, rarity.Rarity.LEGENDARY, 2, null, quantity=30);
         const method2 = [new craftingMethod.CraftingMethod(2, 15)];
         assert.deepEqual(item2.getCraftingMethod(30), method2)
     });
 
     it('CraftingItem: getCraftingMethod advanced', () => {
         // 3min to craft, needs 19 in 20minutes. Craft: 4x 1time, 3x 5times.
-        const item = new craftingItem.CraftingItem("craftingItem", 3, 100, rarity.Rarity.LEGENDARY, 1, quantity=19);
+        const item = new craftingItem.CraftingItem("craftingItem", 3, 100, rarity.Rarity.LEGENDARY, 1, null, quantity=19);
         const method = [new craftingMethod.CraftingMethod(4, 1), new craftingMethod.CraftingMethod(3, 5)];
         assert.deepEqual(item.getCraftingMethod(20), method);
         
         // 7min to craft, needs 29 in 12minutes. Craft: 8x 1time, 7x 3times.
-        const item2 = new craftingItem.CraftingItem("craftingItem", 7, 100, rarity.Rarity.LEGENDARY, 1, quantity=29);
+        const item2 = new craftingItem.CraftingItem("craftingItem", 7, 100, rarity.Rarity.LEGENDARY, 1, null, quantity=29);
         const method2 = [new craftingMethod.CraftingMethod(8, 1), new craftingMethod.CraftingMethod(7, 3)];
         assert.deepEqual(item2.getCraftingMethod(28), method2);
     });
