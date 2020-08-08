@@ -102,7 +102,7 @@ function addFloor(){
 
     if(floor === undefined){
         displayPopover("addFloor", "Can't add floor");
-        return; // TODO: Write error to the user that the floor selected is undefined.
+        return;
     }
     
     for(var i = 0; i < floor.requirements.length; i++){
