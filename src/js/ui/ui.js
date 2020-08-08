@@ -24,14 +24,17 @@ function addFloor(){
     var floor = floorRecipes.get(floorValue);
 
     if(floor === undefined){
+        displayPopover("addFloor", "Can't add floor");
         return; // TODO: Write error to the user that the floor selected is undefined.
     }
-
+    
     for(var i = 0; i < floor.requirements.length; i++){
         var itemName = floor.requirements[i][0];
         var quantity = floor.requirements[i][1];
         increaseCraftingAmount(itemName, quantity);
     }
+    
+    displayPopover("addFloor", "Added floor: \"" + floor + "\"");
 }
 
 function calculate(){
@@ -51,7 +54,8 @@ function calculate(){
     
     console.log(crafting.craftingList.size);
     if(crafting.craftingList.size <= 0){
-        // TODO: Give error message to the user
+        displayPopover("calculate", "Nothing to calculate");
+        displayPopover("quickCalculate", "Nothing to calculate");
         return;
     }
 
@@ -69,6 +73,7 @@ function calculate(){
         item.quantity = quantity;
         createOutputTableRow(table, item, crafting.craftingTime);
     }
+    
     // TODO: Add comma to clean up format
     document.getElementById("outputTotalCost").innerText = "Total cost: " + crafting.getTotalCost();
 }
@@ -271,4 +276,16 @@ function updateCraftingAmount(name){
         value = 0;
     }
     document.getElementById(name).value = value;
+}
+
+/**
+ * Helper function that displays a popover on a selected item.
+ * Note:
+ *  For the popover to automatically close, the DOM element must have data-toggle="popover"
+ *  data-placement is also nice to have :eyes:
+ */
+function displayPopover(id, content){
+    var popElement = $('#' + id);
+    popElement.attr('data-content', content);
+    popElement.popover("show");
 }
