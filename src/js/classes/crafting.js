@@ -6,14 +6,19 @@ export class Crafting{
         this.currentCraft = new Map();
     }
 
-    addCraftingItem(item){
-        var craftingItem = this.craftingList.get(item.name);
-        if(craftingItem === undefined){
-            this.craftingList.set(item.name, item);
+    addCraftingItem(name, quantity){
+        var item = this.craftingRecipes.get(name);
+        if(item === undefined){
+            // TODO: Throw error as this item does not exist as a crafting recipe. Also write test for this
+            return;
+        }
+
+        var oldQuantity = this.craftingList.get(name);
+        if(oldQuantity === undefined){
+            this.craftingList.set(name, quantity);
         }
         else{
-            craftingItem.quantity += item.quantity;
-            this.craftingList.set(item.name, craftingItem);
+            this.craftingList.set(name, oldQuantity + quantity);
         }
     }
 
@@ -23,12 +28,14 @@ export class Crafting{
 
     getCraftingRequirements(){
         this.currentCraft.clear();
-
-        for (const [name, craftingItem] of this.craftingList.entries()) {
-            this.getItemRequirements(craftingItem, craftingItem.quantity);
-            this.addElementToCurrentCraft(craftingItem.name, craftingItem.quantity);
-
+        
+        for (const [name, quantity] of this.craftingList.entries()) {
+            var item = this.craftingRecipes.get(name);
+            item.quantity = quantity;
+            this.getItemRequirements(item, item.quantity);
+            this.addElementToCurrentCraft(item.name, item.quantity);
         }
+
         return this.currentCraft;
     }
 
@@ -66,5 +73,15 @@ export class Crafting{
             var oldValue = this.currentCraft.get(key);
             this.currentCraft.set(key, oldValue + value);
         }
+    }
+
+    getTotalCost(){
+        var totalCost = 0;
+        for (const [name, quantity] of this.getCraftingRequirements()) {
+            var item = this.craftingRecipes.get(name);
+            item.quantity = quantity;
+            totalCost += item.getCost(item.getCraftingMethod(this.craftingTime));
+        }
+        return totalCost;
     }
 }
