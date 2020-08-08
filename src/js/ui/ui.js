@@ -1,4 +1,5 @@
 import { Crafting } from '../classes/crafting';
+import { intToString } from '../utility/utility';
 
 var crafting = null;
 var recipes = null;
@@ -6,8 +7,70 @@ var recipes = null;
 export function initialize(rec){
     recipes = rec;
     crafting = new Crafting(recipes);
+
+    document.getElementById("calculate").onclick = calculate;
+    document.getElementById("quickCalculate").onclick = calculate;
 }
 
+function calculate(){
+    var userHours = parseInt(document.getElementById("userTimeHours").value);
+    var userMinutes = parseInt(document.getElementById("userTimeMinutes").value);
+    
+    var userTime = 0;
+    if(!isNaN(userHours)) {
+        userTime += userHours * 60;
+    }
+    if(!isNaN(userMinutes)){
+        userTime += userMinutes;
+    }
+    if(userTime <= 0){
+        return; // TODO: Give error message to the user
+    }
+
+    crafting.setCraftingTime(userTime);
+
+    var reqs = crafting.getCraftingRequirements();
+    console.log('Requirements: ');
+    var table = document.getElementById('outputTable').getElementsByTagName('tbody')[0];
+    for (const [name, quantity] of reqs.entries()) {
+        console.log(name + ': ' + quantity);
+        var item = recipes.get(name);
+        item.quantity = quantity;
+        createOutputTableRow(table, item, crafting.craftingTime);
+    }
+    var cost = crafting.getTotalCost();
+    console.log('cost: ' + cost);
+    console.log();
+}
+
+function createOutputTableRow(table, item, craftingTime){
+    var tableRow = table.insertRow();
+
+    // Add item name cell
+    var cellItem = tableRow.insertCell(0);
+    var cellNodeItem = document.createTextNode(item.name);
+    cellItem.appendChild(cellNodeItem);
+
+    // Add quantity cell
+    var cellQuantity = tableRow.insertCell(1);
+    var cellNodeQuantity = document.createTextNode(item.quantity);
+    cellQuantity.appendChild(cellNodeQuantity);
+
+    // Add cost cell
+    var cost = item.getCost(item.getCraftingMethod(craftingTime));
+    var cellCost = tableRow.insertCell(2);
+    var cellNodeCost = document.createTextNode(intToString(cost));
+    cellCost.appendChild(cellNodeCost);
+
+    var craftingText = item.getCraftingMethod();
+
+    // Add crafting method cell
+    var cellCrafting = tableRow.insertCell(3);
+    var cellNodeCrafting = document.createTextNode(craftingText);
+    cellCrafting.appendChild(cellNodeCrafting);
+}
+
+// TODO: This should be called via initialize
 export function populateFloors(floorRecipes){
     var select = document.getElementById("floors");
     
@@ -19,6 +82,7 @@ export function populateFloors(floorRecipes){
     }
 }
 
+// TODO: This should be called via initialize
 export function populateCraftingItems(recipes){
     var craftingDiv = document.getElementById("craftingContainer");
 

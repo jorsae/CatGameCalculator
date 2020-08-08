@@ -1,5 +1,4 @@
 import { getCraftingRecipes } from './recipes';
-import { Crafting } from '../classes/crafting';
 import { initialize, populateCraftingItems, populateFloors } from '../ui/ui';
 import { getFloorRecipes } from './floorRecipes';
 

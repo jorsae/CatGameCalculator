@@ -11,6 +11,5 @@ describe('CraftingMethod', () => {
     it('toString: Returns expected string', () => {
         const method = new craftingMethod.CraftingMethod(20, 3);
         assert.equal(method, "Craft: 20x, 3times");
-
     });
 });
