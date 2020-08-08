@@ -39,22 +39,4 @@ describe('utility test', () => {
         var result7d = utility.intToString(-7299912);
         assert.equal(result7d, '-7.3m');
     });
-
-    it('getCraftingRequirements', () => {
-        const recipes = recipe.getCraftingRecipes();
-        const item = recipes.get("Needles");
-
-        var currentCraft = new Map();
-        utility.getCraftingRequirements(item, recipes, currentCraft);
-        
-        var expected = new Map();
-        expected.set('Cotton', 6);
-        expected.set('Log', 6);
-        expected.set('Metal', 4);
-        expected.set('Ribbon', 1);
-        expected.set('Rock', 12);
-        expected.set('String', 2);
-        expected.set('Wood', 2);
-        assert.deepEqual(currentCraft, expected);
-    });
 });

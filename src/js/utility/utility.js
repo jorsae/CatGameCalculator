@@ -13,33 +13,3 @@ export function intToString (num, fixed=0) {
         e = d + ['', 'k', 'm', 'b', 't'][k]; // append power
     return e;
 }
-
-/**
- * Recursive function that will fetch all crafting requirements from a given item.
- * TODO: It should not be needed to have currentCraft as a parameter.
- */
-export function getCraftingRequirements(item, craftingRecipes, currentCraft, parentQuantity = 1){
-    if(item.craftingRequirements === null){
-        return;
-    }
-
-    // Adds all the requirements
-    for(var i = 0; i < item.craftingRequirements.length; i++){
-        var name = item.craftingRequirements[i].craftingItem.name;
-        var quantity = item.craftingRequirements[i].quantity * parentQuantity;
-        
-        var nameMap = currentCraft.get(name);
-        if(nameMap === undefined){
-            var craftingItem = craftingRecipes.get(name);
-            getCraftingRequirements(craftingItem, craftingRecipes, currentCraft, quantity);
-            currentCraft.set(name, quantity);
-        }
-        else{
-            var craftingItem = craftingRecipes.get(name);
-            getCraftingRequirements(craftingItem, craftingRecipes, currentCraft, quantity);
-            var oldQuantity = currentCraft.get(name);
-            currentCraft.set(name, oldQuantity + quantity);
-        }
-    }
-    return currentCraft;
-}
