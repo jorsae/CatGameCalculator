@@ -1,0 +1,459 @@
+body{
+    background-color: #74270c;
+    background-image: url("data:image/svg+xml,%3Csvg width='180' height='180' viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M81.28 88H68.413l19.298 19.298L81.28 88zm2.107 0h13.226L90 107.838 83.387 88zm15.334 0h12.866l-19.298 19.298L98.72 88zm-32.927-2.207L73.586 78h32.827l.5.5 7.294 7.293L115.414 87l-24.707 24.707-.707.707L64.586 87l1.207-1.207zm2.62.207L74 80.414 79.586 86H68.414zm16 0L90 80.414 95.586 86H84.414zm16 0L106 80.414 111.586 86h-11.172zm-8-6h11.173L98 85.586 92.414 80zM82 85.586L87.586 80H76.414L82 85.586zM17.414 0L.707 16.707 0 17.414V0h17.414zM4.28 0L0 12.838V0h4.28zm10.306 0L2.288 12.298 6.388 0h8.198zM180 17.414L162.586 0H180v17.414zM165.414 0l12.298 12.298L173.612 0h-8.198zM180 12.838L175.72 0H180v12.838zM0 163h16.413l.5.5 7.294 7.293L25.414 172l-8 8H0v-17zm0 10h6.613l-2.334 7H0v-7zm14.586 7l7-7H8.72l-2.333 7h8.2zM0 165.414L5.586 171H0v-5.586zM10.414 171L16 165.414 21.586 171H10.414zm-8-6h11.172L8 170.586 2.414 165zM180 163h-16.413l-7.794 7.793-1.207 1.207 8 8H180v-17zm-14.586 17l-7-7h12.865l2.333 7h-8.2zM180 173h-6.613l2.334 7H180v-7zm-21.586-2l5.586-5.586 5.586 5.586h-11.172zM180 165.414L174.414 171H180v-5.586zm-8 5.172l5.586-5.586h-11.172l5.586 5.586zM152.933 25.653l1.414 1.414-33.94 33.942-1.416-1.416 33.943-33.94zm1.414 127.28l-1.414 1.414-33.942-33.94 1.416-1.416 33.94 33.943zm-127.28 1.414l-1.414-1.414 33.94-33.942 1.416 1.416-33.943 33.94zm-1.414-127.28l1.414-1.414 33.942 33.94-1.416 1.416-33.94-33.943zM0 85c2.21 0 4 1.79 4 4s-1.79 4-4 4v-8zm180 0c-2.21 0-4 1.79-4 4s1.79 4 4 4v-8zM94 0c0 2.21-1.79 4-4 4s-4-1.79-4-4h8zm0 180c0-2.21-1.79-4-4-4s-4 1.79-4 4h8z' fill='%2395b2b8' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+}
+
+/* General CSS functions */
+p{
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+a{
+    color: gold;
+}
+
+h1.text-center{
+    margin: 4px;
+}
+
+.text-center{
+    text-align: center;
+}
+
+.no-margin{
+    margin: 0px;
+}
+
+/* CSS for version number */
+.version-number{
+    position: absolute;
+    font-size: 0.75em;
+    top: 0vw;
+    right: 1vw;
+    width: auto;
+}
+
+.popover{
+    position: absolute;
+    font-size: 1em;
+    background-color: gray;
+    width: fit-content;
+    border: solid 2px lightgray;
+    margin-top: -8px;
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.tooltip-inner{
+    position: absolute;
+    background-color: gray;
+}
+
+/* CSS for cookie policy banner */
+.cookie-paragraph{
+    margin: 0 0 0 0;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+}
+.cookie-paragraph a,
+.cookie-paragraph a:visited{
+    color: white;
+}
+
+.cookie-policy{
+    display: none;
+    flex-direction: wrap;
+    flex-wrap: nowrap;
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: gray;
+    width: 70vw;
+    border: solid 2px darkgray;
+    padding: 4px;
+}
+
+.cookie-policy-close{
+    color: white;
+    background-image: linear-gradient(to bottom, #2de3f5, #169ed1);
+    border: none;
+    text-align: center;
+    max-height: 70%;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+    padding: 8px;
+}
+
+.cookie-policy-close:hover{
+    color: black;
+    cursor: pointer;
+}
+
+/* CSS For index page */
+.calculator-selection{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.calculator-option{
+    font-size: 3em;
+    border: solid 1px white;
+    margin: 8px;
+}
+
+.calculator-option:hover{
+    color: gold;
+    cursor: pointer;
+}
+
+.guide-container-wrapper{
+    text-align: center;
+}
+
+.full-guide{
+    display: inline-block;
+    flex-direction: column;
+    height: auto !important;
+    text-align: left;
+    width: 70vw;
+    max-width: 70%;
+}
+
+ol {
+    font-size: 1.25em;
+    counter-reset: item
+}
+li {
+    display: block
+}
+li:before {
+    content: counters(item, ".") ") ";
+    counter-increment: item
+}
+
+.small{
+    font-size: 0.75em;
+}
+
+.super-small{
+    font-size: 0.95em;
+}
+
+/* CSS for Main Menu */
+.topnav{
+    text-decoration: none;
+    overflow: none;
+    width: 100vw;
+    max-width: 100%;
+    border-bottom: solid 2px black;
+    font-size: 2em;
+    margin-top: 12px;
+}
+
+.topnav a{
+    color: white;
+}
+
+.topnav .hamburger-menu {
+    display: none;
+}
+
+/* CSS for 'How-to use' */
+#howToUse{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-top: 12px;
+    font-size: 1em;
+}
+
+.guide-container{
+    display: flex;
+    justify-content: center;
+    height: 0;
+    overflow: hidden;
+}
+.guide-container-height{
+    height: auto;
+}
+
+/* Event countdown timer */ 
+.event-timer{
+    text-decoration: underline;
+}
+
+.event-running{
+    color: gold;
+    text-decoration: underline;
+}
+
+/* Crafting item CSS */
+.crafting-container{
+    display: block;
+    width: 100vw;
+    max-width: 100%;
+    overflow: visible;
+    text-align: center;
+    margin: auto;
+}
+
+.crafting-container h2{
+    margin-bottom: 0px;
+    margin-top: 0.5em;
+}
+
+.crafting-container select,
+.crafting-container button,
+.crafting-container label,
+.crafting-minute {
+    margin: 4px;
+    font-size: 1.5em;
+}
+
+.crafting-tier{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.crafting-item{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 33.33vw;
+    max-width: 33.33%;
+    margin-left: 8px;
+}
+
+.crafting-item-button{
+    background: none;
+    color: #ffffff;
+    font-size: 1em !important;
+    border: none;
+    height: 2em;
+}
+
+.crafting-item-info{
+    display: none;
+    height: 0;
+    font-size: 0.75em;
+}
+
+.display-crafting-item-info{
+    display: block;
+    height: auto;
+}
+
+.crafting-item-amount{
+    font-size: 1.5em;
+    width: 4.5em;
+    background: transparent;
+    text-align: center;
+    color: white;
+    border: none;
+    -webkit-box-shadow: inset 0px 0px 8px #333333;
+    -moz-box-shadow: inset 0px 0px 8px #333333;
+    box-shadow: inset 0px 0px 8px #333333;
+}
+
+.arrow{
+    width: auto;
+}
+
+/* Background for the different crafting tiers */
+.raw{
+    background-image: linear-gradient(to bottom, #b5b0a1, #66635c);
+}
+
+.common{
+    background-image: linear-gradient(to bottom, #2de3f5, #169ed1);
+}
+
+.rare{
+    background-image: linear-gradient(to bottom, #f55d69, #cb2347);
+}
+
+.epic{
+    background-image: linear-gradient(to bottom, #dd7cdb, #a859b4);
+}
+
+.legendary{
+    background-image: linear-gradient(to bottom, #81e3da, #7d2ba6);
+}
+
+/* Crafting time input */
+.crafting-time-container{
+    display: block;
+}
+
+.crafting-time-info{
+    width: 10vw;
+    max-width: 1.5em;
+}
+
+.crafting-time-input{
+    width: 40vw;
+    margin: auto;
+    padding: 8px;
+}
+
+.user-input-label{
+    vertical-align: middle;
+}
+
+.user-input{
+    font-size: 1em;
+    width: 15vw;
+    float: right;   
+}
+
+.crafting-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.crafting-button button{
+    font-size: 1.5em;
+    margin: 8px;
+}
+
+/* output-container */
+#copyClipboard{
+    display: block;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.output-total{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 8px;
+}
+
+.output-total span{
+    display: inline-block;
+    margin-left: 4px;
+    margin-right: 4px;
+    font-size: 1.5em;
+}
+
+.output-table{
+    left: 0px;
+    right: 0px;
+    margin: auto;
+}
+
+table{
+    table-layout: fixed;
+    width: 100%;
+}
+
+th{
+    font-weight: 900;
+    font-size: 1em;
+}
+
+td{
+    text-align: center;
+    overflow: auto;
+}
+
+td img{
+    max-height: 5vw;
+    vertical-align: middle;
+}
+
+tbody tr:nth-child(odd){
+    background-color: #169ed1;
+}
+
+tbody tr:nth-child(even){
+    background-color: #a859b4;
+}
+
+/* event.html */
+.raw-material{
+    margin: 4px;
+    padding: 8px;
+}
+
+.selected-raw-material{
+    border: solid 6px white;
+}
+
+/* about.html */
+.about-article{
+    margin: 0 auto;
+    width: 50%;
+}
+
+.about-article p{
+    display: inline-block;
+}
+
+.download{
+    margin-top: 20px;
+}
+
+.download img{
+    text-decoration: none;
+}
+
+.download a img{
+    max-width: 250px;
+}
+
+.app-store-icon{
+    height: 97px;
+    width: 225px;
+}
+
+/* feedback.html */
+.feedback{
+    text-align: center;
+    width: 100%;
+}
+
+/* privacy.html */
+.privacy{
+    width: 50%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    text-align: center;
+}
+
+.privacy ul li{
+    list-style-type: none;
+}
+
+/* Removes up/down arrows on 'input type="number"' */
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+input[type=checkbox] {
+    width: 1em;
+    height: 1em;
+    vertical-align: sub;
+}
