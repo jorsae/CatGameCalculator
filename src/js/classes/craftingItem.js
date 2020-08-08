@@ -57,7 +57,12 @@ export class CraftingItem{
             var max = maxQuantity * i;
             var min = minQuantity * (crafts - i);
             if((max+min) === this.quantity){
-                return [new craftingMethod.CraftingMethod(maxQuantity, i), new craftingMethod.CraftingMethod(minQuantity, (crafts-i))];
+                if((crafts - i) > 0){
+                    return [new craftingMethod.CraftingMethod(maxQuantity, i), new craftingMethod.CraftingMethod(minQuantity, (crafts-i))];
+                }
+                else{
+                    return [new craftingMethod.CraftingMethod(maxQuantity, i)];
+                }
             }
         }
 
