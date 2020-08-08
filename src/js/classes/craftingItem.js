@@ -15,8 +15,10 @@ export class CraftingItem{
 
     toString(){
         var craftReq = "";
-        for(var i = 0; i < this.craftingRequirements.length; i++){
-            craftReq += this.craftingRequirements[i].craftingItem.name + ' : ' + this.craftingRequirements[i].quantity + " ";
+        if(this.craftingRequirements !== null){
+            for(var i = 0; i < this.craftingRequirements.length; i++){
+                craftReq += this.craftingRequirements[i].craftingItem.name + ' : ' + this.craftingRequirements[i].quantity + " ";
+            }
         }
         return this.name + ", " + this.craftingTime + "minutes, " + this.baseCost + "coins. Crafting Requirement: " + craftReq;
     }
