@@ -19,7 +19,19 @@ export function initialize(rec, floorRec){
 }
 
 function addFloor(){
-    console.log('addFloor clicked');
+    var floorElement = document.getElementById("floors");
+    var floorValue = floorElement.value;
+    var floor = floorRecipes.get(floorValue);
+
+    if(floor === undefined){
+        return; // TODO: Write error to the user that the floor selected is undefined.
+    }
+
+    for(var i = 0; i < floor.requirements.length; i++){
+        var itemName = floor.requirements[i][0];
+        var quantity = floor.requirements[i][1];
+        increaseCraftingAmount(itemName, quantity);
+    }
 }
 
 function calculate(){
@@ -239,13 +251,16 @@ function craftingAmountUpdate(e){
 }
 
 function upClick(name){
-    crafting.addCraftingItem(name, 1);
-    updateCraftingAmount(name);
+    increaseCraftingAmount(name, 1);
 }
 
 function downClick(name){
-    crafting.addCraftingItem(name, -1);
-    updateCraftingAmount(name);
+    increaseCraftingAmount(name, -1);
+}
+
+function increaseCraftingAmount(name, quantity){
+    crafting.addCraftingItem(name, quantity);
+    updateCraftingAmount(name)
 }
 
 function updateCraftingAmount(name){
