@@ -1,5 +1,5 @@
 var assert = require('assert');
-var craftingMethod = require('../src/js/classes/craftingMethod');
+var craftingMethod = require('../../src/js/classes/craftingMethod');
 
 describe('Test for CraftingMethod', () => {
     it('CraftingMethod variables', () => {
@@ -10,7 +10,6 @@ describe('Test for CraftingMethod', () => {
 
     it('craftingMethod: toString', () => {
         const method = new craftingMethod.CraftingMethod(20, 3);
-        console.log(method);
         assert.equal(method, "Craft: 20x, 3times");
 
     });

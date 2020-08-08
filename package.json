@@ -16,7 +16,7 @@
     "webpack": "^4.43.0"
   },
   "scripts": {
-    "test": "mocha -r esm",
+    "test": "mocha -r esm --recursive",
     "build": "webpack"
   },
   "repository": {

@@ -1,5 +1,5 @@
 var assert = require('assert');
-var floor = require('../src/js/classes/floor');
+var floor = require('../../src/js/classes/floor');
 
 describe('Test for Floor', () => {
     it('Floor variables', () => {

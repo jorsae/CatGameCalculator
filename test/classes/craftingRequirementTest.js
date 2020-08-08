@@ -1,6 +1,6 @@
 var assert = require('assert');
-var craftingItem = require('../src/js/classes/craftingItem');
-var craftingRequirement = require('../src/js/classes/craftingRequirement');
+var craftingItem = require('../../src/js/classes/craftingItem');
+var craftingRequirement = require('../../src/js/classes/craftingRequirement');
 
 describe('Test for CraftingRequirement', () => {
     it('CraftingRequirement variables', () => {
