@@ -13,9 +13,17 @@ export function initialize(rec, floorRec){
     document.getElementById("calculate").onclick = calculate;
     document.getElementById("quickCalculate").onclick = calculate;
     document.getElementById("addFloor").onclick = addFloor;
+    document.getElementById("clear").onclick = clear;
 
     populateCraftingItems(recipes);
     populateFloors(floorRecipes);
+}
+
+function clear(){
+    for (const [name, quantity] of crafting.craftingList.entries()) {
+        increaseCraftingAmount(name, -quantity);
+    }
+    displayPopover("clear", "Cleared!");
 }
 
 function addFloor(){
