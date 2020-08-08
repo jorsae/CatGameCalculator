@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "build": "webpack --config webpack.config.js"
   },
   "repository": {
@@ -19,6 +19,8 @@
   },
   "homepage": "https://github.com/jorsae/CatGameCalculator#readme",
   "devDependencies": {
+    "mocha": "^8.0.1",
+    "mocha-loader": "^5.1.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   }
