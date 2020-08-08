@@ -1,8 +1,8 @@
 var assert = require('assert');
 var utility = require('../../src/js/utility/utility');
 
-describe('utility test', () => {
-    it('intToString positive number', () => {
+describe('Utility', () => {
+    it('intToString: Tests correct truncation for positive numbers', () => {
         var result1d = utility.intToString(0);
         assert.equal(result1d, '0');
 
@@ -22,7 +22,7 @@ describe('utility test', () => {
         assert.equal(result7d, '7.3m');
     });
 
-    it('intToString negative number', () => {
+    it('intToString: Tests correct truncation for negative numbers', () => {
         var result2d = utility.intToString(-16);
         assert.equal(result2d, '-16');
 

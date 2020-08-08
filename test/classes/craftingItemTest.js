@@ -4,8 +4,8 @@ var craftingItem = require('../../src/js/classes/craftingItem');
 var rarity = require('../../src/js/classes/rarity');
 const { AssertionError } = require('assert');
 
-describe('Test for CraftingItem', () => {
-    it('CraftingItem variables', () => {
+describe('CraftingItem', () => {
+    it('constructor: Create object with right attributes', () => {
         const item = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.COMMON, 0);
         assert.equal(item.name, "craftingItem");
         assert.equal(item.craftingTime, 50);
@@ -16,7 +16,7 @@ describe('Test for CraftingItem', () => {
         assert.equal(item.craftingRequirements, null);
     });
 
-    it('CraftingItem getRarityValue', () => {
+    it('getRarityValue: Testing rarity value for all possible rarities', () => {
         const hidden = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.HIDDEN, 0);
         assert.equal(hidden.getRarityValue(), 0);
 
@@ -39,7 +39,7 @@ describe('Test for CraftingItem', () => {
         assert.equal(legendary.getRarityValue(), 5);
     });
 
-    it('CraftingItem: getCraftingMethod basic', () => {
+    it('getCraftingMethod: Crafting method with only 1 step', () => {
         // 50min to craft, needs 19 in 30minutes. Craft 19x 1times
         const item = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.LEGENDARY, 1, null, quantity=19);
         const method = [new craftingMethod.CraftingMethod(19, 1)];
@@ -51,7 +51,7 @@ describe('Test for CraftingItem', () => {
         assert.deepEqual(item2.getCraftingMethod(30), method2)
     });
 
-    it('CraftingItem: getCraftingMethod advanced', () => {
+    it('getCraftingMethod: Crafting method with 2 steps', () => {
         // 3min to craft, needs 19 in 20minutes. Craft: 4x 1time, 3x 5times.
         const item = new craftingItem.CraftingItem("craftingItem", 3, 100, rarity.Rarity.LEGENDARY, 1, null, quantity=19);
         const method = [new craftingMethod.CraftingMethod(4, 1), new craftingMethod.CraftingMethod(3, 5)];
@@ -63,7 +63,7 @@ describe('Test for CraftingItem', () => {
         assert.deepEqual(item2.getCraftingMethod(28), method2);
     });
 
-    it('CraftingItem: toString', () => {
+    it('toString: Returns expected string', () => {
         const item = new craftingItem.CraftingItem("craftingItem2", 501, 1020, rarity.Rarity.COMMON, 0);
         assert.equal(item, "craftingItem2, 501minutes, 1020coins. Crafting Requirement: ");
     });

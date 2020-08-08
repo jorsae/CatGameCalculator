@@ -1,8 +1,8 @@
 var assert = require('assert');
 var rarity = require('../../src/js/classes/rarity');
 
-describe('Test for Rarity', () => {
-    it('Rarity values', () => {
+describe('Rarity', () => {
+    it('rarity: Tests all rarities string value is correct', () => {
         assert.equal(rarity.Rarity.HIDDEN, 'hidden');
         assert.equal(rarity.Rarity.RAW, 'raw');
         assert.equal(rarity.Rarity.COMMON, 'common');

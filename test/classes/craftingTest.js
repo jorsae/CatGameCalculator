@@ -3,13 +3,16 @@ var craftingItem = require('../../src/js/classes/craftingItem');
 var crafting = require('../../src/js/classes/crafting');
 var recipe = require('../../src/js/normal/recipes');
 
-describe('Test for Crafting', () => {
-    it('Crafting constructor', () => {
+describe('Crafting', () => {
+    it('constructor: Create object with right attributes', () => {
         var c = new crafting.Crafting(null);
         assert.equal(c.craftingTime, 30);
+        assert.equal(c.craftingRecipes, null);
+        assert.deepEqual(c.craftingList, new Map());
+        assert.deepEqual(c.currentCraft, new Map());
     });
 
-    it('Crafting change craftingTime', () => {
+    it('setCraftingTime: Can set new crafting time', () => {
         var c = new crafting.Crafting(null);
         assert.equal(c.craftingTime, 30);
 
@@ -17,7 +20,17 @@ describe('Test for Crafting', () => {
         assert.equal(c.craftingTime, 160);
     });
 
-    it('Crafting addCraftingItem one item', () => {
+    it('addCraftingItem: Adding invalid crafting item', () => {
+        var recipes = recipe.getCraftingRecipes();
+        
+        var c = new crafting.Crafting(recipes);
+        c.addCraftingItem('Test', 5);
+        
+        var expected = new Map();
+        assert.deepEqual(c.craftingList, expected);
+    });
+
+    it('addCraftingItem: Adding one item', () => {
         var recipes = recipe.getCraftingRecipes();
         const item = recipes.get('Needles');
         
@@ -29,7 +42,7 @@ describe('Test for Crafting', () => {
         assert.deepEqual(c.craftingList, expected);
     });
 
-    it('Crafting addCraftingItem multiple items', () => {
+    it('addCraftingItem: Adding multiple items', () => {
         var recipes = recipe.getCraftingRecipes();
 
         const item = recipes.get('Needles');
@@ -46,7 +59,7 @@ describe('Test for Crafting', () => {
         assert.deepEqual(c.craftingList, expected);
     });
 
-    it('Crafting addCraftingItem multiple items with same key', () => {
+    it('addCraftingItem: Adding multiple items with same key', () => {
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
@@ -68,7 +81,7 @@ describe('Test for Crafting', () => {
         assert.deepEqual(c.craftingList, expected2);
     });
 
-    it('Crafting getCraftingRequirements: 2 needles', () => {
+    it('getCraftingRequirements: Get crafting recipe for item with quantity higher than 1', () => {
         var recipes = recipe.getCraftingRecipes();
         var needles = recipes.get('Needles');
         needles.quantity = 2;
@@ -90,7 +103,7 @@ describe('Test for Crafting', () => {
         assert.deepEqual(currentCraft, expected);
     });
 
-    it('Crafting getCraftingRequirements. Non over-lapping crafting items', () => {
+    it('getCraftingRequirements: Adding crafting items with no overlapping requirements', () => {
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
@@ -111,7 +124,7 @@ describe('Test for Crafting', () => {
         assert.deepEqual(currentCraft, expected);
     });
 
-    it('Crafting getCraftingRequirements. Over-lapping crafting items', () => {
+    it('getCraftingRequirements: Adding multiple crafting items with over-lapping requirements', () => {
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
@@ -138,7 +151,7 @@ describe('Test for Crafting', () => {
         assert.deepEqual(currentCraft, expected);
     });
 
-    it('Crafting getTotalCost. Non-lapping crafting-items', () =>{
+    it('getTotalCost: Get costs for multiple items with no overlapping requirements', () =>{
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
@@ -149,7 +162,7 @@ describe('Test for Crafting', () => {
         assert.equal(cost, 500);
     });
 
-    it('Crafting getTotalCost. Over-lapping crafting-items', () =>{
+    it('getTotalCost: Get costs for multiple items with overlapping requirements', () =>{
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
@@ -160,7 +173,7 @@ describe('Test for Crafting', () => {
         assert.equal(cost, 20800);
     });
 
-    it('Crafting getTotalCost. Assure time is calculated properly', () =>{
+    it('getTotalCost: Assure time is taken into account properly when calculating cost', () =>{
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
