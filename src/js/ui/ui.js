@@ -1,3 +1,14 @@
+export function populateFloors(floorRecipes){
+    var select = document.getElementById("floors");
+    
+    for (const [name, item] of floorRecipes.entries()) {
+        var option = document.createElement("option");
+        option.value = name;
+        option.innerHTML = name;
+        select.appendChild(option);
+    }
+}
+
 export function populateCraftingItems(recipes){
     var craftingDiv = document.getElementById("craftingContainer");
 
