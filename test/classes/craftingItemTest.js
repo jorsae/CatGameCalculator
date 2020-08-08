@@ -1,8 +1,6 @@
 var assert = require('assert');
 var craftingMethod = require('../../src/js/classes/craftingMethod');
 var craftingItem = require('../../src/js/classes/craftingItem');
-var utility = require('../../src/js/utility/utility');
-var recipe = require('../../src/js/normal/recipes');
 var rarity = require('../../src/js/classes/rarity');
 const { AssertionError } = require('assert');
 

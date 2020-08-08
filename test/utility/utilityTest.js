@@ -1,6 +1,5 @@
 var assert = require('assert');
 var utility = require('../../src/js/utility/utility');
-var recipe = require('../../src/js/normal/recipes');
 
 describe('utility test', () => {
     it('intToString positive number', () => {
