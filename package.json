@@ -2,10 +2,20 @@
   "name": "CatGameCalculator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "mocha-loader": "^5.1.0",
+    "webpack-cli": "^3.3.11"
+  },
+  "devDependencies": {
+    "webpack": "^4.43.0"
+  },
   "scripts": {
     "test": "mocha",
-    "build": "webpack --config webpack.config.js"
+    "build" : "webpack"
   },
   "repository": {
     "type": "git",
@@ -17,11 +27,5 @@
   "bugs": {
     "url": "https://github.com/jorsae/CatGameCalculator/issues"
   },
-  "homepage": "https://github.com/jorsae/CatGameCalculator#readme",
-  "devDependencies": {
-    "mocha": "^8.0.1",
-    "mocha-loader": "^5.1.0",
-    "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.11"
-  }
+  "homepage": "https://github.com/jorsae/CatGameCalculator#readme"
 }

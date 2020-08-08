@@ -1,8 +1,11 @@
 const webpack = require('webpack')
+var glob = require('glob');
 const path = require('path');
 
 module.exports = {
-    entry: './src/js/test.js',
+    entry: {
+        'classes': glob.sync('./src/js/classes/*.js')
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: '[name].min.js'
