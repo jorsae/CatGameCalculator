@@ -140,10 +140,11 @@ function calculate(){
 
     clearOutputTable(); // Clears the table from any input
     
+    // TODO: Implement one minute crafting mode
     var oneMinCrafting = document.getElementById("crafting"); // oneMinCrafting.checked = 1min crafting
 
     var reqs = crafting.getCraftingRequirements();
-    // TODO: The output should be sorted by item.sortingOrder
+    
     var table = document.getElementById('outputTable').getElementsByTagName('tbody')[0];
     for (const [name, quantity] of reqs.entries()) {
         var item = recipes.get(name);

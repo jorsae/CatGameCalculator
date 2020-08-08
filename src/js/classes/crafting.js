@@ -62,6 +62,23 @@ export class Crafting{
             this.addElementToCurrentCraft(item.name, item.quantity);
         }
 
+        // Sort items into array sorting
+        var sorting = [];
+        for (const [name, quantity] of this.currentCraft.entries()) {
+            var item = this.craftingRecipes.get(name);
+            item.quantity = quantity;
+            sorting.push(item);
+        }
+        sorting.sort(function(x, y){
+            return x.sortingOrder - y.sortingOrder;
+        });
+
+        // Clear currentCraft and re-add items that are now sorted
+        this.currentCraft.clear(); 
+        for(var item of sorting){
+            this.addElementToCurrentCraft(item.name, item.quantity);
+        }
+
         return this.currentCraft;
     }
 
