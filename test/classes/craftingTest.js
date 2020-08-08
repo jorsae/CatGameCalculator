@@ -48,12 +48,6 @@ describe('Test for Crafting', () => {
 
     it('Crafting addCraftingItem multiple items with same key', () => {
         var recipes = recipe.getCraftingRecipes();
-        const item = recipes.get('Needles')
-        item.quantity = 5;
-        const item2 = recipes.get('Needles')
-        item2.quantity = 7;
-        const item3 = recipes.get('Needles')
-        item3.quantity = 10;
 
         var c = new crafting.Crafting(recipes);
         c.addCraftingItem('Needles', 5);
