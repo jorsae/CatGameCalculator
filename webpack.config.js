@@ -6,7 +6,8 @@ const copyPlugin = require('copy-webpack-plugin');
 module.exports = {
     entry: {
         'classes': glob.sync('./src/js/classes/*.js'),
-        'test': './src/js/test.js'
+        'test': './src/js/test.js',
+        'required' : glob.sync('./src/js/required/*.js')
     },
     output: {
         path: path.resolve(__dirname, 'dist/js'),
@@ -20,5 +21,8 @@ module.exports = {
             { from: 'src/images', to:'../images' }
           ],
         }),
+        new webpack.DefinePlugin({
+            __VERSION__: JSON.stringify(require("./package.json").version)
+        })
       ],
 };
