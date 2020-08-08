@@ -5,12 +5,13 @@ var rarity = require('./rarity');
  * i.e: String, Cotton, Firestone, etc.
  */
 export class CraftingItem{
-    constructor(name, craftingTime, baseCost, rarity, sortingOrder, craftingRequirements = null, quantity = 1){
+    constructor(name, category, baseCost, craftingTime, rarity, sortingOrder, craftingRequirements = null, quantity = 1){
         this.name = name;
-        this.craftingTime = craftingTime;
+        this.category = category;
         this.baseCost = baseCost;
+        this.craftingTime = craftingTime;
         this.rarity = rarity;
-        this.sortingOrder = sortingOrder
+        this.sortingOrder = sortingOrder;
         this.quantity = quantity;
 
         this.craftingRequirements = craftingRequirements;
@@ -81,9 +82,10 @@ export class CraftingItem{
         var craftReq = "";
         if(this.craftingRequirements !== null){
             for(var i = 0; i < this.craftingRequirements.length; i++){
-                craftReq += this.craftingRequirements[i].craftingItem.name + ' : ' + this.craftingRequirements[i].quantity + " ";
+                craftReq += this.craftingRequirements[i].craftingItem.name + ': ' + (this.craftingRequirements[i].quantity * this.quantity) + ", ";
             }
+            craftReq = craftReq.substring(0, craftReq.length - 2);
         }
-        return this.name + ", " + this.craftingTime + "minutes, " + this.baseCost + "coins. Crafting Requirement: " + craftReq;
+        return '[' + this.category + '/' + this.rarity + '] ' + this.name + '(' + this.quantity + '): ' + this.baseCost + 'coins, ' + this.craftingTime + 'min. Crafting Requirement: ' + craftReq;
     }
 }

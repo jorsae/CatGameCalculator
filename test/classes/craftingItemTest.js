@@ -1,15 +1,17 @@
 var assert = require('assert');
 var craftingMethod = require('../../src/js/classes/craftingMethod');
 var craftingItem = require('../../src/js/classes/craftingItem');
+var craftingRequirement = require('../../src/js/classes/craftingRequirement');
 var rarity = require('../../src/js/classes/rarity');
 const { AssertionError } = require('assert');
 
 describe('CraftingItem', () => {
     it('constructor: Create object with right attributes', () => {
-        const item = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.COMMON, 0);
+        const item = new craftingItem.CraftingItem("craftingItem", "category", 100, 50, rarity.Rarity.COMMON, 0);
         assert.equal(item.name, "craftingItem");
-        assert.equal(item.craftingTime, 50);
+        assert.equal(item.category, "category");
         assert.equal(item.baseCost, 100);
+        assert.equal(item.craftingTime, 50);
         assert.equal(item.rarity, rarity.Rarity.COMMON);
         assert.equal(item.sortingOrder, 0);
         assert.equal(item.quantity, 1);
@@ -17,55 +19,77 @@ describe('CraftingItem', () => {
     });
 
     it('getRarityValue: Testing rarity value for all possible rarities', () => {
-        const hidden = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.HIDDEN, 0);
+        const hidden = new craftingItem.CraftingItem("craftingItem", "category", 50, 100, rarity.Rarity.HIDDEN, 0);
         assert.equal(hidden.getRarityValue(), 0);
 
-        const raw = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.RAW, 0);
+        const raw = new craftingItem.CraftingItem("craftingItem", "category", 50, 100, rarity.Rarity.RAW, 0);
         assert.equal(raw.getRarityValue(), 1);
 
-        const common = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.COMMON, 0);
+        const common = new craftingItem.CraftingItem("craftingItem", "category", 50, 100, rarity.Rarity.COMMON, 0);
         assert.equal(common.getRarityValue(), 2);
 
-        const def = new craftingItem.CraftingItem("craftingItem", 50, 100, null, 0);
+        const def = new craftingItem.CraftingItem("craftingItem", "category", 50, 100, null, 0);
         assert.equal(def.getRarityValue(), 2);
 
-        const rare = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.RARE, 0);
+        const rare = new craftingItem.CraftingItem("craftingItem", "category", 50, 100, rarity.Rarity.RARE, 0);
         assert.equal(rare.getRarityValue(), 3);
 
-        const epic = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.EPIC, 0);
+        const epic = new craftingItem.CraftingItem("craftingItem", "category", 50, 100, rarity.Rarity.EPIC, 0);
         assert.equal(epic.getRarityValue(), 4);
 
-        const legendary = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.LEGENDARY, 0);
+        const legendary = new craftingItem.CraftingItem("craftingItem", "category", 50, 100, rarity.Rarity.LEGENDARY, 0);
         assert.equal(legendary.getRarityValue(), 5);
     });
 
     it('getCraftingMethod: Crafting method with only 1 step', () => {
         // 50min to craft, needs 19 in 30minutes. Craft 19x 1times
-        const item = new craftingItem.CraftingItem("craftingItem", 50, 100, rarity.Rarity.LEGENDARY, 1, null, quantity=19);
+        const item = new craftingItem.CraftingItem("craftingItem", "category", 100, 50, rarity.Rarity.LEGENDARY, 1, null, quantity=19);
         const method = [new craftingMethod.CraftingMethod(19, 1)];
         assert.deepEqual(item.getCraftingMethod(30), method);
         
         // 2min to craft, needs 30 in 30minutes. Craft: 2x 15times
-        const item2 = new craftingItem.CraftingItem("craftingItem", 2, 100, rarity.Rarity.LEGENDARY, 2, null, quantity=30);
+        const item2 = new craftingItem.CraftingItem("craftingItem", "category", 100, 2, rarity.Rarity.LEGENDARY, 2, null, quantity=30);
         const method2 = [new craftingMethod.CraftingMethod(2, 15)];
         assert.deepEqual(item2.getCraftingMethod(30), method2)
     });
 
     it('getCraftingMethod: Crafting method with 2 steps', () => {
         // 3min to craft, needs 19 in 20minutes. Craft: 4x 1time, 3x 5times.
-        const item = new craftingItem.CraftingItem("craftingItem", 3, 100, rarity.Rarity.LEGENDARY, 1, null, quantity=19);
+        const item = new craftingItem.CraftingItem("craftingItem", "category", 100, 3, rarity.Rarity.LEGENDARY, 1, null, quantity=19);
         const method = [new craftingMethod.CraftingMethod(4, 1), new craftingMethod.CraftingMethod(3, 5)];
         assert.deepEqual(item.getCraftingMethod(20), method);
         
         // 7min to craft, needs 29 in 12minutes. Craft: 8x 1time, 7x 3times.
-        const item2 = new craftingItem.CraftingItem("craftingItem", 7, 100, rarity.Rarity.LEGENDARY, 1, null, quantity=29);
+        const item2 = new craftingItem.CraftingItem("craftingItem", "category", 100, 7, rarity.Rarity.LEGENDARY, 1, null, quantity=29);
         const method2 = [new craftingMethod.CraftingMethod(8, 1), new craftingMethod.CraftingMethod(7, 3)];
         assert.deepEqual(item2.getCraftingMethod(28), method2);
     });
 
-    it('toString: Returns expected string', () => {
-        const item = new craftingItem.CraftingItem("craftingItem2", 501, 1020, rarity.Rarity.COMMON, 0);
-        assert.equal(item, "craftingItem2, 501minutes, 1020coins. Crafting Requirement: ");
+    it('toString: Without crafting requirements', () => {
+        const item = new craftingItem.CraftingItem("craftingItem2", "category", 1020, 501, rarity.Rarity.COMMON, 0);
+        assert.equal(item, "[category/common] craftingItem2(1): 1020coins, 501min. Crafting Requirement: ");
+    });
+    
+    it('toString: With 1 crafting requirement', () => {
+        const item2 = new craftingItem.CraftingItem("reqItem", "low category", 50, 15, rarity.Rarity.COMMON, 0);
+        const itemReq = [new craftingRequirement.CraftingRequirement(item2, 3)];
+        const item = new craftingItem.CraftingItem("craftingItem2", "category", 1020, 501, rarity.Rarity.COMMON, 0, itemReq);
+        assert.equal(item, "[category/common] craftingItem2(1): 1020coins, 501min. Crafting Requirement: reqItem: 3");
+    });
+
+    it('toString: Item has 3quantity and with 1 crafting requirement', () => {
+        const item2 = new craftingItem.CraftingItem("reqItem", "low category", 50, 15, rarity.Rarity.COMMON, 0);
+        const itemReq = [new craftingRequirement.CraftingRequirement(item2, 3)];
+        const item = new craftingItem.CraftingItem("craftingItem2", "category", 1020, 501, rarity.Rarity.COMMON, 0, itemReq, 3);
+        assert.equal(item, "[category/common] craftingItem2(3): 1020coins, 501min. Crafting Requirement: reqItem: 9");
+    });
+
+    it('toString: With multiple crafting requirements', () => {
+        const itemReq1 = new craftingItem.CraftingItem("reqItem1", "low category1", 100, 15, rarity.Rarity.COMMON, 0);
+        const itemReq2 = new craftingItem.CraftingItem("reqItem2", "low category2", 50, 15, rarity.Rarity.COMMON, 0);
+        const itemReq = [new craftingRequirement.CraftingRequirement(itemReq1, 3), new craftingRequirement.CraftingRequirement(itemReq2, 1)];
+        const item = new craftingItem.CraftingItem("craftingItem2", "category", 1020, 501, rarity.Rarity.COMMON, 0, itemReq);
+        assert.equal(item, "[category/common] craftingItem2(1): 1020coins, 501min. Crafting Requirement: reqItem1: 3, reqItem2: 1");
     });
 
 });
