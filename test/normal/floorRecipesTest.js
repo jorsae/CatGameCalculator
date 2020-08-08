@@ -8,7 +8,7 @@ describe('Floor Recipes', () => {
     });
 
     it('getFloorRecipes: Makes sure floor recipes is returned as a Map object', () => {
-        var recipes = recipe.getCraftingRecipes();
+        var recipes = floorRecipe.getFloorRecipes();
         assert.ok(recipes instanceof Map);
     });
 });

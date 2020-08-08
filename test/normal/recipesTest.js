@@ -7,7 +7,7 @@ describe('Normal crafting recipes', () => {
         assert.equal(recipes.size, 23)
     });
 
-    it('getCraftingRecipes: Makes sure crafting recipes is returned as a Map object', () => {
+    it('getCraftingRecipes: Makes sure normal crafting recipes is returned as a Map object', () => {
         var recipes = recipe.getCraftingRecipes();
         assert.ok(recipes instanceof Map);
     });
