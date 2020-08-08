@@ -51,52 +51,92 @@ function createCraftingTierHeader(category){
     return header;
 }
 
-// This function creates a crafting-item with all DOM elements needed
 function createCraftingItem(tier, item){
     var itemDiv = document.createElement("div");
     itemDiv.classList.add("crafting-item");
     itemDiv.classList.add(item.rarity);
-
+    
     // Creates button which act as a header and as a dropdown button for more info about the item
-    const craftingItemButton = document.createElement("button"); // Button elements for the crafting items
-    craftingItemButton.classList.add("crafting-item-button");
-    craftingItemButton.innerHTML = item.name + ' <i class="fa fa-angle-double-down"></i>';
+    var craftingItemButton = createCraftingItemButton(item.name);
     itemDiv.appendChild(craftingItemButton);
 
     // Creates the p tag that holds item information
-    //<p class="crafting-item-info" id="woodInfo"></p>
+    var craftingItemInfo = createCraftingItemDescription(item);
+    itemDiv.appendChild(craftingItemInfo);
+
+    // Displays/hides crafting item description
+    craftingItemButton.onclick = () => {
+        const displayCraftingItemInfoClass = "display-crafting-item-info";
+        // crafting item description is visible
+        if(craftingItemInfo.classList.contains(displayCraftingItemInfoClass)){
+            craftingItemInfo.classList.remove(displayCraftingItemInfoClass)
+        }
+        else{
+            craftingItemInfo.classList.add(displayCraftingItemInfoClass);
+        }
+    };
+
+    // Input field for how many to craft
+    const craftingAmount = createCraftingItemInputField(item.name);
+    itemDiv.appendChild(craftingAmount);
+
+    // Creates arrows for increasing/decreasing quantity of items to craft
+    const incrementContainer = createCraftingItemArrows(item.name);
+    itemDiv.appendChild(incrementContainer);
+
+    tier.appendChild(itemDiv);
+}
+
+function createCraftingItemButton(name){
+    const craftingItemButton = document.createElement("button"); // Button elements for the crafting items
+    craftingItemButton.classList.add("crafting-item-button");
+    craftingItemButton.innerHTML = name + ' <i class="fa fa-angle-double-down"></i>';
+    return craftingItemButton;
+}
+
+function createCraftingItemDescription(item){
     const craftingItemInfo = document.createElement("p");
     craftingItemInfo.classList.add("crafting-item-info");
     craftingItemInfo.id = item.name + "Info";
-    itemDiv.appendChild(craftingItemInfo);
 
-    // Input field for how many to craft
-    // <input id="WoodAmount" class="crafting-item-amount" aria-label="Amount of wood you want to craft"
-    //type="number" value="0" min="0" onclick="this.select()"></input>
+    var descriptionText = '';
+    for(let i = 0; i < item.craftingRequirements.length; i++){
+        var text = document.createTextNode(item.craftingRequirements[i]);
+        craftingItemInfo.appendChild(text);
+        craftingItemInfo.appendChild(document.createElement("br"));
+    }
+    craftingItemInfo.appendChild(document.createTextNode('Crafting time: ' + item.craftingTime + 'min'));
+    
+    var craftingItemDescription = document.createTextNode(descriptionText);
+    craftingItemInfo.appendChild(craftingItemDescription);
+    return craftingItemInfo;
+}
+
+function createCraftingItemInputField(name){
     const craftingAmount = document.createElement("input");
-    craftingAmount.id = item.name + "Amount";
+    craftingAmount.id = name + "Amount";
     craftingAmount.classList.add("crafting-item-amount");
     craftingAmount.type = "number";
     craftingAmount.value = 0;
     craftingAmount.min = 0;
     craftingAmount.addEventListener("click", function() { this.select(); });
-    itemDiv.appendChild(craftingAmount);
+    return craftingAmount;
+}
 
+function createCraftingItemArrows(name){
     const incrementContainer = document.createElement("span");
 
     var upArrow = document.createElement("img");
     upArrow.src = "images/arrow-up.png";
-    upArrow.addEventListener("click", function() { upClick(item.name); } );
+    upArrow.addEventListener("click", function() { upClick(name); } );
     incrementContainer.appendChild(upArrow);
     
     var downArrow = document.createElement("img");
     downArrow.src = "images/arrow-down.png";
-    downArrow.addEventListener("click", function() { downClick(item.name); } );
+    downArrow.addEventListener("click", function() { downClick(name); } );
     incrementContainer.appendChild(downArrow);
     
-    itemDiv.appendChild(incrementContainer);
-
-    tier.appendChild(itemDiv);
+    return incrementContainer;
 }
 
 function upClick(name){
