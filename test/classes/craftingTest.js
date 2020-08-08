@@ -81,6 +81,34 @@ describe('Crafting', () => {
         assert.deepEqual(c.craftingList, expected2);
     });
 
+    it('setCraftingItem: Adding one item', () => {
+        var recipes = recipe.getCraftingRecipes();
+        const item = recipes.get('Needles');
+        
+        var c = new crafting.Crafting(recipes);
+        c.setCraftingItem('Needles', 1);
+        
+        var expected = new Map();
+        expected.set(item.name, item.quantity);
+        assert.deepEqual(c.craftingList, expected);
+    });
+
+    it('setCraftingItem: Adding multiple items with same key', () => {
+        var recipes = recipe.getCraftingRecipes();
+
+        const item = recipes.get('Needles');
+        item.quantity = 4;
+
+        var c = new crafting.Crafting(recipes);
+        c.setCraftingItem('Needles', 1);
+        c.setCraftingItem('Needles', 4);
+
+        var expected = new Map();
+        expected.set(item.name, item.quantity);
+
+        assert.deepEqual(c.craftingList, expected);
+    });
+
     it('getCraftingRequirements: Get crafting recipe for item with quantity higher than 1', () => {
         var recipes = recipe.getCraftingRecipes();
         var needles = recipes.get('Needles');

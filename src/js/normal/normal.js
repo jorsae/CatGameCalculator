@@ -1,12 +1,12 @@
 import { getCraftingRecipes } from './recipes';
 import { Crafting } from '../classes/crafting';
-import { populateCraftingItems, populateFloors } from '../ui/ui';
+import { initialize, populateCraftingItems, populateFloors } from '../ui/ui';
 import { getFloorRecipes } from './floorRecipes';
 
 // init function
 $(document).ready(function(){
     const recipes = getCraftingRecipes();
-    var crafting = new Crafting(recipes);
+    initialize(recipes);
     var floorRecipes = getFloorRecipes();
 
     populateCraftingItems(recipes);

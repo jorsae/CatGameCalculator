@@ -22,6 +22,16 @@ export class Crafting{
         }
     }
 
+    setCraftingItem(name, quantity){
+        var item = this.craftingRecipes.get(name);
+        if(item === undefined){
+            // TODO: Throw error as this item does not exist as a crafting recipe. Also write test for this
+            return;
+        }
+
+        this.craftingList.set(name, quantity);
+    }
+
     setCraftingTime(time){
         this.craftingTime = time;
     }

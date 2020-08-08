@@ -1,3 +1,13 @@
+import { Crafting } from '../classes/crafting';
+
+var crafting = null;
+var recipes = null;
+
+export function initialize(rec){
+    recipes = rec;
+    crafting = new Crafting(recipes);
+}
+
 export function populateFloors(floorRecipes){
     var select = document.getElementById("floors");
     
@@ -114,12 +124,13 @@ function createCraftingItemDescription(item){
 
 function createCraftingItemInputField(name){
     const craftingAmount = document.createElement("input");
-    craftingAmount.id = name + "Amount";
+    craftingAmount.id = name;
     craftingAmount.classList.add("crafting-item-amount");
     craftingAmount.type = "number";
     craftingAmount.value = 0;
     craftingAmount.min = 0;
     craftingAmount.addEventListener("click", function() { this.select(); });
+    craftingAmount.addEventListener('input', craftingAmountUpdate);
     return craftingAmount;
 }
 
@@ -139,10 +150,22 @@ function createCraftingItemArrows(name){
     return incrementContainer;
 }
 
+function craftingAmountUpdate(e){
+    var value = parseInt(e.target.value);
+    crafting.setCraftingItem(e.target.id, value);
+    updateCraftingAmount(e.target.id);
+}
+
 function upClick(name){
-    console.log("upClick: " + name);
+    crafting.addCraftingItem(name, 1);
+    updateCraftingAmount(name);
 }
 
 function downClick(name){
-    console.log("downClick: " + name);
+    crafting.addCraftingItem(name, -1);
+    updateCraftingAmount(name);
+}
+
+function updateCraftingAmount(name){
+    document.getElementById(name).value = crafting.craftingList.get(name);
 }
