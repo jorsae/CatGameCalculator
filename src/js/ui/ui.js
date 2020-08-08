@@ -29,18 +29,28 @@ function calculate(){
 
     crafting.setCraftingTime(userTime);
 
+    clearOutputTable(); // Clears the table from any input
+
+    
+    var oneMinCrafting = document.getElementById("crafting"); // oneMinCrafting.checked = 1min crafting
+
     var reqs = crafting.getCraftingRequirements();
-    console.log('Requirements: ');
+    // TODO: The output should be sorted by item.sortingOrder
     var table = document.getElementById('outputTable').getElementsByTagName('tbody')[0];
     for (const [name, quantity] of reqs.entries()) {
-        console.log(name + ': ' + quantity);
+        if(quantity <= 0){
+            // TODO: Instead of ignoring items with 0 quantity. They should be removed from crafting.craftingList when user sets them to 0 quantity.
+            continue;
+        }
         var item = recipes.get(name);
         item.quantity = quantity;
         createOutputTableRow(table, item, crafting.craftingTime);
     }
     var cost = crafting.getTotalCost();
-    console.log('cost: ' + cost);
-    console.log();
+}
+
+function clearOutputTable(){
+    document.getElementById('outputTable').getElementsByTagName('tbody')[0].innerHTML = "";
 }
 
 function createOutputTableRow(table, item, craftingTime){
