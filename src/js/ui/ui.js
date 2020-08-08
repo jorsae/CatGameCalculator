@@ -84,6 +84,9 @@ function calculate(){
     
     // TODO: Add comma to clean up format
     document.getElementById("outputTotalCost").innerText = "Total cost: " + crafting.getTotalCost();
+
+    // Scroll down to the results
+    document.getElementById("outputContainer").scrollIntoView();
 }
 
 function clearOutputTable(){
