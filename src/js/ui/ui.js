@@ -3,13 +3,23 @@ import { intToString } from '../utility/utility';
 
 var crafting = null;
 var recipes = null;
+var floorRecipes = null;
 
-export function initialize(rec){
+export function initialize(rec, floorRec){
     recipes = rec;
+    floorRecipes = floorRec;
     crafting = new Crafting(recipes);
 
     document.getElementById("calculate").onclick = calculate;
     document.getElementById("quickCalculate").onclick = calculate;
+    document.getElementById("addFloor").onclick = addFloor;
+
+    populateCraftingItems(recipes);
+    populateFloors(floorRecipes);
+}
+
+function addFloor(){
+    console.log('addFloor clicked');
 }
 
 function calculate(){
@@ -80,8 +90,7 @@ function createOutputTableRow(table, item, craftingTime){
     cellCrafting.appendChild(cellNodeCrafting);
 }
 
-// TODO: This should be called via initialize
-export function populateFloors(floorRecipes){
+function populateFloors(floorRecipes){
     var select = document.getElementById("floors");
     
     for (const [name, item] of floorRecipes.entries()) {
@@ -92,8 +101,7 @@ export function populateFloors(floorRecipes){
     }
 }
 
-// TODO: This should be called via initialize
-export function populateCraftingItems(recipes){
+function populateCraftingItems(recipes){
     var craftingDiv = document.getElementById("craftingContainer");
 
     var lastCategory = null;
