@@ -169,8 +169,7 @@ function calculate(){
         createOutputTableRow(table, item, crafting.craftingTime, userBoost);
     }
     
-    // TODO: Add comma to clean up format
-    document.getElementById("outputTotalCost").innerText = "Total cost: " + crafting.getTotalCost(userBoost);
+    document.getElementById("outputTotalCost").innerText = "Total cost: " + crafting.getTotalCost(userBoost).toLocaleString();
 
     // Scroll down to the results
     document.getElementById("outputContainer").scrollIntoView();
@@ -190,7 +189,7 @@ function createOutputTableRow(table, item, craftingTime, boost){
 
     // Add quantity cell
     var cellQuantity = tableRow.insertCell(1);
-    var cellNodeQuantity = document.createTextNode(item.quantity);
+    var cellNodeQuantity = document.createTextNode(item.quantity.toLocaleString());
     cellQuantity.appendChild(cellNodeQuantity);
 
     // Add cost cell
