@@ -1,6 +1,5 @@
 import { Floor } from '../classes/floor';
-import { craftingItemNames } from './recipes';
-import { prizeNames } from './recipes';
+import { craftingItemNames, prizeNames } from './eventNames';
 
 export function getFloorRecipes(){
     var floorRecipes = new Map();
