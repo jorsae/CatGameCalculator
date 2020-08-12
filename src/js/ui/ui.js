@@ -273,7 +273,7 @@ function createCraftingItem(tier, item){
     itemDiv.appendChild(craftingItemInfo);
 
     // Displays/hides crafting item description
-    craftingItemLabel.onclick = () => {
+    craftingItemLabel.onclick = (e) => {
         const displayCraftingItemInfoClass = "display-crafting-item-info";
         // crafting item description is visible
         if(craftingItemInfo.classList.contains(displayCraftingItemInfoClass)){
@@ -282,6 +282,7 @@ function createCraftingItem(tier, item){
         else{
             craftingItemInfo.classList.add(displayCraftingItemInfoClass);
         }
+        e.preventDefault();// Stops clicking label toggling input field.
     };
 
     // Input field for how many to craft
