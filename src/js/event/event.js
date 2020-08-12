@@ -26,7 +26,8 @@ function fillRawMaterials(recipes){
             var itemRequirement = item.craftingRequirements[0].craftingItem;
             if(itemRequirement.rarity === rarity.Rarity.RAW){
                 rawMaterialHeader[index].innerText = itemRequirement.name + ": " + item.craftingRequirements[0].quantity;
-                const selectedIndex = index;
+                // If I pass itemRequirement.name directly, it will be overriden as it only passes the reference,
+                // so I need to store it as a const before passing it
                 const itemName = itemRequirement.name;
                 rawMaterials[index].onclick = function() { setRawMaterial(recipes, itemName) };
                 index += 1

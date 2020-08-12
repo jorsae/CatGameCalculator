@@ -2,11 +2,10 @@ import { Crafting } from '../classes/crafting';
 import { intToString } from '../utility/utility';
 
 var crafting = null;
-var recipes = null;
 var floorRecipes = null;
+var craftingTime = new Map();
 
-export function initialize(rec, floorRec){
-    recipes = rec;
+export function initialize(recipes, floorRec){
     floorRecipes = floorRec;
     crafting = new Crafting(recipes);
 
@@ -17,8 +16,25 @@ export function initialize(rec, floorRec){
     document.getElementById("copyClipboard").onclick = copyClipboard;
     document.getElementById("howToUse").onclick = displayHowTo;
 
-    populateCraftingItems(recipes);
+    populateCraftingItems(crafting.craftingRecipes);
     populateFloors(floorRecipes);
+}
+
+function setOneMinuteCrafting(oneMin = true){
+    if(oneMin){
+        if(craftingTime.size <= 0){
+            for (const [name, item] of crafting.craftingRecipes.entries()) {
+                craftingTime.set(name, item.craftingTime); // Save the time for later
+                item.craftingTime = 1; // Set crafting time to 1min
+            }
+        }
+    }
+    else{
+        for (const [name, item] of crafting.craftingRecipes.entries()) {
+            item.craftingTime = craftingTime.get(name);
+        }
+        craftingTime.clear();
+    }
 }
 
 /**
@@ -130,7 +146,6 @@ function calculate(){
         return; // TODO: Give error message to the user
     }
     
-    console.log(crafting.craftingList.size);
     if(crafting.craftingList.size <= 0){
         displayPopover("calculate", "Nothing to calculate");
         displayPopover("quickCalculate", "Nothing to calculate");
@@ -141,14 +156,15 @@ function calculate(){
 
     clearOutputTable(); // Clears the table from any input
     
-    // TODO: Implement one minute crafting mode
+    // Sets to one minute crafting mode, if user requested it.
     var oneMinCrafting = document.getElementById("crafting"); // oneMinCrafting.checked = 1min crafting
+    setOneMinuteCrafting(oneMinCrafting.checked);
 
     var reqs = crafting.getCraftingRequirements();
     
     var table = document.getElementById('outputTable').getElementsByTagName('tbody')[0];
     for (const [name, quantity] of reqs.entries()) {
-        var item = recipes.get(name);
+        var item = crafting.craftingRecipes.get(name);
         item.quantity = quantity;
         createOutputTableRow(table, item, crafting.craftingTime, userBoost);
     }
@@ -183,7 +199,7 @@ function createOutputTableRow(table, item, craftingTime, boost){
     var cellNodeCost = document.createTextNode(intToString(cost));
     cellCost.appendChild(cellNodeCost);
 
-    var craftingText = item.getCraftingMethod();
+    var craftingText = item.getCraftingMethod(craftingTime);
 
     // Add crafting method cell
     var cellCrafting = tableRow.insertCell(3);
