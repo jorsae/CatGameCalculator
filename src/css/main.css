@@ -231,6 +231,7 @@ li:before {
     width: 33.33vw;
     max-width: 33.33%;
     margin-left: 8px;
+    height: fit-content;
 }
 
 .crafting-item-button{
@@ -238,7 +239,6 @@ li:before {
     color: #ffffff;
     font-size: 1em !important;
     border: none;
-    height: 2em;
 }
 
 .crafting-item-info{
