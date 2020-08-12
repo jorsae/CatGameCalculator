@@ -337,11 +337,13 @@ function createCraftingItemArrows(name){
 
     var upArrow = document.createElement("img");
     upArrow.src = "images/arrow-up.png";
+    upArrow.setAttribute("alt", "Increases amount of " + name);
     upArrow.addEventListener("click", function() { upClick(name); } );
     incrementContainer.appendChild(upArrow);
     
     var downArrow = document.createElement("img");
     downArrow.src = "images/arrow-down.png";
+    downArrow.setAttribute("alt", "Decreases amount of " + name);
     downArrow.addEventListener("click", function() { downClick(name); } );
     incrementContainer.appendChild(downArrow);
     
