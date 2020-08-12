@@ -32,10 +32,12 @@ function setOneMinuteCrafting(oneMin = true){
         }
     }
     else{
-        for (const [name, item] of crafting.craftingRecipes.entries()) {
-            item.craftingTime = craftingTime.get(name);
+        if(craftingTime.size > 0){
+            for (const [name, item] of crafting.craftingRecipes.entries()) {
+                item.craftingTime = craftingTime.get(name);
+            }
+            craftingTime.clear();
         }
-        craftingTime.clear();
     }
 }
 
