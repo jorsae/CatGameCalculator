@@ -197,7 +197,7 @@ function createOutputTableRow(table, item, craftingTime, boost){
     cellQuantity.appendChild(cellNodeQuantity);
 
     // Add cost cell
-    var cost = item.getCost(item.getCraftingMethod(craftingTime), boost);
+    var cost = item.getCost(craftingTime, boost);
     var cellCost = tableRow.insertCell(2);
     var cellNodeCost = document.createTextNode(intToString(cost));
     cellCost.appendChild(cellNodeCost);

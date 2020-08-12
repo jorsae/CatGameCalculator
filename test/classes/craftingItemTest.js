@@ -98,6 +98,6 @@ describe('CraftingItem', () => {
         var stars = recipes.get('3 Stars');
         stars.quantity = 4;
 
-        assert.equal(stars.getCost(stars.getCraftingMethod(30), 252), 1200);
+        assert.equal(stars.getCost(30, 252), 1200);
     });
 });

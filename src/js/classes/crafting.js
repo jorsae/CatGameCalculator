@@ -123,7 +123,7 @@ export class Crafting{
         for (const [name, quantity] of this.getCraftingRequirements()) {
             var item = this.craftingRecipes.get(name);
             item.quantity = quantity;
-            totalCost += item.getCost(item.getCraftingMethod(this.craftingTime), boost);
+            totalCost += item.getCost(this.craftingTime, boost);
         }
         return totalCost;
     }

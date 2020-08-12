@@ -70,8 +70,8 @@ export class CraftingItem{
         return [];
     }
 
-    // TODO: Should be able to remove craftingMethods as a parameter. Worst case scenario swap it out with craftingTime!
-    getCost(craftingMethods, boost=1.00){
+    getCost(craftingTime, boost=1.00){
+        var craftingMethods = this.getCraftingMethod(craftingTime);
         var totalCost = 0;
         for(var i = 0; i < craftingMethods.length; i++){
             totalCost += (this.baseCost / 4) * (Math.pow(craftingMethods[i].itemQuantity, 2) + 3 * craftingMethods[i].itemQuantity) * craftingMethods[i].crafts;
