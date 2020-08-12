@@ -1,22 +1,22 @@
 import { Crafting } from '../classes/crafting';
 import { intToString, convertMinutes } from '../utility/utility';
+var event = require('./event');
+var helper = require('./helper');
 
-var crafting = null;
-var floorRecipes = null;
+export var crafting = null;
+export var floorRecipes = null;
 var craftingTime = new Map();
-
-// TODO: this file should be refactored
 
 export function initialize(recipes, floorRec){
     floorRecipes = floorRec;
     crafting = new Crafting(recipes);
 
+    document.getElementById("howToUse").onclick = event.displayHowTo;
     document.getElementById("calculate").onclick = calculate;
     document.getElementById("quickCalculate").onclick = calculate;
-    document.getElementById("addFloor").onclick = addFloor;
-    document.getElementById("clear").onclick = clear;
-    document.getElementById("copyClipboard").onclick = copyClipboard;
-    document.getElementById("howToUse").onclick = displayHowTo;
+    document.getElementById("addFloor").onclick = event.addFloor;
+    document.getElementById("clear").onclick = event.clear;
+    document.getElementById("copyClipboard").onclick = event.copyClipboard;
 
     populateCraftingItems(crafting.craftingRecipes);
     populateFloors(floorRecipes);
@@ -41,99 +41,6 @@ function setOneMinuteCrafting(oneMin = true){
     }
 }
 
-/**
- * Function that sets up click events to display/hide How-to guide
- */
-function displayHowTo(){
-    const guideContainer = document.getElementById("guideContainer");
-    if(guideContainer.classList.contains("guide-container-height")){
-        guideContainer.classList.remove("guide-container-height");
-    }
-    else{
-        guideContainer.classList.add("guide-container-height");
-    }
-}
-
-/**
- * Puts the output table to the users clipboard.
- * We can only copy to clipboard things that are on the website itself.
- * We create a invisible div and create a clone of the table, without the first column.
- * We then copy that table and then remove the div so everything is deleted afterwards.
- */
-function copyClipboard(){
-    var table = document.createElement("table");
-
-    // Add table header
-    var tableHeader = document.querySelectorAll("#outputTable tr th");
-    var thead = document.createElement("thead");
-    table.appendChild(thead);
-
-    var tableRow = document.createElement("tr");
-    thead.appendChild(tableRow);
-    for(var i = 0; i < tableHeader.length; i++){
-        var clone = tableHeader[i].cloneNode(true);
-        tableRow.appendChild(clone);
-    }
-    thead.appendChild(tableRow);
-
-    // Add table data
-    var tableData = document.querySelectorAll("#outputTable tr td");
-    var tbody = document.createElement("tbody");
-    var tableRow = document.createElement("tr");
-    for(var i = 0; i < tableData.length; i++){
-        var clone = tableData[i].cloneNode(true);
-        tableRow.appendChild(tableData[i].cloneNode(true));
-        if((i % 4) === 3 && i !== 0){
-            tbody.appendChild(tableRow);
-            tableRow = document.createElement("tr");
-        }
-    }
-    table.appendChild(tbody);
-
-    // "Invisible" div to store the table we created
-    var tableDiv = document.createElement("div");
-    tableDiv.style = "position: absolute; top: -9999999px; opacity: 0;";
-    tableDiv.appendChild(table);
-    document.body.appendChild(tableDiv);
-
-    // Puts the table in the users clipboard
-    var range = document.createRange();  
-    range.selectNode(table);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-    document.execCommand('copy');
-    
-    document.body.removeChild(tableDiv);
-
-    displayPopover('copyClipboard', 'Copied!');
-}
-
-function clear(){
-    for (const [name, quantity] of crafting.craftingList.entries()) {
-        increaseCraftingAmount(name, -quantity);
-    }
-    displayPopover("clear", "Cleared!");
-}
-
-function addFloor(){
-    var floorElement = document.getElementById("floors");
-    var floorValue = floorElement.value;
-    var floor = floorRecipes.get(floorValue);
-
-    if(floor === undefined){
-        displayPopover("addFloor", "Can't add floor");
-        return;
-    }
-    
-    for(var i = 0; i < floor.requirements.length; i++){
-        var itemName = floor.requirements[i][0];
-        var quantity = floor.requirements[i][1];
-        increaseCraftingAmount(itemName, quantity);
-    }
-    
-    displayPopover("addFloor", "Added floor: \"" + floor + "\"");
-}
-
 function calculate(){
     var userHours = parseInt(document.getElementById("userTimeHours").value);
     var userMinutes = parseInt(document.getElementById("userTimeMinutes").value);
@@ -151,8 +58,8 @@ function calculate(){
     }
     
     if(crafting.craftingList.size <= 0){
-        displayPopover("calculate", "Nothing to calculate");
-        displayPopover("quickCalculate", "Nothing to calculate");
+        helper.displayPopover("calculate", "Nothing to calculate");
+        helper.displayPopover("quickCalculate", "Nothing to calculate");
         return;
     }
 
@@ -334,7 +241,7 @@ function createCraftingItemInputField(name){
     craftingAmount.value = 0;
     craftingAmount.min = 0;
     craftingAmount.addEventListener("click", function() { this.select(); });
-    craftingAmount.addEventListener('input', craftingAmountUpdate);
+    craftingAmount.addEventListener('input', event.craftingAmountUpdate);
     return craftingAmount;
 }
 
@@ -344,53 +251,14 @@ function createCraftingItemArrows(name){
     var upArrow = document.createElement("img");
     upArrow.src = "images/arrow-up.png";
     upArrow.setAttribute("alt", "Increases amount of " + name);
-    upArrow.addEventListener("click", function() { upClick(name); } );
+    upArrow.addEventListener("click", function() { event.upClick(name); } );
     incrementContainer.appendChild(upArrow);
     
     var downArrow = document.createElement("img");
     downArrow.src = "images/arrow-down.png";
     downArrow.setAttribute("alt", "Decreases amount of " + name);
-    downArrow.addEventListener("click", function() { downClick(name); } );
+    downArrow.addEventListener("click", function() { event.downClick(name); } );
     incrementContainer.appendChild(downArrow);
     
     return incrementContainer;
-}
-
-function craftingAmountUpdate(e){
-    var value = parseInt(e.target.value);
-    crafting.setCraftingItem(e.target.id, value);
-    updateCraftingAmount(e.target.id);
-}
-
-function upClick(name){
-    increaseCraftingAmount(name, 1);
-}
-
-function downClick(name){
-    increaseCraftingAmount(name, -1);
-}
-
-function increaseCraftingAmount(name, quantity){
-    crafting.addCraftingItem(name, quantity);
-    updateCraftingAmount(name)
-}
-
-function updateCraftingAmount(name){
-    var value = crafting.craftingList.get(name);
-    if(value === undefined){
-        value = 0;
-    }
-    document.getElementById(name).value = value;
-}
-
-/**
- * Helper function that displays a popover on a selected item.
- * Note:
- *  For the popover to automatically close, the DOM element must have data-toggle="popover"
- *  data-placement is also nice to have :eyes:
- */
-function displayPopover(id, content){
-    var popElement = $('#' + id);
-    popElement.attr('data-content', content);
-    popElement.popover("show");
 }
