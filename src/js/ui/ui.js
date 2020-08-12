@@ -117,6 +117,7 @@ function addFloor(){
 function calculate(){
     var userHours = parseInt(document.getElementById("userTimeHours").value);
     var userMinutes = parseInt(document.getElementById("userTimeMinutes").value);
+    var userBoost = parseFloat(document.getElementById("userTimeBoost").value);
     
     var userTime = 0;
     if(!isNaN(userHours)) {
@@ -149,11 +150,11 @@ function calculate(){
     for (const [name, quantity] of reqs.entries()) {
         var item = recipes.get(name);
         item.quantity = quantity;
-        createOutputTableRow(table, item, crafting.craftingTime);
+        createOutputTableRow(table, item, crafting.craftingTime, userBoost);
     }
     
     // TODO: Add comma to clean up format
-    document.getElementById("outputTotalCost").innerText = "Total cost: " + crafting.getTotalCost();
+    document.getElementById("outputTotalCost").innerText = "Total cost: " + crafting.getTotalCost(userBoost);
 
     // Scroll down to the results
     document.getElementById("outputContainer").scrollIntoView();
@@ -163,7 +164,7 @@ function clearOutputTable(){
     document.getElementById('outputTable').getElementsByTagName('tbody')[0].innerHTML = "";
 }
 
-function createOutputTableRow(table, item, craftingTime){
+function createOutputTableRow(table, item, craftingTime, boost){
     var tableRow = table.insertRow();
 
     // Add item name cell
@@ -177,7 +178,7 @@ function createOutputTableRow(table, item, craftingTime){
     cellQuantity.appendChild(cellNodeQuantity);
 
     // Add cost cell
-    var cost = item.getCost(item.getCraftingMethod(craftingTime));
+    var cost = item.getCost(item.getCraftingMethod(craftingTime), boost);
     var cellCost = tableRow.insertCell(2);
     var cellNodeCost = document.createTextNode(intToString(cost));
     cellCost.appendChild(cellNodeCost);
