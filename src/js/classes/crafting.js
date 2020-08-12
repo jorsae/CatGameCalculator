@@ -118,12 +118,12 @@ export class Crafting{
         }
     }
 
-    getTotalCost(){
+    getTotalCost(boost=1.00){
         var totalCost = 0;
         for (const [name, quantity] of this.getCraftingRequirements()) {
             var item = this.craftingRecipes.get(name);
             item.quantity = quantity;
-            totalCost += item.getCost(item.getCraftingMethod(this.craftingTime));
+            totalCost += Math.ceil(item.getCost(item.getCraftingMethod(this.craftingTime)) / boost);
         }
         return totalCost;
     }

@@ -212,6 +212,29 @@ describe('Crafting', () => {
         assert.equal(cost, 20800);
     });
 
+    it('getTotalCost: Assure boost is calculated correctly with items', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var c = new crafting.Crafting(recipes);
+        c.addCraftingItem('Amethyst', 1);
+        c.addCraftingItem('Pendant', 1);
+        var cost = c.getTotalCost(boost=1.5);
+
+        assert.equal(cost, 13870);
+    });
+
+    it('getTotalCost: Assure boost is calculated correctly with lots of items', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var c = new crafting.Crafting(recipes);
+        c.addCraftingItem('Artifact', 18);
+        c.addCraftingItem('Elementstone', 5);
+        c.setCraftingTime(3600);
+        var cost = c.getTotalCost(boost=1.5);
+
+        assert.equal(cost, 4315637);
+    });
+
     it('getTotalCost: Assure time is taken into account properly when calculating cost', () =>{
         var recipes = recipe.getCraftingRecipes();
 
