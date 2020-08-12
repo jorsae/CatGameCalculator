@@ -5,6 +5,8 @@ var crafting = null;
 var floorRecipes = null;
 var craftingTime = new Map();
 
+// TODO: this file should be refactored
+
 export function initialize(recipes, floorRec){
     floorRecipes = floorRec;
     crafting = new Crafting(recipes);
