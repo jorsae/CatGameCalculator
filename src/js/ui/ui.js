@@ -212,7 +212,7 @@ function populateFloors(floorRecipes){
     for (const [name, item] of floorRecipes.entries()) {
         var option = document.createElement("option");
         option.value = name;
-        option.innerHTML = name;
+        option.innerHTML = item;
         select.appendChild(option);
     }
 }
@@ -265,15 +265,15 @@ function createCraftingItem(tier, item){
     itemDiv.classList.add(item.rarity);
     
     // Creates button which act as a header and as a dropdown button for more info about the item
-    var craftingItemButton = createCraftingItemButton(item.name);
-    itemDiv.appendChild(craftingItemButton);
+    var craftingItemLabel = createCraftingItemLabel(item.name);
+    itemDiv.appendChild(craftingItemLabel);
 
     // Creates the p tag that holds item information
     var craftingItemInfo = createCraftingItemDescription(item);
     itemDiv.appendChild(craftingItemInfo);
 
     // Displays/hides crafting item description
-    craftingItemButton.onclick = () => {
+    craftingItemLabel.onclick = () => {
         const displayCraftingItemInfoClass = "display-crafting-item-info";
         // crafting item description is visible
         if(craftingItemInfo.classList.contains(displayCraftingItemInfoClass)){
@@ -295,8 +295,9 @@ function createCraftingItem(tier, item){
     tier.appendChild(itemDiv);
 }
 
-function createCraftingItemButton(name){
-    const craftingItemButton = document.createElement("button"); // Button elements for the crafting items
+function createCraftingItemLabel(name){
+    const craftingItemButton = document.createElement("label"); // Button elements for the crafting items
+    craftingItemButton.setAttribute("for", name);
     craftingItemButton.classList.add("crafting-item-button");
     craftingItemButton.innerHTML = name + ' <i class="fa fa-angle-double-down"></i>';
     return craftingItemButton;
