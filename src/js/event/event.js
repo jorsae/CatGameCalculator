@@ -6,9 +6,7 @@ var rarity = require('../classes/rarity');
 // init function
 $(document).ready(function(){
     const recipes = getCraftingRecipes();
-    console.log(recipes);
     var floorRecipes = getFloorRecipes();
-    console.log(floorRecipes);
     initialize(recipes, floorRecipes);
     fillRawMaterials(recipes);
 });
