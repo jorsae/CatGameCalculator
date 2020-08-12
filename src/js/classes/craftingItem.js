@@ -76,6 +76,9 @@ export class CraftingItem{
         for(var i = 0; i < craftingMethods.length; i++){
             totalCost += (this.baseCost / 4) * (Math.pow(craftingMethods[i].itemQuantity, 2) + 3 * craftingMethods[i].itemQuantity) * craftingMethods[i].crafts;
         }
+        if(this.name === "3 Stars"){
+            return totalCost;
+        }
         return Math.ceil(totalCost / boost);
     }
 

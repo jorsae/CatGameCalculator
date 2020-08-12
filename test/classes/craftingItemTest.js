@@ -3,7 +3,7 @@ var craftingMethod = require('../../src/js/classes/craftingMethod');
 var craftingItem = require('../../src/js/classes/craftingItem');
 var craftingRequirement = require('../../src/js/classes/craftingRequirement');
 var rarity = require('../../src/js/classes/rarity');
-const { AssertionError } = require('assert');
+var eventRecipe = require('../../src/js/event/recipes');
 
 describe('CraftingItem', () => {
     it('constructor: Create object with right attributes', () => {
@@ -92,4 +92,12 @@ describe('CraftingItem', () => {
         assert.equal(item, "[category/common] craftingItem2(1): 1020coins, 501min. Crafting Requirement: reqItem1: 3, reqItem2: 1");
     });
 
+    it('getCost: Assure boost is NOT affecting "3 Stars"', () =>{
+        var recipes = eventRecipe.getCraftingRecipes();
+
+        var stars = recipes.get('3 Stars');
+        stars.quantity = 4;
+
+        assert.equal(stars.getCost(stars.getCraftingMethod(30), 252), 1200);
+    });
 });
