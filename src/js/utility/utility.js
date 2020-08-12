@@ -13,3 +13,38 @@ export function intToString (num, fixed=0) {
         e = d + ['', 'k', 'm', 'b', 't'][k]; // append power
     return e;
 }
+
+/**
+ * Helper function to convert minutes to more readable text
+ */
+export function convertMinutes(num){
+    var d = Math.floor(num/1440); // 60*24
+    var h = Math.floor((num-(d*1440))/60);
+    var m = Math.round(num%60);
+
+    var output = "";
+    if(d > 0){
+        output += d + " " + fixPlural(d, 'day') + ", ";
+    }
+
+    if(h > 0){
+        output += h + " " + fixPlural(h, 'hour') + ", ";
+    }
+
+    if(m > 0){
+        output += m + " min";
+    }
+
+    if(output.endsWith(", ")){
+        return output.substring(0, output.length - 2);
+    }
+
+    return output === "" ? "N/A" : output;
+}
+
+/**
+ * Function to fix singular/plural for convertMinutes
+ */
+function fixPlural(number, base){
+    return number === 1 ? base : base.concat('s');
+}

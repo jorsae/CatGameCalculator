@@ -36,7 +36,6 @@ export class CraftingItem{
     }
 
     getCraftingMethod(time){
-        console.log('getCraftingMethod: ' + this.craftingTime + " : " + time);
         var crafts = 1; // How many crafts you can do in the time given. Rounded down. Minimum 1
         if(this.craftingTime < time){
             crafts = Math.floor(time / this.craftingTime);

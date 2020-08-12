@@ -1,5 +1,5 @@
 import { Crafting } from '../classes/crafting';
-import { intToString } from '../utility/utility';
+import { intToString, convertMinutes } from '../utility/utility';
 
 var crafting = null;
 var floorRecipes = null;
@@ -314,7 +314,7 @@ function createCraftingItemDescription(item){
         craftingItemInfo.appendChild(text);
         craftingItemInfo.appendChild(document.createElement("br"));
     }
-    craftingItemInfo.appendChild(document.createTextNode('Crafting time: ' + item.craftingTime + 'min'));
+    craftingItemInfo.appendChild(document.createTextNode('Crafting time: ' + convertMinutes(item.craftingTime)));
     
     var craftingItemDescription = document.createTextNode(descriptionText);
     craftingItemInfo.appendChild(craftingItemDescription);
