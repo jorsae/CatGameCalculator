@@ -674,7 +674,7 @@ export function getFloorRecipes(){
      * Floor: 62-64 all require the same material, in the same order.
      *  Increase performance, by just using the same CraftingRequirement list
      */
-    const identical62_67 = [["Necklace", 1],
+    const identical62 = [["Necklace", 1],
                         ["Fire", 10],
                         ["Pendant", 6],
                         ["Waterstone", 11],
@@ -682,23 +682,25 @@ export function getFloorRecipes(){
                         ["Elementstone", 2],
     ];
     
-    const gnomes = new Floor("Gnomes", 62, identical62_67);
+    const gnomes = new Floor("Gnomes", 62, identical62);
     floorRecipes.set(gnomes.name, gnomes);
     
-    const deconstructivism = new Floor("Deconstructivism", 63, identical62_67);
+    const deconstructivism = new Floor("Deconstructivism", 63, identical62);
     floorRecipes.set(deconstructivism.name, deconstructivism);
     
-    const caveman = new Floor("Caveman", 64, identical62_67);
+    const caveman = new Floor("Caveman", 64, identical62);
     floorRecipes.set(caveman.name, caveman);
     
-    const miniature = new Floor("Miniature", 65, identical62_67);
+    const miniature = new Floor("Miniature", 65, identical62);
     floorRecipes.set(miniature.name, miniature);
     
-    const wrestling = new Floor("Wrestling", 66, identical62_67);
+    const wrestling = new Floor("Wrestling", 66, identical62);
     floorRecipes.set(wrestling.name, wrestling);
 
-    const laundromat = new Floor("Laundromat", 67, identical62_67);
+    const laundromat = new Floor("Laundromat", 67, identical62);
     floorRecipes.set(laundromat.name, laundromat);
 
+    const infant = new Floor("Infant", 68, identical62)
+    floorRecipes.set(infant.name, infant);
     return floorRecipes;
 }
