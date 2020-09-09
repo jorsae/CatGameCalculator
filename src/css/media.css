@@ -59,60 +59,51 @@
         max-width: 85%;
     }
     
-    .crafting-container{
-        width: 90vw;
-        max-width: 90%;
+    .crafting-container,
+    .output-table,
+    .output-container{
+        width: 80;
+        max-width: 80%;
     }
 
     .crafting-time-input{
         width: 25vw;
     }
-
-    .output-table{
-        width: 90vw;
-        max-width: 90%;
-    }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    .crafting-container{
-        width: 80vw;
-        max-width: 80%;
+    .crafting-container,
+    .output-table,
+    .output-container{
+        width: 70;
+        max-width: 70%;
     }
 
     .crafting-time-input{
         width: 22vw;
-    }
-
-    .output-table{
-        width: 80vw;
-        max-width: 80%;
     }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .full-guide{
-        width: 70vw;
-        max-width: 70%;
+        width: 60vw;
+        max-width: 60%;
     }
 
-    .crafting-container{
-        width: 70vw;
-        max-width: 70%;
-    }
-
-    .output-table{
-        width: 70vw;
-        max-width: 70%;
+    .crafting-container,
+    .output-table,
+    .output-container{
+        width: 60vw;
+        max-width: 60%;
     }
 }
 
 /* Wide screens */
 @media only screen and (min-width: 1400px) {
-    .output-table{
-        width: 60vw;
-        max-width: 60%;
+    .output-table {
+        width: 55vw;
+        max-width: 55%;
     }
 }
