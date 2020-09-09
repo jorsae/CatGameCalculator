@@ -173,7 +173,6 @@ function createCraftingTierHeader(category){
 function createCraftingItem(tier, item){
     var itemDiv = document.createElement("div");
     itemDiv.classList.add("crafting-item");
-    itemDiv.classList.add(item.rarity);
     
     // Creates button which act as a header and as a dropdown button for more info about the item
     var craftingItemLabel = createCraftingItemLabel(item.name);
