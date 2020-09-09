@@ -370,10 +370,11 @@ tbody tr:nth-child(even){
 .raw-material{
     margin: 4px;
     padding: 8px;
+    border: solid 2px white;
 }
 
 .selected-raw-material{
-    border: solid 6px white;
+    border: solid 2px gold;
 }
 
 /* about.html */
