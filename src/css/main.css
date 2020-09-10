@@ -243,6 +243,10 @@ li:before {
     color: white;
 }
 
+.topnav a:hover{
+    color: gold;
+}
+
 .topnav .hamburger-menu {
     display: none;
 }
@@ -476,14 +480,14 @@ tbody tr:nth-child(even).light-theme{
     border: solid 2px white;
 }
 .raw-material.light-theme{
-    border: solid 4px white;
+    border: solid 2px white;
 }
 
 .selected-raw-material{
     border: solid 2px gold;
 }
 .selected-raw-material.light-theme{
-    border: solid 4px gold;
+    border: solid 2px red;
 }
 
 /* about.html */
