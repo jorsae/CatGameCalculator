@@ -50,6 +50,12 @@ function setTheme(){
 
     var cookiePolicyClose = document.getElementsByClassName("cookie-policy-close");
     setThemeArray(cookiePolicyClose, light);
+
+    var rawMaterial = document.getElementsByClassName("raw-material");
+    setThemeArray(rawMaterial, light);
+
+    var rawMaterialSelected = document.getElementsByClassName("raw-material-selected");
+    setThemeArray(rawMaterialSelected, light);
 }
 
 function setThemeArray(elements, light){

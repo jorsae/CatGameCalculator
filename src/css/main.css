@@ -475,12 +475,15 @@ tbody tr:nth-child(even).light-theme{
     padding: 8px;
     border: solid 2px white;
 }
+.raw-material.light-theme{
+    border: solid 4px white;
+}
 
 .selected-raw-material{
     border: solid 2px gold;
 }
 .selected-raw-material.light-theme{
-    border: solid 2px white;
+    border: solid 4px gold;
 }
 
 /* about.html */
