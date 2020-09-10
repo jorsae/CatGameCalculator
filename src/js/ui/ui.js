@@ -1,6 +1,6 @@
 import { Crafting } from '../classes/crafting';
 import { intToString, convertMinutes } from '../utility/utility';
-import { isDarkTheme, darkTheme } from '../required/themeSettings';
+import { isLightTheme, lightTheme } from '../required/themeSettings';
 
 var event = require('./event');
 var helper = require('./helper');
@@ -12,14 +12,14 @@ var craftingTime = new Map();
 export function initialize(recipes, floorRec){
     floorRecipes = floorRec;
     crafting = new Crafting(recipes);
-
+    
     document.getElementById("howToUse").onclick = event.displayHowTo;
     document.getElementById("calculate").onclick = calculate;
     document.getElementById("quickCalculate").onclick = calculate;
     document.getElementById("addFloor").onclick = event.addFloor;
     document.getElementById("clear").onclick = event.clear;
     document.getElementById("copyClipboard").onclick = event.copyClipboard;
-
+    
     populateCraftingItems(crafting.craftingRecipes);
     populateFloors(floorRecipes);
 }
@@ -94,8 +94,8 @@ function clearOutputTable(){
 
 function createOutputTableRow(table, item, craftingTime, boost){
     var tableRow = table.insertRow();
-    if(isDarkTheme){
-        tableRow.classList.add(darkTheme);
+    if(isLightTheme()){
+        tableRow.classList.add(lightTheme);
     }
 
     // Add item name cell
@@ -135,8 +135,8 @@ function populateFloors(floorRecipes){
 
 function populateCraftingItems(recipes){
     var craftingDiv = document.getElementById("craftingContainer");
-    if(isDarkTheme){
-        craftingDiv.classList.add(darkTheme);
+    if(isLightTheme()){
+        craftingDiv.classList.add(lightTheme);
     }
 
     var lastCategory = null;
@@ -181,8 +181,8 @@ function createCraftingTierHeader(category){
 function createCraftingItem(tier, item){
     var itemDiv = document.createElement("div");
     itemDiv.classList.add("crafting-item");
-    if(isDarkTheme){
-        itemDiv.classList.add(darkTheme);
+    if(isLightTheme()){
+        itemDiv.classList.add(lightTheme);
     }
 
     
@@ -248,8 +248,8 @@ function createCraftingItemInputField(name){
     const craftingAmount = document.createElement("input");
     craftingAmount.id = name;
     craftingAmount.classList.add("crafting-item-amount");
-    if(isDarkTheme){
-        craftingAmount.classList.add(darkTheme);
+    if(isLightTheme()){
+        craftingAmount.classList.add(lightTheme);
     }
     craftingAmount.type = "number";
     craftingAmount.value = 0;

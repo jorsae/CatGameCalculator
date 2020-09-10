@@ -1,10 +1,72 @@
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+
 body{
-    background-color: red;
+    background-color: #323232;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: #d7dadc;
 }
-body.dark-theme{
-    background-color: #323232;
+body.light-theme{
+    background-color: red;
 }
 
 /* General CSS functions */
@@ -75,13 +137,13 @@ h1.text-center{
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    background-color: green;
+    background-color: #242424;
     width: 70vw;
     border: solid 2px darkgray;
     padding: 4px;
 }
-.cookie-policy.dark-theme{
-    background-color: #242424;
+.cookie-policy.light-theme{
+    background-color: green;
 }
 
 .cookie-policy-close{
@@ -100,11 +162,11 @@ h1.text-center{
 }
 
 .cookie-policy-close:hover{
-    color: deeppink;
+    color: gold;
     cursor: pointer;
 }
-.cookie-policy-close:hover.dark-theme{
-    color: gold;
+.cookie-policy-close:hover.light-theme{
+    color: deeppink;
 }
 
 /* CSS For index page */
@@ -209,11 +271,11 @@ li:before {
     overflow: visible;
     text-align: center;
     margin: auto;
-    background-color: green;
+    background-color: #242424;
     padding-bottom: 4px;
 }
-.crafting-container.dark-theme{
-    background-color: #242424;
+.crafting-container.light-theme{
+    background-color: green;
 }
 
 .crafting-container h2{
@@ -243,10 +305,10 @@ li:before {
     max-width: 33.33%;
     margin-left: 4px;
     margin-right: 4px;
-    background-color: red;
-}
-.crafting-item.dark-theme{
     background-color: #323232;
+}
+.crafting-item.light-theme{
+    background-color: red;
 }
 
 .crafting-item-button{
@@ -273,14 +335,14 @@ li:before {
     margin: auto;
     background: transparent;
     text-align: center;
-    color: deeppink;
+    color: gold;
     border: none;
     -webkit-box-shadow: inset 0px 0px 4px #d7dadc;
     -moz-box-shadow: inset 0px 0px 4px #d7dadc;
     box-shadow: inset 0px 0px 4px #d7dadc;
 }
-.crafting-item-amount.dark-theme{
-    color:gold;
+.crafting-item-amount.light-theme{
+    color:deeppink;
 }
 
 .arrow{
@@ -325,11 +387,11 @@ li:before {
 
 /* output-container */
 .output-container{
-    background-color: green;
+    background-color: #242424;
     margin: auto;
 }
-.output-container.dark-theme{
-    background-color: #242424;
+.output-container.light-theme{
+    background-color: green;
 }
 
 #copyClipboard{
@@ -367,13 +429,13 @@ table{
 th{
     font-weight: 900;
     font-size: 1em;
-    color: deeppink;
     font-weight: bold;
-    background-color: red;
-}
-th.dark-theme{
-    background-color: #323232;
+    background-color:#323232;
     color: gold;
+}
+th.light-theme{
+    background-color: red;
+    color: deeppink;
 }
 
 td{
@@ -387,17 +449,17 @@ td img{
 }
 
 tbody tr:nth-child(odd){
-    background-color: violet;
-}
-tbody tr:nth-child(odd).dark-theme{
     background-color: #2A4494;
+}
+tbody tr:nth-child(odd).light-theme{
+    background-color: violet;
 }
 
 tbody tr:nth-child(even){
-    background-color: red;
-}
-tbody tr:nth-child(even).dark-theme{
     background-color: #323232;
+}
+tbody tr:nth-child(even).light-theme{
+    background-color: red;
 }
 
 /* event.html */
@@ -408,10 +470,10 @@ tbody tr:nth-child(even).dark-theme{
 }
 
 .selected-raw-material{
-    border: solid 2px deeppink;
-}
-.selected-raw-material.dark-theme{
     border: solid 2px gold;
+}
+.selected-raw-material.light-theme{
+    border: solid 2px deeppink;
 }
 
 /* about.html */
