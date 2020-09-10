@@ -1,5 +1,7 @@
 import { Crafting } from '../classes/crafting';
 import { intToString, convertMinutes } from '../utility/utility';
+import { isDarkTheme, darkTheme } from '../required/themeSettings';
+
 var event = require('./event');
 var helper = require('./helper');
 
@@ -92,6 +94,9 @@ function clearOutputTable(){
 
 function createOutputTableRow(table, item, craftingTime, boost){
     var tableRow = table.insertRow();
+    if(isDarkTheme){
+        tableRow.classList.add(darkTheme);
+    }
 
     // Add item name cell
     var cellItem = tableRow.insertCell(0);
@@ -130,6 +135,9 @@ function populateFloors(floorRecipes){
 
 function populateCraftingItems(recipes){
     var craftingDiv = document.getElementById("craftingContainer");
+    if(isDarkTheme){
+        craftingDiv.classList.add(darkTheme);
+    }
 
     var lastCategory = null;
     var currentTier = null;
@@ -173,6 +181,10 @@ function createCraftingTierHeader(category){
 function createCraftingItem(tier, item){
     var itemDiv = document.createElement("div");
     itemDiv.classList.add("crafting-item");
+    if(isDarkTheme){
+        itemDiv.classList.add(darkTheme);
+    }
+
     
     // Creates button which act as a header and as a dropdown button for more info about the item
     var craftingItemLabel = createCraftingItemLabel(item.name);
@@ -236,6 +248,9 @@ function createCraftingItemInputField(name){
     const craftingAmount = document.createElement("input");
     craftingAmount.id = name;
     craftingAmount.classList.add("crafting-item-amount");
+    if(isDarkTheme){
+        craftingAmount.classList.add(darkTheme);
+    }
     craftingAmount.type = "number";
     craftingAmount.value = 0;
     craftingAmount.min = 0;

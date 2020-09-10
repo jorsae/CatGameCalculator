@@ -1,7 +1,10 @@
 body{
-    background-color: #323232;
+    background-color: red;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: #d7dadc;
+}
+body.dark-theme{
+    background-color: #323232;
 }
 
 /* General CSS functions */
@@ -72,15 +75,18 @@ h1.text-center{
     right: 0;
     margin-left: auto;
     margin-right: auto;
-    background-color: #242424;
+    background-color: green;
     width: 70vw;
     border: solid 2px darkgray;
     padding: 4px;
 }
+.cookie-policy.dark-theme{
+    background-color: #242424;
+}
 
 .cookie-policy-close{
     color: white;
-    background-color: #2A4494;
+    background-color: violet;
     border: none;
     text-align: center;
     max-height: 70%;
@@ -89,10 +95,16 @@ h1.text-center{
     margin: auto;
     padding: 8px;
 }
+.cookie-policy-close{
+    background-color: #2A4494;
+}
 
 .cookie-policy-close:hover{
-    color: gold;
+    color: deeppink;
     cursor: pointer;
+}
+.cookie-policy-close:hover.dark-theme{
+    color: gold;
 }
 
 /* CSS For index page */
@@ -189,11 +201,6 @@ li:before {
     text-decoration: underline;
 }
 
-.event-running{
-    color: gold;
-    text-decoration: underline;
-}
-
 /* Crafting item CSS */
 .crafting-container{
     display: block;
@@ -202,8 +209,11 @@ li:before {
     overflow: visible;
     text-align: center;
     margin: auto;
-    background-color: #242424;
+    background-color: green;
     padding-bottom: 4px;
+}
+.crafting-container.dark-theme{
+    background-color: #242424;
 }
 
 .crafting-container h2{
@@ -233,6 +243,9 @@ li:before {
     max-width: 33.33%;
     margin-left: 4px;
     margin-right: 4px;
+    background-color: red;
+}
+.crafting-item.dark-theme{
     background-color: #323232;
 }
 
@@ -260,11 +273,14 @@ li:before {
     margin: auto;
     background: transparent;
     text-align: center;
-    color: gold;
+    color: deeppink;
     border: none;
     -webkit-box-shadow: inset 0px 0px 4px #d7dadc;
     -moz-box-shadow: inset 0px 0px 4px #d7dadc;
     box-shadow: inset 0px 0px 4px #d7dadc;
+}
+.crafting-item-amount.dark-theme{
+    color:gold;
 }
 
 .arrow{
@@ -309,8 +325,11 @@ li:before {
 
 /* output-container */
 .output-container{
-    background-color: #242424;
+    background-color: green;
     margin: auto;
+}
+.output-container.dark-theme{
+    background-color: #242424;
 }
 
 #copyClipboard{
@@ -348,9 +367,13 @@ table{
 th{
     font-weight: 900;
     font-size: 1em;
-    color: gold;
+    color: deeppink;
     font-weight: bold;
+    background-color: red;
+}
+th.dark-theme{
     background-color: #323232;
+    color: gold;
 }
 
 td{
@@ -364,10 +387,16 @@ td img{
 }
 
 tbody tr:nth-child(odd){
+    background-color: violet;
+}
+tbody tr:nth-child(odd).dark-theme{
     background-color: #2A4494;
 }
 
 tbody tr:nth-child(even){
+    background-color: red;
+}
+tbody tr:nth-child(even).dark-theme{
     background-color: #323232;
 }
 
@@ -379,6 +408,9 @@ tbody tr:nth-child(even){
 }
 
 .selected-raw-material{
+    border: solid 2px deeppink;
+}
+.selected-raw-material.dark-theme{
     border: solid 2px gold;
 }
 
