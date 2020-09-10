@@ -1,6 +1,6 @@
 {
   "name": "catgamecalculator",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "",
   "main": "webpack.config.js",
   "module": "main.js",
