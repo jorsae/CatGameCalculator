@@ -69,6 +69,10 @@
     .crafting-time-input{
         width: 25vw;
     }
+
+    .light-mode-container{
+        position: absolute;
+    }
 } 
 
 /* Large devices (laptops/desktops, 992px and up) */
