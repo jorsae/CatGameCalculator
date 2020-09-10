@@ -81,6 +81,7 @@ h1.text-center{
     width: 70vw;
     border: solid 2px darkgray;
     padding: 4px;
+    z-index: 100;
 }
 .cookie-policy.light-theme{
     background-color: gray;
@@ -322,6 +323,7 @@ li:before {
 .crafting-button{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .crafting-button button{
