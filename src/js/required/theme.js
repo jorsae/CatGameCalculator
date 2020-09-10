@@ -54,7 +54,7 @@ function setTheme(){
     var rawMaterial = document.getElementsByClassName("raw-material");
     setThemeArray(rawMaterial, light);
 
-    var rawMaterialSelected = document.getElementsByClassName("raw-material-selected");
+    var rawMaterialSelected = document.getElementsByClassName("selected-raw-material");
     setThemeArray(rawMaterialSelected, light);
 }
 
