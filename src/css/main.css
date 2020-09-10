@@ -156,7 +156,7 @@ h1.text-center{
 
 .cookie-policy-close{
     color: white;
-    background-color: violet;
+    background-color: #2A4494;
     border: none;
     text-align: center;
     max-height: 70%;
@@ -165,8 +165,8 @@ h1.text-center{
     margin: auto;
     padding: 8px;
 }
-.cookie-policy-close{
-    background-color: #2A4494;
+.cookie-policy-close.light-theme{
+    background-color: #169ed1;
 }
 
 .cookie-policy-close:hover{

@@ -30,9 +30,6 @@ function setTheme(){
     var body = document.getElementsByTagName("body")
     setThemeArray(body, light);
 
-    var ths = document.getElementsByTagName("th");
-    setThemeArray(ths, light);
-
     var craftingItem = document.getElementsByClassName("crafting-item");
     setThemeArray(craftingItem, light);
 
@@ -53,6 +50,12 @@ function setTheme(){
 
     var rawMaterial = document.getElementsByClassName("raw-material");
     setThemeArray(rawMaterial, light);
+
+    var ths = document.getElementsByTagName("th");
+    setThemeArray(ths, light);
+
+    var trs = document.getElementsByTagName("tr");
+    setThemeArray(trs, light);
 
     var rawMaterialSelected = document.getElementsByClassName("selected-raw-material");
     setThemeArray(rawMaterialSelected, light);
