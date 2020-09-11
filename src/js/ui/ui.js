@@ -253,7 +253,6 @@ function createInventory(name){
 
     // Input field
     const inventoryAmount = createCraftingItemInputField(name + 'Inventory');
-    inventoryAmount.addEventListener("click", function() { this.select(); });
     craftingInventoryContainer.appendChild(inventoryAmount);
     // TODO: Add event listener to add this to inventory
     
@@ -277,7 +276,6 @@ function createCrafting(name){
 
     // Input field
     const craftingAmount = createCraftingItemInputField(name);
-    craftingAmount.addEventListener("click", function() { this.select(); });
     craftingAmount.addEventListener('input', event.craftingAmountUpdate);
     craftingInventoryContainer.appendChild(craftingAmount);
     
@@ -302,8 +300,7 @@ function createCraftingItemInputField(name){
     craftingAmount.type = "number";
     craftingAmount.value = 0;
     craftingAmount.min = 0;
-    //craftingAmount.addEventListener("click", function() { this.select(); });
-    //craftingAmount.addEventListener('input', event.craftingAmountUpdate);
+    craftingAmount.addEventListener("click", function() { this.select(); });
     return craftingAmount;
 }
 
