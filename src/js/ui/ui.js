@@ -1,5 +1,5 @@
 import { Crafting } from '../classes/crafting';
-import { intToString, convertMinutes } from '../utility/utility';
+import { intToString, convertMinutes, jsonToMap } from '../utility/utility';
 import { isLightTheme, lightTheme } from '../required/themeSettings';
 
 var event = require('./event');
@@ -24,6 +24,19 @@ export function initialize(recipes, floorRec, key){
     
     populateCraftingItems(crafting.craftingRecipes);
     populateFloors(floorRecipes);
+    loadInventory();
+}
+
+function loadInventory(){
+    var inventory = localStorage.getItem(inventoryKey);
+    if(inventory === null){
+        return; // No saved inventory
+    }
+    crafting.inventory = jsonToMap(inventory);
+    for (const [name, quantity] of crafting.inventory.entries()) {
+        console.log(name + ': ' + quantity);
+        helper.updateInventoryAmount(name);
+    }
 }
 
 function setOneMinuteCrafting(oneMin = true){
@@ -312,7 +325,6 @@ function createUpArrow(name){
     var upArrow = document.createElement("img");
     upArrow.src = "images/arrow-up.png";
     upArrow.setAttribute("alt", "Increases amount of " + name);
-    //upArrow.addEventListener("click", function() { event.upClick(name); } );
     return upArrow;
 }
 
@@ -320,6 +332,5 @@ function createDownArrow(name){
     var downArrow = document.createElement("img");
     downArrow.src = "images/arrow-down.png";
     downArrow.setAttribute("alt", "Decreases amount of " + name);
-    //downArrow.addEventListener("click", function() { event.downClick(name); } );
     return downArrow;
 }
