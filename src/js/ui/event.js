@@ -1,5 +1,5 @@
 import { crafting, floorRecipes } from './ui';
-import { useInventory, useInventoryCookie, inventoryCookieDefaultValue } from './inventory';
+import { useInventory, useInventoryCookie, inventoryCookieDefaultValue, displayInventory } from './inventory';
 import { setCookie } from '../utility/cookie';
 
 var helper = require('./helper');
@@ -160,4 +160,5 @@ export function toggleInventory(){
     else{
         setCookie(useInventoryCookie, "true", 365);
     }
+    displayInventory();
 }

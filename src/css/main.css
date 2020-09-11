@@ -290,6 +290,10 @@ li:before {
     color: white;
 }
 
+.inventory.hide-inventory{
+    display: none;
+}
+
 .arrow{
     width: auto;
 }

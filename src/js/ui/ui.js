@@ -264,6 +264,10 @@ function createCraftingItemDescription(item){
 
 function createInventory(name){
     const inventoryContainer = document.createElement("span");
+    inventoryContainer.classList.add('inventory');
+    if(useInventory() === false){
+        inventoryContainer.classList.add('hide-inventory');
+    }
     
     // Header
     const inventoryHeader = document.createElement("p");
