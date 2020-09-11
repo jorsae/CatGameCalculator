@@ -95,7 +95,7 @@ export class Crafting{
         this.craftingTime = time;
     }
 
-    getCraftingRequirements(){
+    getCraftingRequirements(useInventory=true){
         this.currentCraft.clear();
         
         for (const [name, quantity] of this.craftingList.entries()) {
@@ -105,14 +105,16 @@ export class Crafting{
             this.getItemRequirements(item, item.quantity);
             this.addElementToCurrentCraft(item.name, item.quantity);
         }
-
-        // Remove items from craft if we have them in inventory
-        for (const [name, quantity] of this.currentCraft.entries()) {
-            var inventoryQuantity = this.inventory.get(name);
-            if(inventoryQuantity !== undefined){
-                var item = this.craftingRecipes.get(name);
-                this.subtractItemRequirements(item, inventoryQuantity);
-                this.addElementToCurrentCraft(item.name, -inventoryQuantity);
+        
+        if(useInventory){
+            // Remove items from craft if we have them in inventory
+            for (const [name, quantity] of this.currentCraft.entries()) {
+                var inventoryQuantity = this.inventory.get(name);
+                if(inventoryQuantity !== undefined){
+                    var item = this.craftingRecipes.get(name);
+                    this.subtractItemRequirements(item, inventoryQuantity);
+                    this.addElementToCurrentCraft(item.name, -inventoryQuantity);
+                }
             }
         }
 
@@ -201,9 +203,9 @@ export class Crafting{
         }
     }
 
-    getTotalCost(boost=1.00){
+    getTotalCost(boost=1.00, useInventory=true){
         var totalCost = 0;
-        for (const [name, quantity] of this.getCraftingRequirements()) {
+        for (const [name, quantity] of this.getCraftingRequirements(useInventory)) {
             var item = this.craftingRecipes.get(name);
             item.quantity = quantity;
             totalCost += item.getCost(this.craftingTime, boost);

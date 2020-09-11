@@ -271,6 +271,24 @@ describe('Crafting', () => {
         assert.deepStrictEqual(currentCraft, expected);
     });
 
+    it('getCraftingRequirements: Make sure inventory is ignored for crafting requirements', () => {
+        var recipes = recipe.getCraftingRecipes();
+
+        var c = new crafting.Crafting(recipes);
+        c.addItemToCrafting('Ribbon', 1);
+        c.addItemToInventory('Ribbon', 1);
+        
+        var currentCraft = c.getCraftingRequirements(false);
+        var expected = new Map();
+        expected.set('Cotton', 6);
+        expected.set('Log', 6);
+        expected.set('String', 2);
+        expected.set('Wood', 2);
+        expected.set('Ribbon', 1);
+
+        assert.deepStrictEqual(currentCraft, expected);
+    });
+
     it('getTotalCost: Get costs for multiple items with no overlapping requirements', () =>{
         var recipes = recipe.getCraftingRecipes();
 
@@ -359,5 +377,18 @@ describe('Crafting', () => {
         var cost = c.getTotalCost();
 
         assert.strictEqual(cost, 500);
+    });
+
+    it('getTotalCost: Make sure inventory is ignored and does affect cost', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var c = new crafting.Crafting(recipes);
+        c.addItemToCrafting('Needles', 3);
+        
+        c.addItemToInventory('Needles', 4);
+
+        var cost = c.getTotalCost(useInventory=false);
+
+        assert.strictEqual(cost, 0);
     });
 });
