@@ -7,15 +7,15 @@ describe('CraftingRequirement', () => {
         const item = new craftingItem.CraftingItem("craftingItem", 50, 100, "rare", 0);
         const requirement = new craftingRequirement.CraftingRequirement(item, 50);
 
-        assert.equal(requirement.craftingItem, item);
-        assert.equal(requirement.quantity, 50);
+        assert(requirement.craftingItem === item);
+        assert(requirement.quantity === 50);
     });
 
     it('toString: Returns expected string', () => {
         const item = new craftingItem.CraftingItem("testItem", 50, 100, "rare", 0);
         const req = new craftingRequirement.CraftingRequirement(item, 52);
         
-        assert.equal(req, "testItem: 52");
+        assert(req.toString() === "testItem: 52");
     });
 
 });

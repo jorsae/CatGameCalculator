@@ -155,8 +155,6 @@ describe('Crafting', () => {
 
     it('getCraftingRequirements: Get crafting recipe for item with quantity higher than 1', () => {
         var recipes = recipe.getCraftingRecipes();
-        var needles = recipes.get('Needles');
-        needles.quantity = 2;
 
         var c = new crafting.Crafting(recipes);
         c.addItemToCrafting('Needles', 2);
@@ -225,8 +223,6 @@ describe('Crafting', () => {
 
     it('getCraftingRequirements: Get crafting recipe for 2items, but have 1item in inventory', () => {
         var recipes = recipe.getCraftingRecipes();
-        var needles = recipes.get('Needles');
-        needles.quantity = 2;
 
         var c = new crafting.Crafting(recipes);
         c.addItemToCrafting('Needles', 2);
@@ -248,8 +244,6 @@ describe('Crafting', () => {
 
     it('getCraftingRequirements: Get crafting recipe for 2items, but have more in inventory', () => {
         var recipes = recipe.getCraftingRecipes();
-        var needles = recipes.get('Needles');
-        needles.quantity = 2;
 
         var c = new crafting.Crafting(recipes);
         c.addItemToCrafting('Needles', 2);
@@ -263,8 +257,6 @@ describe('Crafting', () => {
 
     it('getCraftingRequirements: Make sure items with negative quantity because of inventory, does not show up', () => {
         var recipes = recipe.getCraftingRecipes();
-        var needles = recipes.get('Needles');
-        needles.quantity = 2;
 
         var c = new crafting.Crafting(recipes);
         c.addItemToCrafting('Ribbon', 1);
