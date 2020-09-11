@@ -34,7 +34,6 @@ function loadInventory(){
     }
     crafting.inventory = jsonToMap(inventory);
     for (const [name, quantity] of crafting.inventory.entries()) {
-        console.log(name + ': ' + quantity);
         helper.updateInventoryAmount(name);
     }
 }
