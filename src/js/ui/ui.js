@@ -1,6 +1,7 @@
 import { Crafting } from '../classes/crafting';
 import { intToString, convertMinutes, jsonToMap } from '../utility/utility';
 import { isLightTheme, lightTheme } from '../required/theme';
+import { useInventory } from './inventory';
 
 var event = require('./event');
 var helper = require('./helper');
@@ -21,6 +22,11 @@ export function initialize(recipes, floorRec, key){
     document.getElementById("addFloor").onclick = event.addFloor;
     document.getElementById("clear").onclick = event.clear;
     document.getElementById("copyClipboard").onclick = event.copyClipboard;
+    var checkboxInventory = document.getElementById("checkboxInventory");
+    checkboxInventory.onclick = event.toggleInventory;
+    if(useInventory()){
+        checkboxInventory.checked = true;
+    }
     
     populateCraftingItems(crafting.craftingRecipes);
     populateFloors(floorRecipes);

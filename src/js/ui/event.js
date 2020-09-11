@@ -1,4 +1,7 @@
 import { crafting, floorRecipes } from './ui';
+import { useInventory, useInventoryCookie, inventoryCookieDefaultValue } from './inventory';
+import { setCookie } from '../utility/cookie';
+
 var helper = require('./helper');
 
 /**
@@ -145,4 +148,16 @@ export function inventoryAmountUpdate(e){
     var value = parseInt(e.target.value);
     crafting.setItemToInventory(id, value);
     helper.updateInventoryAmount(id);
+}
+
+/**
+ * Toggles if inventory should be used or not
+ */
+export function toggleInventory(){
+    if(useInventory()){
+        setCookie(useInventoryCookie, inventoryCookieDefaultValue, 365);
+    }
+    else{
+        setCookie(useInventoryCookie, "true", 365);
+    }
 }
