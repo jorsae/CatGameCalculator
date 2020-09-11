@@ -93,7 +93,7 @@ function calculate(){
     var oneMinCrafting = document.getElementById("crafting"); // oneMinCrafting.checked = 1min crafting
     setOneMinuteCrafting(oneMinCrafting.checked);
 
-    var reqs = crafting.getCraftingRequirements();
+    var reqs = crafting.getCraftingRequirements(useInventory());
     
     var table = document.getElementById('outputTable').getElementsByTagName('tbody')[0];
     for (const [name, quantity] of reqs.entries()) {
@@ -102,7 +102,7 @@ function calculate(){
         createOutputTableRow(table, item, crafting.craftingTime, userBoost);
     }
     
-    document.getElementById("outputTotalCost").innerText = "Total cost: " + crafting.getTotalCost(userBoost).toLocaleString();
+    document.getElementById("outputTotalCost").innerText = "Total cost: " + crafting.getTotalCost(userBoost, useInventory()).toLocaleString();
 
     // Scroll down to the results
     document.getElementById("outputContainer").scrollIntoView();
