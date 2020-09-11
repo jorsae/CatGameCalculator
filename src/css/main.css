@@ -276,7 +276,7 @@ li:before {
 
 .crafting-item-amount{
     font-size: 1.5em;
-    width: 4em;
+    width: 90%;
     margin: auto;
     background: transparent;
     text-align: center;

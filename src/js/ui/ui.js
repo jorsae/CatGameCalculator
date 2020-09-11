@@ -184,7 +184,6 @@ function createCraftingItem(tier, item){
     if(isLightTheme()){
         itemDiv.classList.add(lightTheme);
     }
-
     
     // Creates button which act as a header and as a dropdown button for more info about the item
     var craftingItemLabel = createCraftingItemLabel(item.name);
@@ -207,13 +206,12 @@ function createCraftingItem(tier, item){
         e.preventDefault();// Stops clicking label toggling input field.
     };
 
-    // Input field for how many to craft
-    const craftingAmount = createCraftingItemInputField(item.name);
-    itemDiv.appendChild(craftingAmount);
+    // Inventory field
+    const inventory = createInventory(item.name);
+    itemDiv.appendChild(inventory);
 
-    // Creates arrows for increasing/decreasing quantity of items to craft
-    const incrementContainer = createCraftingItemArrows(item.name);
-    itemDiv.appendChild(incrementContainer);
+    const craftingItem = createCrafting(item.name);
+    itemDiv.appendChild(craftingItem);
 
     tier.appendChild(itemDiv);
 }
@@ -244,6 +242,54 @@ function createCraftingItemDescription(item){
     return craftingItemInfo;
 }
 
+function createInventory(name){
+    const craftingInventoryContainer = document.createElement("span");
+    
+    // Header
+    const inventoryHeader = document.createElement("p");
+    var inventoryHeaderText = document.createTextNode("Inventory:");
+    inventoryHeader.appendChild(inventoryHeaderText);
+    craftingInventoryContainer.appendChild(inventoryHeader);
+
+    // Input field
+    const inventoryAmount = createCraftingItemInputField(name);
+    inventoryAmount.addEventListener("click", function() { this.select(); });
+    craftingInventoryContainer.appendChild(inventoryAmount);
+    // TODO: Add event listener to add this to inventory
+    
+    const upArrow = createUpArrow(name);
+    craftingInventoryContainer.appendChild(upArrow);
+    
+    const downArrow = createDownArrow(name);
+    craftingInventoryContainer.appendChild(downArrow);
+
+    return craftingInventoryContainer;
+}
+
+function createCrafting(name){
+    const craftingInventoryContainer = document.createElement("span");
+    
+    // Header
+    const inventoryHeader = document.createElement("p");
+    var inventoryHeaderText = document.createTextNode("Crafting:");
+    inventoryHeader.appendChild(inventoryHeaderText);
+    craftingInventoryContainer.appendChild(inventoryHeader);
+
+    // Input field
+    const inventoryAmount = createCraftingItemInputField(name);
+    inventoryAmount.addEventListener("click", function() { this.select(); });
+    craftingInventoryContainer.appendChild(inventoryAmount);
+    // TODO: Add event listener to add this to inventory
+    
+    const upArrow = createUpArrow(name);
+    craftingInventoryContainer.appendChild(upArrow);
+    
+    const downArrow = createDownArrow(name);
+    craftingInventoryContainer.appendChild(downArrow);
+
+    return craftingInventoryContainer;
+}
+
 function createCraftingItemInputField(name){
     const craftingAmount = document.createElement("input");
     craftingAmount.id = name;
@@ -254,25 +300,22 @@ function createCraftingItemInputField(name){
     craftingAmount.type = "number";
     craftingAmount.value = 0;
     craftingAmount.min = 0;
-    craftingAmount.addEventListener("click", function() { this.select(); });
-    craftingAmount.addEventListener('input', event.craftingAmountUpdate);
+    //craftingAmount.addEventListener("click", function() { this.select(); });
+    //craftingAmount.addEventListener('input', event.craftingAmountUpdate);
     return craftingAmount;
 }
 
-function createCraftingItemArrows(name){
-    const incrementContainer = document.createElement("span");
-
+function createUpArrow(name){
     var upArrow = document.createElement("img");
     upArrow.src = "images/arrow-up.png";
     upArrow.setAttribute("alt", "Increases amount of " + name);
-    upArrow.addEventListener("click", function() { event.upClick(name); } );
-    incrementContainer.appendChild(upArrow);
-    
+    //upArrow.addEventListener("click", function() { event.upClick(name); } );
+    return upArrow;
+}
+function createDownArrow(name){
     var downArrow = document.createElement("img");
     downArrow.src = "images/arrow-down.png";
     downArrow.setAttribute("alt", "Decreases amount of " + name);
-    downArrow.addEventListener("click", function() { event.downClick(name); } );
-    incrementContainer.appendChild(downArrow);
-    
-    return incrementContainer;
+    //downArrow.addEventListener("click", function() { event.downClick(name); } );
+    return downArrow;
 }
