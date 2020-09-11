@@ -223,6 +223,62 @@ describe('Crafting', () => {
         assert.deepStrictEqual(currentCraft, expected);
     });
 
+    it('getCraftingRequirements: Get crafting recipe for 2items, but have 1item in inventory', () => {
+        var recipes = recipe.getCraftingRecipes();
+        var needles = recipes.get('Needles');
+        needles.quantity = 2;
+
+        var c = new crafting.Crafting(recipes);
+        c.addItemToCrafting('Needles', 2);
+        c.addItemToInventory('Needles', 1);
+        
+        var currentCraft = c.getCraftingRequirements();
+        var expected = new Map();
+        expected.set('Cotton', 6);
+        expected.set('Log', 6);
+        expected.set('Rock', 12);
+        expected.set('String', 2);
+        expected.set('Wood', 2);
+        expected.set('Ribbon', 1);
+        expected.set('Metal', 4);
+        expected.set('Needles', 1);
+
+        assert.deepStrictEqual(currentCraft, expected);
+    });
+
+    it('getCraftingRequirements: Get crafting recipe for 2items, but have more in inventory', () => {
+        var recipes = recipe.getCraftingRecipes();
+        var needles = recipes.get('Needles');
+        needles.quantity = 2;
+
+        var c = new crafting.Crafting(recipes);
+        c.addItemToCrafting('Needles', 2);
+        c.addItemToInventory('Needles', 3);
+        
+        var currentCraft = c.getCraftingRequirements();
+        var expected = new Map();
+
+        assert.deepStrictEqual(currentCraft, expected);
+    });
+
+    it('getCraftingRequirements: Make sure items with negative quantity because of inventory, does not show up', () => {
+        var recipes = recipe.getCraftingRecipes();
+        var needles = recipes.get('Needles');
+        needles.quantity = 2;
+
+        var c = new crafting.Crafting(recipes);
+        c.addItemToCrafting('Ribbon', 1);
+        c.addItemToInventory('Wood', 9999);
+        
+        var currentCraft = c.getCraftingRequirements();
+        var expected = new Map();
+        expected.set('Cotton', 6);
+        expected.set('String', 2);
+        expected.set('Ribbon', 1);
+
+        assert.deepStrictEqual(currentCraft, expected);
+    });
+
     it('getTotalCost: Get costs for multiple items with no overlapping requirements', () =>{
         var recipes = recipe.getCraftingRecipes();
 
@@ -283,5 +339,33 @@ describe('Crafting', () => {
         c.setCraftingTime(4000);
         var cost2 = c.getTotalCost();
         assert.strictEqual(cost2, 797400);
+    });
+
+    it('getTotalCost: Get costs for multiple items while having them in inventory', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var c = new crafting.Crafting(recipes);
+        c.addItemToCrafting('Amethyst', 1);
+        c.addItemToCrafting('Pendant', 1);
+        
+        c.addItemToInventory('Amethyst', 1);
+        c.addItemToInventory('Pendant', 1);
+
+        var cost = c.getTotalCost();
+
+        assert.strictEqual(cost, 0);
+    });
+
+    it('getTotalCost: Get costs for multiple items while having underlying items in inventory', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var c = new crafting.Crafting(recipes);
+        c.addItemToCrafting('Needles', 1);
+        
+        c.addItemToInventory('Metal', 4);
+
+        var cost = c.getTotalCost();
+
+        assert.strictEqual(cost, 500);
     });
 });

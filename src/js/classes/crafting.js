@@ -101,8 +101,19 @@ export class Crafting{
         for (const [name, quantity] of this.craftingList.entries()) {
             var item = this.craftingRecipes.get(name);
             item.quantity = quantity;
+
             this.getItemRequirements(item, item.quantity);
             this.addElementToCurrentCraft(item.name, item.quantity);
+        }
+
+        // Remove items from craft if we have them in inventory
+        for (const [name, quantity] of this.currentCraft.entries()) {
+            var inventoryQuantity = this.inventory.get(name);
+            if(inventoryQuantity !== undefined){
+                var item = this.craftingRecipes.get(name);
+                this.subtractItemRequirements(item, inventoryQuantity);
+                this.addElementToCurrentCraft(item.name, -inventoryQuantity);
+            }
         }
 
         // Sort items into array sorting
@@ -122,6 +133,27 @@ export class Crafting{
             this.addElementToCurrentCraft(item.name, item.quantity);
         }
 
+        return this.currentCraft;
+    }
+
+    /**
+     * Recursive function that will fetch all crafting requirements from a given item.
+     * TODO: It should not be needed to have currentCraft as a parameter.
+     */
+    subtractItemRequirements(item, parentQuantity = 1){
+        if(item.craftingRequirements === null){
+            return;
+        }
+
+        // Adds all the requirements
+        for(var i = 0; i < item.craftingRequirements.length; i++){
+            var name = item.craftingRequirements[i].craftingItem.name;
+            var quantity = item.craftingRequirements[i].quantity * parentQuantity;
+            
+            var craftingItem = this.craftingRecipes.get(name);
+            this.subtractItemRequirements(craftingItem, quantity);
+            this.addElementToCurrentCraft(name, -quantity);
+        }
         return this.currentCraft;
     }
 
@@ -153,11 +185,19 @@ export class Crafting{
     addElementToCurrentCraft(key, value){
         var name = this.currentCraft.get(key);
         if(name === undefined){
-            this.currentCraft.set(key, value);
+            if(value > 0){
+                this.currentCraft.set(key, value);
+            }
         }
         else{
             var oldValue = this.currentCraft.get(key);
-            this.currentCraft.set(key, oldValue + value);
+            var newValue = oldValue + value;
+            if(newValue < 0){
+                this.currentCraft.delete(key);
+            }
+            else{
+                this.currentCraft.set(key, newValue);
+            }
         }
     }
 
