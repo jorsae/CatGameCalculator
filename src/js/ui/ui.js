@@ -252,7 +252,7 @@ function createInventory(name){
     craftingInventoryContainer.appendChild(inventoryHeader);
 
     // Input field
-    const inventoryAmount = createCraftingItemInputField(name);
+    const inventoryAmount = createCraftingItemInputField(name + 'Inventory');
     inventoryAmount.addEventListener("click", function() { this.select(); });
     craftingInventoryContainer.appendChild(inventoryAmount);
     // TODO: Add event listener to add this to inventory
@@ -276,15 +276,17 @@ function createCrafting(name){
     craftingInventoryContainer.appendChild(inventoryHeader);
 
     // Input field
-    const inventoryAmount = createCraftingItemInputField(name);
-    inventoryAmount.addEventListener("click", function() { this.select(); });
-    craftingInventoryContainer.appendChild(inventoryAmount);
-    // TODO: Add event listener to add this to inventory
+    const craftingAmount = createCraftingItemInputField(name);
+    craftingAmount.addEventListener("click", function() { this.select(); });
+    craftingAmount.addEventListener('input', event.craftingAmountUpdate);
+    craftingInventoryContainer.appendChild(craftingAmount);
     
     const upArrow = createUpArrow(name);
+    upArrow.addEventListener("click", function() { event.upClickCrafting(name); } );
     craftingInventoryContainer.appendChild(upArrow);
     
     const downArrow = createDownArrow(name);
+    downArrow.addEventListener("click", function() { event.downClickCrafting(name); } );
     craftingInventoryContainer.appendChild(downArrow);
 
     return craftingInventoryContainer;
@@ -312,6 +314,7 @@ function createUpArrow(name){
     //upArrow.addEventListener("click", function() { event.upClick(name); } );
     return upArrow;
 }
+
 function createDownArrow(name){
     var downArrow = document.createElement("img");
     downArrow.src = "images/arrow-down.png";

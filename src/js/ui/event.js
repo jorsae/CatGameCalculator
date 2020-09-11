@@ -103,14 +103,14 @@ export function copyClipboard(){
 /**
  * User clicks "up-arrow" to increase value of a crafting-item
  */
-export function upClick(name){
+export function upClickCrafting(name){
     helper.increaseCraftingAmount(name, 1);
 }
 
 /**
  * User clicks "down-arrow" to decrease value of a crafting-item
  */
-export function downClick(name){
+export function downClickCrafting(name){
     helper.increaseCraftingAmount(name, -1);
 }
 
