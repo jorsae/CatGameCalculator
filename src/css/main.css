@@ -492,11 +492,11 @@ input[type=checkbox] {
 }
 
 /* Light mode buttons */
-.light-mode-container{
+.settings-container{
     position: relative;
 }
 
-.light-mode-label{
+.settings-label{
     display: inline-block;
 }
 

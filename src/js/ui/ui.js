@@ -1,6 +1,6 @@
 import { Crafting } from '../classes/crafting';
 import { intToString, convertMinutes, jsonToMap } from '../utility/utility';
-import { isLightTheme, lightTheme } from '../required/themeSettings';
+import { isLightTheme, lightTheme } from '../required/theme';
 
 var event = require('./event');
 var helper = require('./helper');

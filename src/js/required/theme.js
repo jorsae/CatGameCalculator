@@ -1,4 +1,8 @@
-import { isLightTheme, lightTheme, lightThemeCookie, lightThemeCookieDefaultValue, setCookie } from './themeSettings';
+import { getCookie, setCookie } from '../utility/cookie';
+
+export const lightTheme = "light-theme";
+const lightThemeCookie = "lightTheme";
+const lightThemeCookieDefaultValue = "false";
 
 /**
  * This file contains everything regarding colour theme
@@ -13,6 +17,22 @@ $(document).ready(function(){
     checkboxLightTheme.onclick = toggleLightTheme;
     checkboxLightTheme.checked = lightTheme;
 });
+
+export function isLightTheme(){
+    var cookie = getCookie(lightThemeCookie);
+    if(cookie == null){
+        setCookie(lightThemeCookie, lightThemeCookieDefaultValue, 365);
+        return false;
+    }
+    else{
+        if(cookie === lightThemeCookieDefaultValue){
+            return false;
+        }
+        else{
+            return true;
+        }
+    }
+}
 
 function toggleLightTheme(){
     var checkboxLightTheme = document.getElementById("checkboxLightTheme");

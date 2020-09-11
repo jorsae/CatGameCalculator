@@ -1,2 +1,0 @@
-const inventoryKey = 'inventory';
-
