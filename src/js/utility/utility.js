@@ -48,3 +48,11 @@ export function convertMinutes(num){
 function fixPlural(number, base){
     return number === 1 ? base : base.concat('s');
 }
+
+export function mapToJson(map){
+    return JSON.stringify(Object.fromEntries(map));
+}
+
+export function jsonToMap(json){
+    return new Map(Object.entries(JSON.parse(json)));
+}

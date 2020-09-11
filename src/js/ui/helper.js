@@ -1,4 +1,5 @@
-import { crafting } from './ui';
+import { crafting, inventoryKey } from './ui';
+import { mapToJson, jsonToMap } from '../utility/utility';
 
 /**
  * Helper function that displays a popover on a selected item.
@@ -50,4 +51,5 @@ export function updateInventoryAmount(name){
         value = 0;
     }
     document.getElementById(name + 'Inventory').value = value;
+    localStorage.setItem(inventoryKey, mapToJson(crafting.inventory));
 }

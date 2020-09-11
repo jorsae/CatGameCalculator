@@ -6,7 +6,7 @@ import { getFloorRecipes } from './floorRecipes';
 $(document).ready(function(){
     const recipes = getCraftingRecipes();
     var floorRecipes = getFloorRecipes();
-    initialize(recipes, floorRecipes);
+    initialize(recipes, floorRecipes, "normalInventory");
 
     /*
     populateCraftingItems(recipes);

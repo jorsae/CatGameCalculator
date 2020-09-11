@@ -7,11 +7,13 @@ var helper = require('./helper');
 
 export var crafting = null;
 export var floorRecipes = null;
+export var inventoryKey = 'normalInventory';
 var craftingTime = new Map();
 
-export function initialize(recipes, floorRec){
+export function initialize(recipes, floorRec, key){
     floorRecipes = floorRec;
     crafting = new Crafting(recipes);
+    inventoryKey = key;
     
     document.getElementById("howToUse").onclick = event.displayHowTo;
     document.getElementById("calculate").onclick = calculate;
