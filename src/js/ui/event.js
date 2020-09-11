@@ -119,6 +119,6 @@ export function downClickCrafting(name){
  */
 export function craftingAmountUpdate(e){
     var value = parseInt(e.target.value);
-    crafting.setCraftingItem(e.target.id, value);
+    crafting.setItemToCrafting(e.target.id, value);
     helper.updateCraftingAmount(e.target.id);
 }

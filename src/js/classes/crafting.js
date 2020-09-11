@@ -4,9 +4,10 @@ export class Crafting{
         this.craftingList = new Map();
         this.craftingTime = 30;
         this.currentCraft = new Map();
+        this.inventory = new Map();
     }
 
-    addCraftingItem(name, quantity){
+    addItemToCrafting(name, quantity){
         var item = this.craftingRecipes.get(name);
         if(item === undefined){
             // TODO: Throw error as this item does not exist as a crafting recipe. Also write test for this
@@ -33,7 +34,7 @@ export class Crafting{
         }
     }
 
-    setCraftingItem(name, quantity){
+    setItemToCrafting(name, quantity){
         var item = this.craftingRecipes.get(name);
         if(item === undefined){
             // TODO: Throw error as this item does not exist as a crafting recipe. Also write test for this
@@ -45,6 +46,48 @@ export class Crafting{
         }
         else{
             this.craftingList.set(name, quantity);
+        }
+    }
+
+    addItemToInventory(name, quantity){
+        var item = this.craftingRecipes.get(name);
+        if(item === undefined){
+            // TODO: Throw error as this item does not exist as a crafting recipe. Also write test for this
+            return;
+        }
+
+        var oldQuantity = this.inventory.get(name);
+        if(oldQuantity === undefined){
+            if(quantity === 0){
+                this.inventory.delete(name);
+            }
+            else{
+                this.inventory.set(name, quantity);
+            }
+        }
+        else{
+            var totalQuantity = oldQuantity + quantity;
+            if(totalQuantity === 0){
+                this.inventory.delete(name);
+            }
+            else{
+                this.inventory.set(name, oldQuantity + quantity);
+            }
+        }
+    }
+
+    setItemToInventory(name, quantity){
+        var item = this.craftingRecipes.get(name);
+        if(item === undefined){
+            // TODO: Throw error as this item does not exist as a crafting recipe. Also write test for this
+            return;
+        }
+
+        if(quantity === 0){
+            this.inventory.delete(name);
+        }
+        else{
+            this.inventory.set(name, quantity);
         }
     }
 

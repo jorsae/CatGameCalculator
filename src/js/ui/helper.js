@@ -17,7 +17,7 @@ export function displayPopover(id, content){
  * Note: This can also be used to decrease, by "increasing" it with a negative number.
  */
 export function increaseCraftingAmount(name, quantity){
-    crafting.addCraftingItem(name, quantity);
+    crafting.addItemToCrafting(name, quantity);
     updateCraftingAmount(name)
 }
 

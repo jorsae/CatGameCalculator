@@ -6,118 +6,151 @@ var recipe = require('../../src/js/normal/recipes');
 describe('Crafting', () => {
     it('constructor: Create object with right attributes', () => {
         var c = new crafting.Crafting(null);
-        assert.equal(c.craftingTime, 30);
-        assert.equal(c.craftingRecipes, null);
-        assert.deepEqual(c.craftingList, new Map());
-        assert.deepEqual(c.currentCraft, new Map());
+        assert.strictEqual(c.craftingTime, 30);
+        assert.strictEqual(c.craftingRecipes, null);
+        assert.deepStrictEqual(c.craftingList, new Map());
+        assert.deepStrictEqual(c.currentCraft, new Map());
     });
 
     it('setCraftingTime: Can set new crafting time', () => {
         var c = new crafting.Crafting(null);
-        assert.equal(c.craftingTime, 30);
+        assert.strictEqual(c.craftingTime, 30);
 
         c.setCraftingTime(160);
-        assert.equal(c.craftingTime, 160);
+        assert.strictEqual(c.craftingTime, 160);
     });
 
-    it('addCraftingItem: Adding invalid crafting item', () => {
+    it('addItemToCrafting: Adding invalid crafting item', () => {
         var recipes = recipe.getCraftingRecipes();
         
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Test', 5);
+        c.addItemToCrafting('Test', 5);
         
         var expected = new Map();
-        assert.deepEqual(c.craftingList, expected);
+        assert.deepStrictEqual(c.craftingList, expected);
     });
 
-    it('addCraftingItem: Adding one item', () => {
+    it('addItemToCrafting: Adding one item', () => {
         var recipes = recipe.getCraftingRecipes();
         const item = recipes.get('Needles');
         
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Needles', 1);
+        c.addItemToCrafting('Needles', 1);
         
         var expected = new Map();
         expected.set(item.name, item.quantity);
-        assert.deepEqual(c.craftingList, expected);
+        assert.deepStrictEqual(c.craftingList, expected);
     });
 
-    it('addCraftingItem: Adding multiple items', () => {
+    it('addItemToCrafting: Adding multiple items', () => {
         var recipes = recipe.getCraftingRecipes();
 
         const item = recipes.get('Needles');
         const item2 = recipes.get('Artifact');
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Needles', 1);
-        c.addCraftingItem('Artifact', 1);
+        c.addItemToCrafting('Needles', 1);
+        c.addItemToCrafting('Artifact', 1);
 
         var expected = new Map();
         expected.set(item.name, item.quantity);
         expected.set(item2.name, item2.quantity);
 
-        assert.deepEqual(c.craftingList, expected);
+        assert.deepStrictEqual(c.craftingList, expected);
     });
 
-    it('addCraftingItem: Adding multiple items with same key', () => {
+    it('addItemToCrafting: Adding multiple items with same key', () => {
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Needles', 5);
-        c.addCraftingItem('Needles', 7);
+        c.addItemToCrafting('Needles', 5);
+        c.addItemToCrafting('Needles', 7);
         
         const expectedItem = recipes.get('Needles');
         expectedItem.quantity = 12;
         var expected = new Map();
         expected.set(expectedItem.name, expectedItem.quantity);
-        assert.deepEqual(c.craftingList, expected);
+        assert.deepStrictEqual(c.craftingList, expected);
         
-        c.addCraftingItem('Needles', 10);
+        c.addItemToCrafting('Needles', 10);
 
         var expected2 = new Map();
         const expectedItem2 = recipes.get('Needles');
         expectedItem2.quantity = 22;
         expected2.set(expectedItem2.name, expectedItem2.quantity);
-        assert.deepEqual(c.craftingList, expected2);
+        assert.deepStrictEqual(c.craftingList, expected2);
     });
 
-    it('setCraftingItem: Adding one item', () => {
+    it('setItemToCrafting: Adding one item', () => {
         var recipes = recipe.getCraftingRecipes();
         const item = recipes.get('Needles');
         
         var c = new crafting.Crafting(recipes);
-        c.setCraftingItem('Needles', 1);
+        c.setItemToCrafting('Needles', 1);
         
         var expected = new Map();
         expected.set(item.name, item.quantity);
-        assert.deepEqual(c.craftingList, expected);
+        assert.deepStrictEqual(c.craftingList, expected);
     });
 
-    it('setCraftingItem: Adding multiple items with same key', () => {
+    it('setItemToCrafting: Adding multiple items with same key', () => {
         var recipes = recipe.getCraftingRecipes();
 
         const item = recipes.get('Needles');
         item.quantity = 4;
 
         var c = new crafting.Crafting(recipes);
-        c.setCraftingItem('Needles', 1);
-        c.setCraftingItem('Needles', 4);
+        c.setItemToCrafting('Needles', 1);
+        c.setItemToCrafting('Needles', 4);
 
         var expected = new Map();
         expected.set(item.name, item.quantity);
 
-        assert.deepEqual(c.craftingList, expected);
+        assert.deepStrictEqual(c.craftingList, expected);
     });
 
-    it('setCraftingItem: Adding one item, then setting it to 0, removes the item', () => {
+    it('setItemToCrafting: Adding one item, then setting it to 0, removes the item', () => {
         var recipes = recipe.getCraftingRecipes();
         
         var c = new crafting.Crafting(recipes);
-        c.setCraftingItem('Needles', 1);
-        c.setCraftingItem('Needles', 0);
+        c.setItemToCrafting('Needles', 1);
+        c.setItemToCrafting('Needles', 0);
         
         var expected = new Map();
-        assert.deepEqual(c.craftingList, expected);
+        assert.deepStrictEqual(c.craftingList, expected);
+    });
+
+    it('addItemToInventory: Adding multiple items with same key', () => {
+        var recipes = recipe.getCraftingRecipes();
+
+        var c = new crafting.Crafting(recipes);
+        c.addItemToInventory('Needles', 5);
+        c.addItemToInventory('Needles', 7);
+        
+        const expectedItem = recipes.get('Needles');
+        expectedItem.quantity = 12;
+        var expected = new Map();
+        expected.set(expectedItem.name, expectedItem.quantity);
+        assert.deepStrictEqual(c.inventory, expected);
+        
+        c.addItemToInventory('Needles', 10);
+
+        var expected2 = new Map();
+        const expectedItem2 = recipes.get('Needles');
+        expectedItem2.quantity = 22;
+        expected2.set(expectedItem2.name, expectedItem2.quantity);
+        assert.deepStrictEqual(c.inventory, expected2);
+    });
+
+    it('setItemToInventory: Adding one item, then setting it to 0, removes the item', () => {
+        var recipes = recipe.getCraftingRecipes();
+        
+        var c = new crafting.Crafting(recipes);
+        c.setItemToInventory('Needles', 1);
+        c.setItemToInventory('Needles', 0);
+        
+        var expected = new Map();
+        assert.deepStrictEqual(c.inventory, expected);
     });
 
     it('getCraftingRequirements: Get crafting recipe for item with quantity higher than 1', () => {
@@ -126,7 +159,7 @@ describe('Crafting', () => {
         needles.quantity = 2;
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Needles', 2);
+        c.addItemToCrafting('Needles', 2);
         
         var currentCraft = c.getCraftingRequirements();
         var expected = new Map();
@@ -139,15 +172,15 @@ describe('Crafting', () => {
         expected.set('Metal', 8);
         expected.set('Needles', 2);
 
-        assert.deepEqual(currentCraft, expected);
+        assert.deepStrictEqual(currentCraft, expected);
     });
 
     it('getCraftingRequirements: Adding crafting items with no overlapping requirements', () => {
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Bronze', 1);
-        c.addCraftingItem('Ribbon', 1);
+        c.addItemToCrafting('Bronze', 1);
+        c.addItemToCrafting('Ribbon', 1);
         
         var currentCraft = c.getCraftingRequirements();
 
@@ -160,15 +193,15 @@ describe('Crafting', () => {
         expected.set('Ribbon', 1);
         expected.set('Bronze', 1);
 
-        assert.deepEqual(currentCraft, expected);
+        assert.deepStrictEqual(currentCraft, expected);
     });
 
     it('getCraftingRequirements: Adding multiple crafting items with over-lapping requirements', () => {
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Amethyst', 1);
-        c.addCraftingItem('Pendant', 1);
+        c.addItemToCrafting('Amethyst', 1);
+        c.addItemToCrafting('Pendant', 1);
         
         var currentCraft = c.getCraftingRequirements();
         var expected = new Map();
@@ -187,68 +220,68 @@ describe('Crafting', () => {
         expected.set('Amethyst', 8);
         expected.set('Pendant', 1);
 
-        assert.deepEqual(currentCraft, expected);
+        assert.deepStrictEqual(currentCraft, expected);
     });
 
     it('getTotalCost: Get costs for multiple items with no overlapping requirements', () =>{
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Bronze', 1);
-        c.addCraftingItem('Ribbon', 1);
+        c.addItemToCrafting('Bronze', 1);
+        c.addItemToCrafting('Ribbon', 1);
         var cost = c.getTotalCost();
 
-        assert.equal(cost, 500);
+        assert.strictEqual(cost, 500);
     });
 
     it('getTotalCost: Get costs for multiple items with overlapping requirements', () =>{
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Amethyst', 1);
-        c.addCraftingItem('Pendant', 1);
+        c.addItemToCrafting('Amethyst', 1);
+        c.addItemToCrafting('Pendant', 1);
         var cost = c.getTotalCost();
 
-        assert.equal(cost, 20800);
+        assert.strictEqual(cost, 20800);
     });
 
     it('getTotalCost: Assure boost is calculated correctly with items', () =>{
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Amethyst', 1);
-        c.addCraftingItem('Pendant', 1);
+        c.addItemToCrafting('Amethyst', 1);
+        c.addItemToCrafting('Pendant', 1);
         var cost = c.getTotalCost(boost=1.5);
 
-        assert.equal(cost, 13870);
+        assert.strictEqual(cost, 13870);
     });
 
     it('getTotalCost: Assure boost is calculated correctly with lots of items', () =>{
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Artifact', 18);
-        c.addCraftingItem('Elementstone', 5);
+        c.addItemToCrafting('Artifact', 18);
+        c.addItemToCrafting('Elementstone', 5);
         c.setCraftingTime(3600);
         var cost = c.getTotalCost(boost=1.5);
 
-        assert.equal(cost, 4315637);
+        assert.strictEqual(cost, 4315637);
     });
 
     it('getTotalCost: Assure time is taken into account properly when calculating cost', () =>{
         var recipes = recipe.getCraftingRecipes();
 
         var c = new crafting.Crafting(recipes);
-        c.addCraftingItem('Artifact', 5);
-        c.addCraftingItem('Water', 10);
-        c.addCraftingItem('Needles', 3);
+        c.addItemToCrafting('Artifact', 5);
+        c.addItemToCrafting('Water', 10);
+        c.addItemToCrafting('Needles', 3);
         c.setCraftingTime(100);
         
         var cost = c.getTotalCost();
-        assert.equal(cost, 11943550);
+        assert.strictEqual(cost, 11943550);
 
         c.setCraftingTime(4000);
         var cost2 = c.getTotalCost();
-        assert.equal(cost2, 797400);
+        assert.strictEqual(cost2, 797400);
     });
 });
