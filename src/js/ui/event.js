@@ -101,24 +101,48 @@ export function copyClipboard(){
 }
 
 /**
- * User clicks "up-arrow" to increase value of a crafting-item
+ * User clicks "up-arrow" to increase value of a crafting-item to craft
  */
 export function upClickCrafting(name){
     helper.increaseCraftingAmount(name, 1);
 }
 
 /**
- * User clicks "down-arrow" to decrease value of a crafting-item
+ * User clicks "down-arrow" to decrease value of a crafting-item to craft
  */
 export function downClickCrafting(name){
     helper.increaseCraftingAmount(name, -1);
 }
 
 /**
- * User manually inputs a value for a crafting-item
+ * User manually inputs a value for a crafting-item to craft
  */
 export function craftingAmountUpdate(e){
     var value = parseInt(e.target.value);
     crafting.setItemToCrafting(e.target.id, value);
     helper.updateCraftingAmount(e.target.id);
+}
+
+/**
+ * User clicks "up-arrow" to increase value of a crafting-item to inventory
+ */
+export function upClickInventory(name){
+    helper.increaseIventoryAmount(name, 1);
+}
+
+/**
+ * User clicks "down-arrow" to decrease value of a crafting-item to inventory
+ */
+export function downClickInventory(name){
+    helper.increaseIventoryAmount(name, -1);
+}
+
+/**
+ * User manually inputs a value for a crafting-item to inventory
+ */
+export function inventoryAmountUpdate(e){
+    var id = e.target.id.slice(0, -9);
+    var value = parseInt(e.target.value);
+    crafting.setItemToInventory(id, value);
+    helper.updateInventoryAmount(id);
 }

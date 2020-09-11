@@ -243,51 +243,53 @@ function createCraftingItemDescription(item){
 }
 
 function createInventory(name){
-    const craftingInventoryContainer = document.createElement("span");
+    const inventoryContainer = document.createElement("span");
     
     // Header
     const inventoryHeader = document.createElement("p");
     var inventoryHeaderText = document.createTextNode("Inventory:");
     inventoryHeader.appendChild(inventoryHeaderText);
-    craftingInventoryContainer.appendChild(inventoryHeader);
+    inventoryContainer.appendChild(inventoryHeader);
 
     // Input field
     const inventoryAmount = createCraftingItemInputField(name + 'Inventory');
-    craftingInventoryContainer.appendChild(inventoryAmount);
-    // TODO: Add event listener to add this to inventory
+    inventoryAmount.addEventListener('input', event.inventoryAmountUpdate);
+    inventoryContainer.appendChild(inventoryAmount);
     
     const upArrow = createUpArrow(name);
-    craftingInventoryContainer.appendChild(upArrow);
+    upArrow.addEventListener("click", function() { event.upClickInventory(name); } );
+    inventoryContainer.appendChild(upArrow);
     
     const downArrow = createDownArrow(name);
-    craftingInventoryContainer.appendChild(downArrow);
+    downArrow.addEventListener("click", function() { event.downClickInventory(name); } );
+    inventoryContainer.appendChild(downArrow);
 
-    return craftingInventoryContainer;
+    return inventoryContainer;
 }
 
 function createCrafting(name){
-    const craftingInventoryContainer = document.createElement("span");
+    const craftingContainer = document.createElement("span");
     
     // Header
     const inventoryHeader = document.createElement("p");
     var inventoryHeaderText = document.createTextNode("Crafting:");
     inventoryHeader.appendChild(inventoryHeaderText);
-    craftingInventoryContainer.appendChild(inventoryHeader);
+    craftingContainer.appendChild(inventoryHeader);
 
     // Input field
     const craftingAmount = createCraftingItemInputField(name);
     craftingAmount.addEventListener('input', event.craftingAmountUpdate);
-    craftingInventoryContainer.appendChild(craftingAmount);
+    craftingContainer.appendChild(craftingAmount);
     
     const upArrow = createUpArrow(name);
     upArrow.addEventListener("click", function() { event.upClickCrafting(name); } );
-    craftingInventoryContainer.appendChild(upArrow);
+    craftingContainer.appendChild(upArrow);
     
     const downArrow = createDownArrow(name);
     downArrow.addEventListener("click", function() { event.downClickCrafting(name); } );
-    craftingInventoryContainer.appendChild(downArrow);
+    craftingContainer.appendChild(downArrow);
 
-    return craftingInventoryContainer;
+    return craftingContainer;
 }
 
 function createCraftingItemInputField(name){

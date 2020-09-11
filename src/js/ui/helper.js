@@ -18,7 +18,7 @@ export function displayPopover(id, content){
  */
 export function increaseCraftingAmount(name, quantity){
     crafting.addItemToCrafting(name, quantity);
-    updateCraftingAmount(name)
+    updateCraftingAmount(name);
 }
 
 /**
@@ -30,4 +30,24 @@ export function updateCraftingAmount(name){
         value = 0;
     }
     document.getElementById(name).value = value;
+}
+
+/**
+ * Increases the quantity of a crafting-item to craft.
+ * Note: This can also be used to decrease, by "increasing" it with a negative number.
+ */
+export function increaseIventoryAmount(name, quantity){
+    crafting.addItemToInventory(name, quantity);
+    updateInventoryAmount(name);
+}
+
+/**
+ * Updates the DOM element with the current quantity of the given crafting-item
+ */
+export function updateInventoryAmount(name){
+    var value = crafting.inventory.get(name);
+    if(value === undefined){
+        value = 0;
+    }
+    document.getElementById(name + 'Inventory').value = value;
 }
