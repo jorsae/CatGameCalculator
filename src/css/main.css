@@ -354,6 +354,7 @@ li:before {
 
 .output-total{
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 8px;

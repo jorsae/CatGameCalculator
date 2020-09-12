@@ -102,7 +102,18 @@ function calculate(){
         createOutputTableRow(table, item, crafting.craftingTime, userBoost);
     }
     
-    document.getElementById("outputTotalCost").innerText = "Total cost: " + crafting.getTotalCost(userBoost, useInventory()).toLocaleString();
+    let totalCost = crafting.getTotalCost(userBoost, useInventory());
+    document.getElementById("outputTotalCost").innerText = "Total cost: " + totalCost.toLocaleString();
+
+    // Give message if nothing was calculated, because user already have items needed
+    if(useInventory()){
+        if(crafting.inventory.size > 0 && totalCost <= 0){
+            document.getElementById("inventoryMessage").innerText = "You already have all items needed";
+        }
+    }
+    else{
+        document.getElementById("inventoryMessage").innerText = "";
+    }
 
     // Scroll down to the results
     document.getElementById("outputContainer").scrollIntoView();

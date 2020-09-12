@@ -1,5 +1,5 @@
 import { crafting, inventoryKey } from './ui';
-import { mapToJson, jsonToMap } from '../utility/utility';
+import { mapToJson } from '../utility/utility';
 
 /**
  * Helper function that displays a popover on a selected item.
