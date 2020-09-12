@@ -109,6 +109,8 @@ function calculate(){
     if(useInventory()){
         if(crafting.inventory.size > 0 && totalCost <= 0){
             document.getElementById("inventoryMessage").innerText = "You already have all items needed";
+        }else{
+            document.getElementById("inventoryMessage").innerText = "";
         }
     }
     else{
