@@ -47,13 +47,23 @@ export function addFloor(){
 }
 
 /**
- * Clears all crafting-item inputted by the user
+ * Clears all "Crafting" crafting-item inputted by the user
  */
-export function clear(){
+export function clearCrafting(){
     for (const [name, quantity] of crafting.craftingList.entries()) {
         helper.increaseCraftingAmount(name, -quantity);
     }
-    helper.displayPopover("clear", "Cleared!");
+    helper.displayPopover("clearCrafting", "Cleared!");
+}
+
+/**
+* Clears all Inventory crafting-items inputted by the user
+ */
+export function clearInventory(){
+    for (const [name, quantity] of crafting.inventory.entries()) {
+        helper.increaseIventoryAmount(name, -quantity);
+    }
+    helper.displayPopover("clearInventory", "Inventory was cleared!");
 }
 
 /**

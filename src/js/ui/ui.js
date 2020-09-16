@@ -20,7 +20,8 @@ export function initialize(recipes, floorRec, key){
     document.getElementById("calculate").onclick = calculate;
     document.getElementById("goToCalculations").onclick = event.goToCalculations;
     document.getElementById("addFloor").onclick = event.addFloor;
-    document.getElementById("clear").onclick = event.clear;
+    document.getElementById("clearCrafting").onclick = event.clearCrafting;
+    document.getElementById("clearInventory").onclick = event.clearInventory;
     document.getElementById("copyClipboard").onclick = event.copyClipboard;
     var checkboxInventory = document.getElementById("checkboxInventory");
     checkboxInventory.onclick = event.toggleInventory;
