@@ -290,7 +290,8 @@ li:before {
     color: white;
 }
 
-.inventory.hide-inventory{
+.inventory.hide-inventory,
+#clearInventory.hide-inventory{
     display: none;
 }
 

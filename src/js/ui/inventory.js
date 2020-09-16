@@ -31,4 +31,6 @@ export function displayInventory(){
             inventories[i].classList.add('hide-inventory');
         }
     }
+
+    document.getElementById("clearInventory").classList.toggle('hide-inventory');
 }

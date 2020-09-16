@@ -35,6 +35,11 @@ export function initialize(recipes, floorRec, key){
 }
 
 function loadInventory(){
+    if(useInventory()){
+        console.log("useInventory");
+        document.getElementById("clearInventory").classList.remove('hide-inventory');
+    }
+    
     var inventory = localStorage.getItem(inventoryKey);
     if(inventory === null){
         return; // No saved inventory
