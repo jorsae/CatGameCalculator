@@ -18,6 +18,13 @@ export function displayHowTo(){
 }
 
 /**
+ * Scrolls view to crafting-time-container
+ */
+export function goToCalculations(){
+    document.getElementsByClassName("crafting-time-container")[0].scrollIntoView();
+}
+
+/**
  * Adds all crafting-item required for the floor selected.
  */
 export function addFloor(){

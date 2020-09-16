@@ -18,7 +18,7 @@ export function initialize(recipes, floorRec, key){
     
     document.getElementById("howToUse").onclick = event.displayHowTo;
     document.getElementById("calculate").onclick = calculate;
-    document.getElementById("quickCalculate").onclick = calculate;
+    document.getElementById("goToCalculations").onclick = event.goToCalculations;
     document.getElementById("addFloor").onclick = event.addFloor;
     document.getElementById("clear").onclick = event.clear;
     document.getElementById("copyClipboard").onclick = event.copyClipboard;
@@ -81,7 +81,6 @@ function calculate(){
     
     if(crafting.craftingList.size <= 0){
         helper.displayPopover("calculate", "Nothing to calculate");
-        helper.displayPopover("quickCalculate", "Nothing to calculate");
         return;
     }
 
@@ -117,9 +116,6 @@ function calculate(){
     else{
         document.getElementById("inventoryMessage").innerText = "";
     }
-
-    // Scroll down to the results
-    document.getElementById("outputContainer").scrollIntoView();
 }
 
 function clearOutputTable(){
