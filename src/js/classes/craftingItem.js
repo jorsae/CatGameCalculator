@@ -13,6 +13,7 @@ export class CraftingItem{
         this.rarity = rarity;
         this.sortingOrder = sortingOrder;
         this.quantity = quantity;
+        this.maxCraftingQuantity = -1;
 
         this.craftingRequirements = craftingRequirements;
     }
@@ -35,16 +36,16 @@ export class CraftingItem{
         }
     }
 
-    getCraftingMethod(time, maxCraftingQuantity=-1){
-        if(maxCraftingQuantity > 0){
-            var crafts = Math.floor(this.quantity / maxCraftingQuantity);
+    getCraftingMethod(time){
+        if(this.maxCraftingQuantity > 0){
+            var crafts = Math.floor(this.quantity / this.maxCraftingQuantity);
             
-            var quantityLeft = this.quantity - (maxCraftingQuantity * crafts);
+            var quantityLeft = this.quantity - (this.maxCraftingQuantity * crafts);
             if(crafts > 0){
                 if(quantityLeft <= 0){
-                    return [new craftingMethod.CraftingMethod(maxCraftingQuantity, crafts)];
+                    return [new craftingMethod.CraftingMethod(this.maxCraftingQuantity, crafts)];
                 }
-                return [new craftingMethod.CraftingMethod(maxCraftingQuantity, crafts), new craftingMethod.CraftingMethod(quantityLeft, 1)];
+                return [new craftingMethod.CraftingMethod(this.maxCraftingQuantity, crafts), new craftingMethod.CraftingMethod(quantityLeft, 1)];
             }
             else{
                 return [new craftingMethod.CraftingMethod(this.quantity, 1)];

@@ -65,22 +65,25 @@ describe('CraftingItem', () => {
         assert.deepStrictEqual(item2.getCraftingMethod(28), method2);
     });
 
-    it('getCraftingMethod: Crafting method with quantity less than max', () => {
+    it('getCraftingMethod: Crafting method with quantity less than maxCraftingQuantity', () => {
         const item = new craftingItem.CraftingItem("craftingItem", "category", 100, 3, rarity.Rarity.LEGENDARY, 1, null, quantity=2);
+        item.maxCraftingQuantity = 3;
         const method = [new craftingMethod.CraftingMethod(2, 1)];
-        assert.deepStrictEqual(item.getCraftingMethod(1e6, 3), method);
+        assert.deepStrictEqual(item.getCraftingMethod(1e6), method);
     });
 
-    it('getCraftingMethod: Crafting method with max', () => {
+    it('getCraftingMethod: Crafting method with maxCraftingQuantity', () => {
         const item = new craftingItem.CraftingItem("craftingItem", "category", 100, 3, rarity.Rarity.LEGENDARY, 1, null, quantity=19);
+        item.maxCraftingQuantity = 3;
         const method = [new craftingMethod.CraftingMethod(3, 6), new craftingMethod.CraftingMethod(1, 1)];
-        assert.deepStrictEqual(item.getCraftingMethod(1e6, 3), method);
+        assert.deepStrictEqual(item.getCraftingMethod(1e6), method);
     });
 
     it('getCraftingMethod: Crafting method with quantity a multiple of max', () => {
         const item = new craftingItem.CraftingItem("craftingItem", "category", 100, 3, rarity.Rarity.LEGENDARY, 1, null, quantity=18);
+        item.maxCraftingQuantity = 3;
         const method = [new craftingMethod.CraftingMethod(3, 6)];
-        assert.deepStrictEqual(item.getCraftingMethod(1e6, 3), method);
+        assert.deepStrictEqual(item.getCraftingMethod(1e6), method);
     });
 
     it('toString: Without crafting requirements', () => {
