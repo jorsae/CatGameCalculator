@@ -35,16 +35,16 @@ export class CraftingItem{
         }
     }
 
-    getCraftingMethod(time, max=-1){
-        if(max <= -1){
-            var crafts = Math.floor(this.quantity / max);
+    getCraftingMethod(time, maxCraftingQuantity=-1){
+        if(maxCraftingQuantity > 0){
+            var crafts = Math.floor(this.quantity / maxCraftingQuantity);
             
-            var quantityLeft = this.quantity - (max * crafts);
+            var quantityLeft = this.quantity - (maxCraftingQuantity * crafts);
             if(crafts > 0){
                 if(quantityLeft <= 0){
-                    return [new craftingMethod.CraftingMethod(max, crafts)];
+                    return [new craftingMethod.CraftingMethod(maxCraftingQuantity, crafts)];
                 }
-                return [new craftingMethod.CraftingMethod(max, crafts), new craftingMethod.CraftingMethod(quantityLeft, 1)];
+                return [new craftingMethod.CraftingMethod(maxCraftingQuantity, crafts), new craftingMethod.CraftingMethod(quantityLeft, 1)];
             }
             else{
                 return [new craftingMethod.CraftingMethod(this.quantity, 1)];
