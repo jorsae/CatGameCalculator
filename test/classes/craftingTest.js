@@ -38,7 +38,7 @@ describe('Crafting', () => {
         c.addItemToCrafting('Needles', 1);
         
         var expected = new Map();
-        expected.set(item.name, item.quantity);
+        expected.set(item.name, {'quantity': item.quantity, 'maxCraftingQuantity': -1});
         assert.deepStrictEqual(c.craftingList, expected);
     });
 
@@ -53,8 +53,8 @@ describe('Crafting', () => {
         c.addItemToCrafting('Artifact', 1);
 
         var expected = new Map();
-        expected.set(item.name, item.quantity);
-        expected.set(item2.name, item2.quantity);
+        expected.set(item.name, {'quantity': item.quantity, 'maxCraftingQuantity': -1});
+        expected.set(item2.name, {'quantity': item2.quantity, 'maxCraftingQuantity': -1});
 
         assert.deepStrictEqual(c.craftingList, expected);
     });
@@ -69,7 +69,7 @@ describe('Crafting', () => {
         const expectedItem = recipes.get('Needles');
         expectedItem.quantity = 12;
         var expected = new Map();
-        expected.set(expectedItem.name, expectedItem.quantity);
+        expected.set(expectedItem.name, {'quantity': expectedItem.quantity, 'maxCraftingQuantity': -1});
         assert.deepStrictEqual(c.craftingList, expected);
         
         c.addItemToCrafting('Needles', 10);
@@ -77,7 +77,7 @@ describe('Crafting', () => {
         var expected2 = new Map();
         const expectedItem2 = recipes.get('Needles');
         expectedItem2.quantity = 22;
-        expected2.set(expectedItem2.name, expectedItem2.quantity);
+        expected2.set(expectedItem2.name, {'quantity': expectedItem2.quantity, 'maxCraftingQuantity': -1});
         assert.deepStrictEqual(c.craftingList, expected2);
     });
 
@@ -89,7 +89,7 @@ describe('Crafting', () => {
         c.setItemToCrafting('Needles', 1);
         
         var expected = new Map();
-        expected.set(item.name, item.quantity);
+        expected.set(item.name, {'quantity': item.quantity, 'maxCraftingQuantity': -1});
         assert.deepStrictEqual(c.craftingList, expected);
     });
 
@@ -104,7 +104,7 @@ describe('Crafting', () => {
         c.setItemToCrafting('Needles', 4);
 
         var expected = new Map();
-        expected.set(item.name, item.quantity);
+        expected.set(item.name, {'quantity': item.quantity, 'maxCraftingQuantity': -1});
 
         assert.deepStrictEqual(c.craftingList, expected);
     });
