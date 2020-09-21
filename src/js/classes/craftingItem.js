@@ -86,8 +86,8 @@ export class CraftingItem{
         return [];
     }
 
-    getCost(craftingTime, boost=1.00, max=-1){
-        var craftingMethods = this.getCraftingMethod(craftingTime, max);
+    getCost(craftingTime, boost=1.00){
+        var craftingMethods = this.getCraftingMethod(craftingTime);
         var totalCost = 0;
         for(var i = 0; i < craftingMethods.length; i++){
             totalCost += (this.baseCost / 4) * (Math.pow(craftingMethods[i].itemQuantity, 2) + 3 * craftingMethods[i].itemQuantity) * craftingMethods[i].crafts;

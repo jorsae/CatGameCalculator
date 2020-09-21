@@ -101,6 +101,7 @@ export class Crafting{
         for (const [name, props] of this.craftingList.entries()) {
             var item = this.craftingRecipes.get(name);
             item.quantity = props.quantity;
+            item.maxCraftingQuantity = props.maxCraftingQuantity;
 
             this.getItemRequirements(item, item.quantity);
             this.addElementToCurrentCraft(item.name, item.quantity);
@@ -140,7 +141,6 @@ export class Crafting{
 
     /**
      * Recursive function that will fetch all crafting requirements from a given item.
-     * TODO: It should not be needed to have currentCraft as a parameter.
      */
     subtractItemRequirements(item, parentQuantity = 1){
         if(item.craftingRequirements === null){
@@ -161,7 +161,6 @@ export class Crafting{
 
     /**
      * Recursive function that will fetch all crafting requirements from a given item.
-     * TODO: It should not be needed to have currentCraft as a parameter.
      */
     getItemRequirements(item, parentQuantity = 1){
         if(item.craftingRequirements === null){
@@ -208,7 +207,7 @@ export class Crafting{
         for (const [name, quantity] of this.getCraftingRequirements(useInventory)) {
             var item = this.craftingRecipes.get(name);
             item.quantity = quantity;
-            totalCost += item.getCost(this.craftingTime, boost);
+            totalCost += item.getCost(this.craftingTime, boost, item.maxCraftingQuantity);
         }
         return totalCost;
     }

@@ -113,6 +113,16 @@ describe('CraftingItem', () => {
         assert(item.toString() === "[category/common] craftingItem2(1): 1020coins, 501min. Crafting Requirement: reqItem1: 3, reqItem2: 1");
     });
 
+    it('getCost: Assure maxCraftingQuantity is correctly applying to the total cost', () =>{
+        var recipes = eventRecipe.getCraftingRecipes();
+
+        var itemB = recipes.get('Item B');
+        itemB.quantity = 100;
+        itemB.maxCraftingQuantity = 5;
+
+        assert(itemB.getCost(30, 1.00) === 4000);
+    });
+
     it('getCost: Assure boost is NOT affecting "3 Stars"', () =>{
         var recipes = eventRecipe.getCraftingRecipes();
 
