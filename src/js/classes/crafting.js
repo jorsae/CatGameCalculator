@@ -208,7 +208,6 @@ export class Crafting{
         if(item === undefined) return;
         item.maxCraftingQuantity = maxCraftingQuantity;
         this.craftingRecipes.set(name, item);
-        console.log('updateCraftingItemMaxCraftingQuantity: ' + name + ": " + maxCraftingQuantity);
     }
 
     getTotalCost(boost=1.00, useInventory=true){
@@ -216,7 +215,6 @@ export class Crafting{
         for (const [name, quantity] of this.getCraftingRequirements(useInventory)) {
             var item = this.craftingRecipes.get(name);
             item.quantity = quantity;
-            console.log(name + ": " + quantity + " | " +  item.maxCraftingQuantity);
             totalCost += item.getCost(this.craftingTime, boost);
         }
         return totalCost;

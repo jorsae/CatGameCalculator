@@ -391,4 +391,28 @@ describe('Crafting', () => {
 
         assert.strictEqual(cost, 0);
     });
+
+    it('updateCraftingItemMaxCraftingQuantity: Make sure maxCraftingQuantity is updated', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var c = new crafting.Crafting(recipes);
+        c.updateCraftingItemMaxCraftingQuantity('Needles', 3);
+
+        var needles = c.craftingRecipes.get('Needles');
+        assert(needles.maxCraftingQuantity, 3);
+    });
+
+    it('updateCraftingItemMaxCraftingQuantity: Make sure maxCraftingQuantity updates even during multiple updates', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var c = new crafting.Crafting(recipes);
+        c.updateCraftingItemMaxCraftingQuantity('Needles', 3);
+        
+        var needles = c.craftingRecipes.get('Needles');
+        assert(needles.maxCraftingQuantity, 3);
+        
+        c.updateCraftingItemMaxCraftingQuantity('Needles', 6);
+        var needles2 = c.craftingRecipes.get('Needles');
+        assert(needles2.maxCraftingQuantity, 6);
+    });
 });
