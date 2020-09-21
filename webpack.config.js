@@ -7,7 +7,8 @@ module.exports = {
     entry: {
         'required' : glob.sync('./src/js/required/*.js'),
         'normal': glob.sync('./src/js/normal/*.js'),
-        'event': glob.sync('./src/js/event/*.js')
+        'event': glob.sync('./src/js/event/*.js'),
+        'test': './src/js/test.js'
     },
     output: {
         path: path.resolve(__dirname, 'dist/js'),

@@ -7,34 +7,34 @@ export class Crafting{
         this.inventory = new Map();
     }
 
-    addItemToCrafting(name, quantity, maxCraftingQuantity=-1){
+    addItemToCrafting(name, quantity){
         var item = this.craftingRecipes.get(name);
         if(item === undefined){
             // TODO: Throw error as this item does not exist as a crafting recipe. Also write test for this
             return;
         }
 
-        var props = this.craftingList.get(name);
-        if(props === undefined){
+        var oldQuantity = this.craftingList.get(name);
+        if(oldQuantity === undefined){
             if(quantity === 0){
                 this.craftingList.delete(name);
             }
             else{
-                this.craftingList.set(name, {'quantity': quantity, 'maxCraftingQuantity': maxCraftingQuantity});
+                this.craftingList.set(name, quantity);
             }
         }
         else{
-            var totalQuantity = props.quantity + quantity;
+            var totalQuantity = oldQuantity + quantity;
             if(totalQuantity === 0){
                 this.craftingList.delete(name);
             }
             else{
-                this.craftingList.set(name, {'quantity': totalQuantity, 'maxCraftingQuantity': maxCraftingQuantity});
+                this.craftingList.set(name, oldQuantity + quantity);
             }
         }
     }
 
-    setItemToCrafting(name, quantity, maxCraftingQuantity=-1){
+    setItemToCrafting(name, quantity){
         var item = this.craftingRecipes.get(name);
         if(item === undefined){
             // TODO: Throw error as this item does not exist as a crafting recipe. Also write test for this
@@ -45,7 +45,7 @@ export class Crafting{
             this.craftingList.delete(name);
         }
         else{
-            this.craftingList.set(name, {'quantity': quantity, 'maxCraftingQuantity': maxCraftingQuantity});
+            this.craftingList.set(name, quantity);
         }
     }
 
@@ -98,10 +98,9 @@ export class Crafting{
     getCraftingRequirements(useInventory=true){
         this.currentCraft.clear();
         
-        for (const [name, props] of this.craftingList.entries()) {
+        for (const [name, quantity] of this.craftingList.entries()) {
             var item = this.craftingRecipes.get(name);
-            item.quantity = props.quantity;
-            item.maxCraftingQuantity = props.maxCraftingQuantity;
+            item.quantity = quantity;
 
             this.getItemRequirements(item, item.quantity);
             this.addElementToCurrentCraft(item.name, item.quantity);
@@ -131,7 +130,7 @@ export class Crafting{
         });
 
         // Clear currentCraft and re-add items that are now sorted
-        this.currentCraft.clear();
+        this.currentCraft.clear(); 
         for(var item of sorting){
             this.addElementToCurrentCraft(item.name, item.quantity);
         }
@@ -141,6 +140,7 @@ export class Crafting{
 
     /**
      * Recursive function that will fetch all crafting requirements from a given item.
+     * TODO: It should not be needed to have currentCraft as a parameter.
      */
     subtractItemRequirements(item, parentQuantity = 1){
         if(item.craftingRequirements === null){
@@ -161,6 +161,7 @@ export class Crafting{
 
     /**
      * Recursive function that will fetch all crafting requirements from a given item.
+     * TODO: It should not be needed to have currentCraft as a parameter.
      */
     getItemRequirements(item, parentQuantity = 1){
         if(item.craftingRequirements === null){
@@ -202,12 +203,21 @@ export class Crafting{
         }
     }
 
+    updateCraftingItemMaxCraftingQuantity(name, maxCraftingQuantity){
+        var item = this.craftingRecipes.get(name);
+        if(item === undefined) return;
+        item.maxCraftingQuantity = maxCraftingQuantity;
+        this.craftingRecipes.set(name, item);
+        console.log('updateCraftingItemMaxCraftingQuantity: ' + name + ": " + maxCraftingQuantity);
+    }
+
     getTotalCost(boost=1.00, useInventory=true){
         var totalCost = 0;
         for (const [name, quantity] of this.getCraftingRequirements(useInventory)) {
             var item = this.craftingRecipes.get(name);
             item.quantity = quantity;
-            totalCost += item.getCost(this.craftingTime, boost, item.maxCraftingQuantity);
+            console.log(name + ": " + quantity + " | " +  item.maxCraftingQuantity);
+            totalCost += item.getCost(this.craftingTime, boost);
         }
         return totalCost;
     }
