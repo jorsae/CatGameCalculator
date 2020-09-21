@@ -203,6 +203,16 @@ export class Crafting{
         }
     }
 
+    massUpdateCraftingItemMaxCraftingQuantity(craftingQuantity){
+        for (const [name, _] of this.craftingRecipes.entries()) {
+            var maxCraftingQuantity = -1;
+            
+            var quantity = craftingQuantity.get(name);
+            if(quantity !== undefined) maxCraftingQuantity = quantity;
+            this.updateCraftingItemMaxCraftingQuantity(name, maxCraftingQuantity);
+        }
+    }
+
     updateCraftingItemMaxCraftingQuantity(name, maxCraftingQuantity){
         var item = this.craftingRecipes.get(name);
         if(item === undefined) return;

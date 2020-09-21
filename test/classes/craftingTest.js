@@ -399,7 +399,7 @@ describe('Crafting', () => {
         c.updateCraftingItemMaxCraftingQuantity('Needles', 3);
 
         var needles = c.craftingRecipes.get('Needles');
-        assert(needles.maxCraftingQuantity, 3);
+        assert.strictEqual(needles.maxCraftingQuantity, 3);
     });
 
     it('updateCraftingItemMaxCraftingQuantity: Make sure maxCraftingQuantity updates even during multiple updates', () =>{
@@ -409,10 +409,50 @@ describe('Crafting', () => {
         c.updateCraftingItemMaxCraftingQuantity('Needles', 3);
         
         var needles = c.craftingRecipes.get('Needles');
-        assert(needles.maxCraftingQuantity, 3);
+        assert.strictEqual(needles.maxCraftingQuantity, 3);
         
         c.updateCraftingItemMaxCraftingQuantity('Needles', 6);
         var needles2 = c.craftingRecipes.get('Needles');
-        assert(needles2.maxCraftingQuantity, 6);
+        assert.strictEqual(needles2.maxCraftingQuantity, 6);
+    });
+
+    it('massUpdateCraftingItemMaxCraftingQuantity: Make sure all maxCraftingQuantity are updated on all items in Map', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var updates = new Map();
+        updates.set('Needles', 2);
+        updates.set('Ribbon', 4);
+
+        var c = new crafting.Crafting(recipes);
+        c.massUpdateCraftingItemMaxCraftingQuantity(updates);
+
+        var needles = c.craftingRecipes.get('Needles');
+        assert.strictEqual(needles.maxCraftingQuantity, 2);
+        var ribbon = c.craftingRecipes.get('Ribbon');
+        assert.strictEqual(ribbon.maxCraftingQuantity, 4);
+    });
+
+    it('massUpdateCraftingItemMaxCraftingQuantity: Make sure maxCraftingQuantity is reset on previously set items', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var updates = new Map();
+        updates.set('String', 55);
+        updates.set('Log', 3);
+
+        var c = new crafting.Crafting(recipes);
+        c.updateCraftingItemMaxCraftingQuantity('Metal', 6);
+
+        var metal = c.craftingRecipes.get('Metal');
+        assert.strictEqual(metal.maxCraftingQuantity, 6);
+        
+        c.massUpdateCraftingItemMaxCraftingQuantity(updates);
+        var metal2 = c.craftingRecipes.get('Metal');
+        assert.strictEqual(metal2.maxCraftingQuantity, -1);
+
+        var string = c.craftingRecipes.get('String');
+        assert.strictEqual(string.maxCraftingQuantity, 55);
+
+        var log = c.craftingRecipes.get('Log');
+        assert.strictEqual(log.maxCraftingQuantity, 3);
     });
 });
