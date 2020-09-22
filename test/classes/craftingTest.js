@@ -473,8 +473,55 @@ describe('Crafting', () => {
         assert.strictEqual(needles2.maxCraftingQuantity, -1);
     });
 
-    // TODO: Write test for resetCraftingItemMaxCraftingQuantity, and make sure cost is not affected
-    // 1) e.g: add items for crafting, check total cost
-    // 2) reset, set maxCraftingQuantity, calculate cost
-    // 3) e.g: add same items as in step 1, calculate cost and check it's the same as in step 1
+    it('resetCraftingItemMaxCraftingQuantity: Make sure setting maxCraftingQuantity does not affect cost', () =>{
+        var recipes = recipe.getCraftingRecipes();
+        var c = new crafting.Crafting(recipes);
+        c.addItemToCrafting('String', 10);
+        c.addItemToCrafting('Wood', 10);
+        c.addItemToCrafting('Needles', 4);
+        c.addItemToCrafting('Bronze', 4);
+        c.addItemToCrafting('Metal', 8);
+        c.addItemToCrafting('Sparkles', 2);
+        var originalCost = c.getTotalCost();
+        assert.strictEqual(originalCost, 39650);
+        console.log(originalCost);
+        
+        // Clear all items
+        c.addItemToCrafting('String', -10);
+        c.addItemToCrafting('Wood', -10);
+        c.addItemToCrafting('Needles', -4);
+        c.addItemToCrafting('Bronze', -4);
+        c.addItemToCrafting('Metal', -8);
+        c.addItemToCrafting('Sparkles', -2);
+
+        // Add maxCraftingQuantity
+        var updates = new Map();
+        updates.set('Ribbon', 8);
+        updates.set('Amethyst', 2);
+        updates.set('Silver', 5);
+        updates.set('Gold', 3);
+
+        c.addItemToCrafting('Ribbon', 100);
+        c.addItemToCrafting('Amethyst', 10);
+        c.addItemToCrafting('Silver', 6);
+        c.addItemToCrafting('Gold', 16);
+        c.getTotalCost(); // Calculate cost, but throw the result away
+        c.addItemToCrafting('Ribbon', -100);
+        c.addItemToCrafting('Amethyst', -10);
+        c.addItemToCrafting('Silver', -6);
+        c.addItemToCrafting('Gold', -16);
+
+        // Reset the maxCraftingQuantity
+        c.resetCraftingItemMaxCraftingQuantity();
+
+        // Add the original items
+        c.addItemToCrafting('String', 10);
+        c.addItemToCrafting('Wood', 10);
+        c.addItemToCrafting('Needles', 4);
+        c.addItemToCrafting('Bronze', 4);
+        c.addItemToCrafting('Metal', 8);
+        c.addItemToCrafting('Sparkles', 2);
+        var newCost = c.getTotalCost();
+        assert.strictEqual(originalCost, newCost);
+    });
 });
