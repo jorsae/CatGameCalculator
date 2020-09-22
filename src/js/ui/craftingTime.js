@@ -20,5 +20,17 @@ export function useCraftingTime(){
 }
 
 export function displayCraftingTime(){
-    console.log("TODO: Display/hide crafting-time ui");
+    var useCTime = useCraftingTime();
+
+    // .crafting-mode-container.hide-crafting-mode-container
+    var craftingMode = document.getElementById("craftingModeContainer");
+    var craftingTime = document.getElementById("craftingTime");
+    if(useCTime){
+        craftingMode.classList.add("hide-crafting-mode");
+        craftingTime.classList.remove("hide-crafting-time");
+    }
+    else{
+        craftingMode.classList.remove("hide-crafting-mode");
+        craftingTime.classList.add("hide-crafting-time");
+    }
 }

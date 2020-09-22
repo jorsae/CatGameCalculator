@@ -2,7 +2,7 @@ import { Crafting } from '../classes/crafting';
 import { intToString, convertMinutes, jsonToMap } from '../utility/utility';
 import { isLightTheme, lightTheme } from '../required/theme';
 import { useInventory } from './inventory';
-import { useCraftingTime } from './craftingTime';
+import { displayCraftingTime, useCraftingTime } from './craftingTime';
 
 var event = require('./event');
 var helper = require('./helper');
@@ -33,6 +33,7 @@ export function initialize(recipes, floorRec, key){
     checkboxCraftingTime.onclick = event.toggleCraftingTime;
     if(useCraftingTime()){
         checkboxCraftingTime.checked = true;
+        displayCraftingTime();
     }
     
     populateCraftingItems(crafting.craftingRecipes);

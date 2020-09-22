@@ -300,8 +300,27 @@ li:before {
 }
 
 /* Crafting time input */
+.crafting-time.hide-crafting-time{
+    display: none;
+}
+
+#craftingModeContainer.hide-crafting-mode{
+    display: none;
+}
+
 .crafting-time-container{
     display: block;
+}
+
+.crafting-mode{
+    display: block;
+    margin: auto;
+}
+
+.crafting-mode-input{
+    display: block;
+    margin: auto;
+    font-size: 1.5em;
 }
 
 .crafting-time-info{
