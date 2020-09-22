@@ -6,22 +6,22 @@ import { getFloorRecipes } from './floorRecipes';
 $(document).ready(function(){
     const recipes = getCraftingRecipes();
     var floorRecipes = getFloorRecipes();
-    initialize(recipes, floorRecipes, "normalInventory");
+    initialize(recipes, floorRecipes, "normalInventory", getCraftingModeLevel);
 });
 
-function getCraftingMethodLevel(level){
+function getCraftingModeLevel(level){
     switch(level){
         case 'casual':
         default:
-            return craftingMethodCasual();
+            return craftingModeCasual();
         case 'semi-competitive':
-            return craftingMethodSemiCompetitive();
+            return craftingModeSemiCompetitive();
         case 'competitive':
-            return craftingMethodCompetitive();
+            return craftingModeCompetitive();
     }
 }
 
-function craftingMethodCasual(){
+function craftingModeCasual(){
     var casual = new Map();
     casual.set('String', 2);
     casual.set('Wood', 2);
@@ -29,7 +29,7 @@ function craftingMethodCasual(){
     return casual;
 }
 
-function craftingMethodSemiCompetitive(){
+function craftingModeSemiCompetitive(){
     var semiComp = new Map();
     semiComp.set('String', 4);
     semiComp.set('Wood', 4);
@@ -40,7 +40,7 @@ function craftingMethodSemiCompetitive(){
     return semiComp;
 }
 
-function craftingMethodCompetitive(){
+function craftingModeCompetitive(){
     var comp = new Map();
     comp.set('String', 8);
     comp.set('Wood', 8);

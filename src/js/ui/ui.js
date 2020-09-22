@@ -11,11 +11,13 @@ export var crafting = null;
 export var floorRecipes = null;
 export var inventoryKey = 'normalInventory';
 var craftingTime = new Map();
+var getCraftingModeLevel = null;
 
-export function initialize(recipes, floorRec, key){
+export function initialize(recipes, floorRec, key, getCraftingMode){
     floorRecipes = floorRec;
     crafting = new Crafting(recipes);
     inventoryKey = key;
+    getCraftingModeLevel = getCraftingMode;
     
     document.getElementById("howToUse").onclick = event.displayHowTo;
     document.getElementById("calculate").onclick = calculate;
@@ -30,10 +32,12 @@ export function initialize(recipes, floorRec, key){
         checkboxInventory.checked = true;
     }
     var checkboxCraftingTime = document.getElementById("checkboxCraftingTime");
-    checkboxCraftingTime.onclick = event.toggleCraftingTime;
-    if(useCraftingTime()){
-        checkboxCraftingTime.checked = true;
-        displayCraftingTime();
+    if(checkboxCraftingTime !== null){
+        checkboxCraftingTime.onclick = event.toggleCraftingTime;
+        if(useCraftingTime()){
+            checkboxCraftingTime.checked = true;
+            displayCraftingTime();
+        }
     }
     
     populateCraftingItems(crafting.craftingRecipes);
@@ -76,27 +80,37 @@ function setOneMinuteCrafting(oneMin = true){
 }
 
 function calculate(){
-    var userHours = parseInt(document.getElementById("userTimeHours").value);
-    var userMinutes = parseInt(document.getElementById("userTimeMinutes").value);
-    var userBoost = parseFloat(document.getElementById("userTimeBoost").value);
+    var mode = document.getElementById("craftingMode");
+    if(!useCraftingTime() && mode !== null){
+        var craftingMode = getCraftingModeLevel(mode.value);
+        crafting.massUpdateCraftingItemMaxCraftingQuantity(craftingMode);
+    }
+    else{
+        crafting.resetCraftingItemMaxCraftingQuantity();
+
+        var userHours = parseInt(document.getElementById("userTimeHours").value);
+        var userMinutes = parseInt(document.getElementById("userTimeMinutes").value);
+        var userBoost = parseFloat(document.getElementById("userTimeBoost").value);
+        
+        var userTime = 0;
+        if(!isNaN(userHours)) {
+            userTime += userHours * 60;
+        }
+        if(!isNaN(userMinutes)){
+            userTime += userMinutes;
+        }
+        if(userTime <= 0){
+            return; // TODO: Give error message to the user
+        }
+        
+        if(crafting.craftingList.size <= 0){
+            helper.displayPopover("calculate", "Nothing to calculate");
+            return;
+        }
     
-    var userTime = 0;
-    if(!isNaN(userHours)) {
-        userTime += userHours * 60;
-    }
-    if(!isNaN(userMinutes)){
-        userTime += userMinutes;
-    }
-    if(userTime <= 0){
-        return; // TODO: Give error message to the user
-    }
-    
-    if(crafting.craftingList.size <= 0){
-        helper.displayPopover("calculate", "Nothing to calculate");
-        return;
+        crafting.setCraftingTime(userTime);
     }
 
-    crafting.setCraftingTime(userTime);
 
     clearOutputTable(); // Clears the table from any input
     

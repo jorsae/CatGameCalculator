@@ -205,7 +205,7 @@ export class Crafting{
 
     massUpdateCraftingItemMaxCraftingQuantity(craftingQuantity){
         for (const [name, _] of this.craftingRecipes.entries()) {
-            var maxCraftingQuantity = -1;
+            var maxCraftingQuantity = 1;
             
             var quantity = craftingQuantity.get(name);
             if(quantity !== undefined) maxCraftingQuantity = quantity;
@@ -218,6 +218,14 @@ export class Crafting{
         if(item === undefined) return;
         item.maxCraftingQuantity = maxCraftingQuantity;
         this.craftingRecipes.set(name, item);
+    }
+
+    // TODO: Write test for this
+    resetCraftingItemMaxCraftingQuantity(){
+        for(const [name, item] of this.craftingRecipes.entries()){
+            item.maxCraftingQuantity = -1;
+            this.craftingRecipes.set(name, item);
+        }
     }
 
     getTotalCost(boost=1.00, useInventory=true){
