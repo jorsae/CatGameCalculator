@@ -447,7 +447,7 @@ describe('Crafting', () => {
         
         c.massUpdateCraftingItemMaxCraftingQuantity(updates);
         var metal2 = c.craftingRecipes.get('Metal');
-        assert.strictEqual(metal2.maxCraftingQuantity, -1);
+        assert.strictEqual(metal2.maxCraftingQuantity, 1);
 
         var string = c.craftingRecipes.get('String');
         assert.strictEqual(string.maxCraftingQuantity, 55);
@@ -455,4 +455,26 @@ describe('Crafting', () => {
         var log = c.craftingRecipes.get('Log');
         assert.strictEqual(log.maxCraftingQuantity, 3);
     });
+
+    it('resetCraftingItemMaxCraftingQuantity: Make sure maxCraftingQuantity is reset to -1', () =>{
+        var recipes = recipe.getCraftingRecipes();
+
+        var updates = new Map();
+        updates.set('Ribbon', 55);
+        updates.set('Amethyst', 3);
+
+        var c = new crafting.Crafting(recipes);
+        c.updateCraftingItemMaxCraftingQuantity('Needles', 6);
+        var needles = c.craftingRecipes.get('Needles');
+        assert.strictEqual(needles.maxCraftingQuantity, 6);
+
+        c.resetCraftingItemMaxCraftingQuantity();
+        var needles2 = c.craftingRecipes.get('Needles');
+        assert.strictEqual(needles2.maxCraftingQuantity, -1);
+    });
+
+    // TODO: Write test for resetCraftingItemMaxCraftingQuantity, and make sure cost is not affected
+    // 1) e.g: add items for crafting, check total cost
+    // 2) reset, set maxCraftingQuantity, calculate cost
+    // 3) e.g: add same items as in step 1, calculate cost and check it's the same as in step 1
 });

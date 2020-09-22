@@ -220,7 +220,6 @@ export class Crafting{
         this.craftingRecipes.set(name, item);
     }
 
-    // TODO: Write test for this
     resetCraftingItemMaxCraftingQuantity(){
         for(const [name, item] of this.craftingRecipes.entries()){
             item.maxCraftingQuantity = -1;
