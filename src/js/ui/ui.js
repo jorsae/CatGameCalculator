@@ -82,7 +82,9 @@ function setOneMinuteCrafting(oneMin = true){
 function calculate(){
     var mode = document.getElementById("craftingMode");
     if(!useCraftingTime() && mode !== null){
-        var craftingMode = getCraftingModeLevel(mode.value);
+        var oneMinCrafting = document.getElementById("crafting"); // oneMinCrafting.checked = 1min crafting
+        var craftingMode = getCraftingModeLevel(mode.value, oneMinCrafting.checked);
+
         crafting.massUpdateCraftingItemMaxCraftingQuantity(craftingMode);
     }
     else{

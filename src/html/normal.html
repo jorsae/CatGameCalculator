@@ -101,10 +101,7 @@
 
         <hr>
         <div class="crafting-time-container">
-            <h2 class="text-center">
-                <span>Crafting time</span>
-                <i class="crafting-time-info fa fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Amount of time you want the crafting to be spread out over. Shorter time increases the costs." alt="Information icon for explaining Crafting Time"></i>
-            </h2>
+            <h2 id="craftingModeHeader" class="text-center">Crafting Mode</h2>
 
             <div id="craftingModeContainer" class="crafting-mode crafting-time-input">
                 <select id="craftingMode" class="crafting-time-input" aria-label="Which crafting mode to use">
@@ -124,8 +121,10 @@
                     <span class="user-input-label">Minutes:</span>
                     <input id="userTimeMinutes" class="user-input" aria-label="Input for crafting time minutes" type="number" value="1">
                 </p>
+            </div>
+
+            <div class="crafting-time">
                 <div class="crafting-time-input">
-                    <p>Remember to set the crafting time!</p>
                     <label for="crafting" class="crafting-minute">1 minute crafting</label>
                     <input id="crafting" type="checkbox" name="crafting" class="crafting-minute">
                 </div>

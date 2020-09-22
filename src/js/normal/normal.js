@@ -9,46 +9,77 @@ $(document).ready(function(){
     initialize(recipes, floorRecipes, "normalInventory", getCraftingModeLevel);
 });
 
-function getCraftingModeLevel(level){
+function getCraftingModeLevel(level, oneMinuteCrafting){
     switch(level){
         case 'casual':
         default:
-            return craftingModeCasual();
+            return craftingModeCasual(oneMinuteCrafting);
         case 'semi-competitive':
-            return craftingModeSemiCompetitive();
+            return craftingModeSemiCompetitive(oneMinuteCrafting);
         case 'competitive':
-            return craftingModeCompetitive();
+            return craftingModeCompetitive(oneMinuteCrafting);
     }
 }
 
-function craftingModeCasual(){
+function craftingModeCasual(oneMinuteCrafting){
     var casual = new Map();
-    casual.set('String', 2);
-    casual.set('Wood', 2);
-    casual.set('Metal', 2);
+    if(oneMinuteCrafting){
+        casual.set('String', 4);
+        casual.set('Wood', 4);
+        casual.set('Ribbon', 2);
+        casual.set('Metal', 4);
+    }
+    else{
+        casual.set('String', 2);
+        casual.set('Wood', 2);
+        casual.set('Metal', 2);
+    }
     return casual;
 }
 
-function craftingModeSemiCompetitive(){
+function craftingModeSemiCompetitive(oneMinuteCrafting){
     var semiComp = new Map();
-    semiComp.set('String', 4);
-    semiComp.set('Wood', 4);
-    semiComp.set('Ribbon', 2);
-    semiComp.set('Metal', 4);
-    semiComp.set('Needles', 2);
-    semiComp.set('Bronze', 2);
+    if(oneMinuteCrafting){
+        semiComp.set('String', 6);
+        semiComp.set('Wood', 6);
+        semiComp.set('Ribbon', 3);
+        semiComp.set('Metal', 8);
+        semiComp.set('Needles', 2);
+        semiComp.set('Sparkles', 1);
+        semiComp.set('Bronze', 3);
+        semiComp.set('Orb', 2);
+    }
+    else{
+        semiComp.set('String', 4);
+        semiComp.set('Wood', 4);
+        semiComp.set('Ribbon', 2);
+        semiComp.set('Metal', 4);
+        semiComp.set('Bronze', 2);
+    }
     return semiComp;
 }
 
-function craftingModeCompetitive(){
+function craftingModeCompetitive(oneMinuteCrafting){
     var comp = new Map();
-    comp.set('String', 8);
-    comp.set('Wood', 8);
-    comp.set('Ribbon', 4);
-    comp.set('Metal', 8);
-    comp.set('Needles', 4);
-    comp.set('Bronze', 4);
-    comp.set('Amethyst', 2);
-    comp.set('Orb', 2);
+    if(oneMinuteCrafting){
+        comp.set('String', 10);
+        comp.set('Wood', 10);
+        comp.set('Ribbon', 5);
+        comp.set('Metal', 12);
+        comp.set('Needles', 3);
+        comp.set('Bronze', 4);
+        comp.set('Amethyst', 2);
+        comp.set('Orb', 2);
+    }
+    else{
+        comp.set('String', 8);
+        comp.set('Wood', 8);
+        comp.set('Ribbon', 4);
+        comp.set('Metal', 8);
+        comp.set('Needles', 4);
+        comp.set('Bronze', 4);
+        comp.set('Amethyst', 2);
+        comp.set('Orb', 2);
+    }
     return comp;
 }
