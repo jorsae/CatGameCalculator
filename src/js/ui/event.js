@@ -1,5 +1,6 @@
 import { crafting, floorRecipes } from './ui';
 import { useInventory, useInventoryCookie, inventoryCookieDefaultValue, displayInventory } from './inventory';
+import { useCraftingTime, craftingTimeCookie, craftingTimeCookieDefaultValue, displayCraftingTime } from './craftingTime';
 import { setCookie } from '../utility/cookie';
 
 var helper = require('./helper');
@@ -178,4 +179,17 @@ export function toggleInventory(){
         setCookie(useInventoryCookie, "true", 365);
     }
     displayInventory();
+}
+
+/**
+ * Toggles if crafting-time should be enabled or not
+ */
+export function toggleCraftingTime(){
+    if(useCraftingTime()){
+        setCookie(craftingTimeCookie, craftingTimeCookieDefaultValue, 365);
+    }
+    else{
+        setCookie(craftingTimeCookie, "true", 365);
+    }
+    displayCraftingTime();
 }
