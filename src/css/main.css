@@ -117,6 +117,10 @@ h1.text-center{
     justify-content: center;
 }
 
+.calculator-selection-logo{
+    width: 100%;
+}
+
 .calculator-option{
     font-size: 3em;
     border: solid 1px white;
