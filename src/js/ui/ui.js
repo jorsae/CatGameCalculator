@@ -300,7 +300,10 @@ function createCraftingItemDescription(item){
         craftingItemInfo.appendChild(text);
         craftingItemInfo.appendChild(document.createElement("br"));
     }
-    craftingItemInfo.appendChild(document.createTextNode('Crafting time: ' + convertMinutes(item.craftingTime)));
+    craftingItemInfo.appendChild(document.createElement("hr"));
+    craftingItemInfo.appendChild(document.createTextNode('Cost: ' + item.baseCost));
+    craftingItemInfo.appendChild(document.createElement("br"));
+    craftingItemInfo.appendChild(document.createTextNode('Time: ' + convertMinutes(item.craftingTime)));
     
     var craftingItemDescription = document.createTextNode(descriptionText);
     craftingItemInfo.appendChild(craftingItemDescription);
