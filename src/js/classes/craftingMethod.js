@@ -10,6 +10,7 @@ export class CraftingMethod{
     }
 
     toString(){
-        return "Craft: " + this.itemQuantity + "x, " + this.crafts + "times";
+        var timePlural = (this.crafts === 1) ? "time" : "times";
+        return this.itemQuantity + "x, " + this.crafts + timePlural;
     }
 }

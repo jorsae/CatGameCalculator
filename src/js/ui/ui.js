@@ -172,12 +172,19 @@ function createOutputTableRow(table, item, craftingTime, boost){
     var cellNodeCost = document.createTextNode(intToString(cost));
     cellCost.appendChild(cellNodeCost);
 
-    var craftingText = item.getCraftingMethod(craftingTime);
-
+    
     // Add crafting method cell
     var cellCrafting = tableRow.insertCell(3);
-    var cellNodeCrafting = document.createTextNode(craftingText);
-    cellCrafting.appendChild(cellNodeCrafting);
+
+    var craftingMethod = item.getCraftingMethod(craftingTime);
+    if(craftingMethod.length >= 2){
+        cellCrafting.appendChild(document.createTextNode(craftingMethod[0]));
+        cellCrafting.appendChild(document.createElement("br"));
+        cellCrafting.appendChild(document.createTextNode(craftingMethod[1]));
+    }
+    else{
+        cellCrafting.appendChild(document.createTextNode(craftingMethod));
+    }
 }
 
 function populateFloors(floorRecipes){
