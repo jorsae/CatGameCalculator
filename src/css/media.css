@@ -102,6 +102,10 @@
         width: 60vw;
         max-width: 60%;
     }
+
+    .settings-container{
+        position: absolute;
+    }
 }
 
 /* Wide screens */
