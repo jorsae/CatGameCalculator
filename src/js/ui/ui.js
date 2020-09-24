@@ -1,4 +1,5 @@
 import { Crafting } from '../classes/crafting';
+import { Rarity } from '../classes/rarity';
 import { intToString, convertMinutes, jsonToMap } from '../utility/utility';
 import { isLightTheme, lightTheme } from '../required/theme';
 import { useInventory } from './inventory';
@@ -175,16 +176,21 @@ function createOutputTableRow(table, item, craftingTime, boost){
     
     // Add crafting method cell
     var cellCrafting = tableRow.insertCell(3);
-
-    var craftingMethod = item.getCraftingMethod(craftingTime);
-    if(craftingMethod.length >= 2){
-        cellCrafting.appendChild(document.createTextNode(craftingMethod[0]));
-        cellCrafting.appendChild(document.createElement("br"));
-        cellCrafting.appendChild(document.createTextNode(craftingMethod[1]));
+    if(item.rarity === Rarity.RAW){
+        cellCrafting.appendChild(document.createTextNode("Raw material"));
     }
     else{
-        cellCrafting.appendChild(document.createTextNode(craftingMethod));
+        var craftingMethod = item.getCraftingMethod(craftingTime);
+        if(craftingMethod.length >= 2){
+            cellCrafting.appendChild(document.createTextNode(craftingMethod[0]));
+            cellCrafting.appendChild(document.createElement("br"));
+            cellCrafting.appendChild(document.createTextNode(craftingMethod[1]));
+        }
+        else{
+            cellCrafting.appendChild(document.createTextNode(craftingMethod));
+        }
     }
+
 }
 
 function populateFloors(floorRecipes){
