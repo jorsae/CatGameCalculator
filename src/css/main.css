@@ -525,10 +525,7 @@ input[type=checkbox] {
     position: relative;
     display: flex;
     align-items: center;
-}
-
-.settings-container .switch{
-    margin-right: 10px;
+    flex-wrap: wrap
 }
 
 .settings-label{
@@ -541,7 +538,7 @@ input[type=checkbox] {
     display: inline-block;
     width: 60px;
     height: 34px;
-    margin: 4px;
+    margin-right: 8px;
 }
 
 .switch input { 
