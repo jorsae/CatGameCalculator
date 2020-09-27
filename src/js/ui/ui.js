@@ -272,14 +272,7 @@ function createCraftingItem(tier, item){
 
     // Displays/hides crafting item description
     craftingItemLabel.onclick = (e) => {
-        const displayCraftingItemInfoClass = "display-crafting-item-info";
-        // crafting item description is visible
-        if(craftingItemInfo.classList.contains(displayCraftingItemInfoClass)){
-            craftingItemInfo.classList.remove(displayCraftingItemInfoClass)
-        }
-        else{
-            craftingItemInfo.classList.add(displayCraftingItemInfoClass);
-        }
+        craftingItemInfo.classList.toggle("display-crafting-item-info");
         e.preventDefault();// Stops clicking label toggling input field.
     };
 

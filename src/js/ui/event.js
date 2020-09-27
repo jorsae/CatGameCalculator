@@ -10,12 +10,7 @@ var helper = require('./helper');
  */
 export function displayHowTo(){
     const guideContainer = document.getElementById("guideContainer");
-    if(guideContainer.classList.contains("guide-container-height")){
-        guideContainer.classList.remove("guide-container-height");
-    }
-    else{
-        guideContainer.classList.add("guide-container-height");
-    }
+    guideContainer.classList.toggle("guide-container-height");
 }
 
 /**
