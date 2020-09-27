@@ -12,6 +12,6 @@ export class CraftingMethod{
 
     toString(){
         var timePlural = (this.crafts === 1) ? "time" : "times";
-        return this.itemQuantity + "x, " + this.crafts + timePlural;
+        return this.itemQuantity + "x " + this.crafts + timePlural;
     }
 }
