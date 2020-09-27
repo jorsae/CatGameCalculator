@@ -183,7 +183,7 @@ function createOutputTableRow(table, item, craftingTime, boost){
     // Add crafting method cell
     var cellCrafting = tableRow.insertCell(4);
     if(item.rarity === Rarity.RAW){
-        cellCrafting.appendChild(document.createTextNode("Raw material"));
+        cellCrafting.appendChild(document.createTextNode("N/A"));
     }
     else{
         var craftingMethod = item.getCraftingMethod(craftingTime);
