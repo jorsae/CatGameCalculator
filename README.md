@@ -6,7 +6,8 @@
 - [Dependencies](#dependencies)
 
 ## General
-This project is a calculator for the phone game "Cat Game - The Cats Collector!". The website can be found at https://catgamecalculator.com.
+This project is a calculator for the phone game "Cat Game - The Cats Collector!".
+The website can be found at https://catgamecalculator.com.
 
 ## Setup
 To run this project, simply download or clone this repo, install the [Dependencies](#dependencies) and build:
