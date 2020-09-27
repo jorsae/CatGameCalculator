@@ -6,7 +6,7 @@
 - [Dependencies](#dependencies)
 
 ## General
-This project is a calculator for the phone game "Cat Game - The Cats Collector!".
+This project is a calculator for the phone game "Cat Game - The Cats Collector!". <br />
 The website can be found at https://catgamecalculator.com.
 
 ## Setup
