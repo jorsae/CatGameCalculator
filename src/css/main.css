@@ -413,7 +413,7 @@ th.light-theme{
 
 td{
     text-align: center;
-    overflow: auto;
+    overflow: hidden;
 }
 
 td img{
