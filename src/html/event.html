@@ -10,9 +10,6 @@
         <link rel="stylesheet" type="text/css" href="css/media.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157531722-1"></script>
         <script>
@@ -21,18 +18,6 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-157531722-1');
-        </script>
-
-        <script>
-            $(document).ready(function(){
-                $('[data-toggle="tooltip"]').tooltip({
-                    boundary: "window"
-                });
-                $('[data-toggle="popover"]').on('shown.bs.popover', function(){
-                    setTimeout(function() {
-                        $('[data-toggle="popover"]').popover("hide")}, 2000);
-                });
-            });
         </script>
     </head>
     <body>
@@ -113,7 +98,6 @@
         <div class="crafting-time-container">
             <h2 class="text-center">
                 <span>Crafting time</span>
-                <i class="crafting-time-info fa fa-info-circle" data-toggle="tooltip" data-placement="bottom" title="Amount of time you want the crafting to be spread out over. Shorter time increases the costs." alt="Information icon for explaining Crafting Time"></i>
             </h2>
 
             <p class="crafting-time-input">
@@ -160,5 +144,9 @@
 
         <script type="text/javascript" src="js/required.min.js" defer></script>
         <script type="text/javascript" src="js/event.min.js" defer></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- TODO: Remove bootstrap. It's only used for popover message on certain button clicks -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </body>
 </html>

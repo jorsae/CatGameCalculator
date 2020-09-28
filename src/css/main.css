@@ -51,11 +51,6 @@ h1.text-center{
     border-radius: 8px;
 }
 
-.tooltip-inner{
-    position: absolute;
-    background-color: gray;
-}
-
 /* CSS for cookie policy banner */
 .cookie-paragraph{
     margin: 0 0 0 0;
