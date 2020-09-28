@@ -168,20 +168,13 @@ function createOutputTableRow(table, item, craftingTime, boost){
     var cellNodeQuantity = document.createTextNode(item.quantity.toLocaleString());
     cellQuantity.appendChild(cellNodeQuantity);
 
-    // Add input cell
-    var cellInput = tableRow.insertCell(2);
-    var craftingQuantity = crafting.craftingList.get(item.name);
-    var cellInputQuantity = document.createTextNode((craftingQuantity === undefined) ? 0 : craftingQuantity);
-    cellInput.appendChild(cellInputQuantity);
-
-    // Add cost cell
     var cost = item.getCost(craftingTime, boost);
-    var cellCost = tableRow.insertCell(3);
+    var cellCost = tableRow.insertCell(2);
     var cellNodeCost = document.createTextNode(intToString(cost));
     cellCost.appendChild(cellNodeCost);
     
     // Add crafting method cell
-    var cellCrafting = tableRow.insertCell(4);
+    var cellCrafting = tableRow.insertCell(3);
     if(item.rarity === Rarity.RAW){
         cellCrafting.appendChild(document.createTextNode("N/A"));
     }
