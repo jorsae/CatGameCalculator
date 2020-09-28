@@ -264,7 +264,7 @@ li:before {
     background: none;
     color: #ffffff;
     font-size: 1em !important;
-    border: none;
+    border-bottom: solid 3px white;
 }
 
 .crafting-item-info{
