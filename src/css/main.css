@@ -266,6 +266,9 @@ li:before {
     font-size: 1em !important;
     border-bottom: solid 3px white;
 }
+.crafting-item-button:hover{
+    color: gold;
+}
 
 .crafting-item-info{
     display: none;

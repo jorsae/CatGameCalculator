@@ -49,7 +49,9 @@ export function clearCrafting(){
     for (const [name, quantity] of crafting.craftingList.entries()) {
         helper.increaseCraftingAmount(name, -quantity);
     }
-    helper.displayPopover("clearCrafting", "Cleared!");
+
+    var popupText = useInventory() ? "Cleared crafting!" : "Cleared!";
+    helper.displayPopover("clearCrafting", popupText);
 }
 
 /**
