@@ -14,8 +14,10 @@ $(document).ready(function(){
     setTheme();
     
     var checkboxLightTheme = document.getElementById("checkboxLightTheme");
-    checkboxLightTheme.onclick = toggleLightTheme;
-    checkboxLightTheme.checked = lightTheme;
+    if(checkboxLightTheme !== null){
+        checkboxLightTheme.onclick = toggleLightTheme;
+        checkboxLightTheme.checked = lightTheme;
+    }
 });
 
 export function isLightTheme(){
