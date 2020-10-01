@@ -1,4 +1,4 @@
-import { crafting, inventoryKey } from './ui';
+import { crafting, craftingKey, inventoryKey } from './ui';
 import { mapToJson } from '../utility/utility';
 
 /**
@@ -31,13 +31,14 @@ export function updateCraftingAmount(name){
         value = 0;
     }
     document.getElementById(name).value = value;
+    localStorage.setItem(craftingKey, mapToJson(crafting.craftingList));
 }
 
 /**
  * Increases the quantity of a crafting-item to craft.
  * Note: This can also be used to decrease, by "increasing" it with a negative number.
  */
-export function increaseIventoryAmount(name, quantity){
+export function increaseInventoryAmount(name, quantity){
     crafting.addItemToInventory(name, quantity);
     updateInventoryAmount(name);
 }

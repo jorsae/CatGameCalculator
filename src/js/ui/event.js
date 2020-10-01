@@ -59,7 +59,7 @@ export function clearCrafting(){
  */
 export function clearInventory(){
     for (const [name, quantity] of crafting.inventory.entries()) {
-        helper.increaseIventoryAmount(name, -quantity);
+        helper.increaseInventoryAmount(name, -quantity);
     }
     helper.displayPopover("clearInventory", "Inventory was cleared!");
 }
@@ -145,14 +145,14 @@ export function craftingAmountUpdate(e){
  * User clicks "up-arrow" to increase value of a crafting-item to inventory
  */
 export function upClickInventory(name){
-    helper.increaseIventoryAmount(name, 1);
+    helper.increaseInventoryAmount(name, 1);
 }
 
 /**
  * User clicks "down-arrow" to decrease value of a crafting-item to inventory
  */
 export function downClickInventory(name){
-    helper.increaseIventoryAmount(name, -1);
+    helper.increaseInventoryAmount(name, -1);
 }
 
 /**

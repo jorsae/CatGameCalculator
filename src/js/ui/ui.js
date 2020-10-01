@@ -11,13 +11,15 @@ var helper = require('./helper');
 export var crafting = null;
 export var floorRecipes = null;
 export var inventoryKey = 'normalInventory';
+export var craftingKey = 'normalCrafting';
 var craftingTime = new Map();
 var getCraftingModeLevel = null;
 
 export function initialize(recipes, floorRec, key, getCraftingMode){
     floorRecipes = floorRec;
     crafting = new Crafting(recipes);
-    inventoryKey = key;
+    inventoryKey = key + "Inventory";
+    craftingKey = key + "Crafting";
     getCraftingModeLevel = getCraftingMode;
     
     document.getElementById("howToUse").onclick = event.displayHowTo;
@@ -44,6 +46,18 @@ export function initialize(recipes, floorRec, key, getCraftingMode){
     populateCraftingItems(crafting.craftingRecipes);
     populateFloors(floorRecipes);
     loadInventory();
+    loadCrafting();
+}
+
+function loadCrafting(){
+    var savedCrafting = localStorage.getItem(craftingKey);
+    if(savedCrafting === null){
+        return; // No saved inventory
+    }
+    crafting.craftingList = jsonToMap(savedCrafting);
+    for (const [name, _] of crafting.craftingList.entries()) {
+        helper.updateCraftingAmount(name);
+    }
 }
 
 function loadInventory(){
@@ -56,7 +70,7 @@ function loadInventory(){
         return; // No saved inventory
     }
     crafting.inventory = jsonToMap(inventory);
-    for (const [name, quantity] of crafting.inventory.entries()) {
+    for (const [name, _] of crafting.inventory.entries()) {
         helper.updateInventoryAmount(name);
     }
 }
