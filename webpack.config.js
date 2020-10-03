@@ -8,7 +8,6 @@ module.exports = {
         'required' : glob.sync('./src/js/required/*.js'),
         'normal': glob.sync('./src/js/normal/*.js'),
         'event': glob.sync('./src/js/event/*.js'),
-        'progress': glob.sync('./src/js/progress/*.js'),
         'test': './src/js/test.js'
     },
     output: {
