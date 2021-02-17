@@ -700,7 +700,21 @@ export function getFloorRecipes(){
     const laundromat = new Floor("Laundromat", 67, identical62);
     floorRecipes.set(laundromat.name, laundromat);
 
-    const infant = new Floor("Infant", 68, identical62)
+    const infant = new Floor("Infant", 68, identical62);
     floorRecipes.set(infant.name, infant);
+    
+    const tropicalFruitReq = [["Firestone", 6],
+                        ["Pendant", 2],
+                        ["Elementstone", 2],
+                        ["Gold", 6],
+                        ["Orb", 45],
+                        ["Necklace", 1],
+                        ["Waterstone", 8],
+                        ["Artifact", 2],
+                        ["Fire", 1],
+    ];
+    const tropicalFruit = new Floor("Tropical Fruit", 69, tropicalFruitReq);
+    floorRecipes.set(tropicalFruit.name, tropicalFruit);
+
     return floorRecipes;
 }
