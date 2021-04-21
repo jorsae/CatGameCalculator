@@ -716,5 +716,31 @@ export function getFloorRecipes(){
     const tropicalFruit = new Floor("Tropical Fruit", 69, tropicalFruitReq);
     floorRecipes.set(tropicalFruit.name, tropicalFruit);
 
+    const gelatinReq = [["Firestone", 10],
+                        ["Pendant", 4],
+                        ["Elementstone", 4],
+                        ["Gold", 10],
+                        ["Orb", 60],
+                        ["Necklace", 2],
+                        ["Waterstone", 12],
+                        ["Artifact", 4],
+                        ["Fire", 2]
+    ];
+    const gelatin = new Floor("Gelatin", 70, gelatinReq)
+    floorRecipes.set(gelatin.name, gelatin);
+
+    const bakingReq = [["Firestone", 14],
+                        ["Pendant", 6],
+                        ["Elementstone", 6],
+                        ["Gold", 14],
+                        ["Orb", 75],
+                        ["Necklace", 3],
+                        ["Waterstone", 16],
+                        ["Artifact", 6],
+                        ["Fire", 3]
+    ];
+    const baking = new Floor("Baking", 71, bakingReq)
+    floorRecipes.set(baking.name, baking);
+
     return floorRecipes;
 }
