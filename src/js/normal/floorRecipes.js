@@ -745,7 +745,7 @@ export function getFloorRecipes(){
     const yardsale = new Floor("Yardsale", 72, identical71)
     floorRecipes.set(yardsale.name, yardsale);
 
-    const deli = new Floor("Deli", 71, identical71)
+    const deli = new Floor("Deli", 73, identical71)
     floorRecipes.set(deli.name, deli);
 
     return floorRecipes;
