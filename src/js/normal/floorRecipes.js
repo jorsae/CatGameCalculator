@@ -729,7 +729,7 @@ export function getFloorRecipes(){
     const gelatin = new Floor("Gelatin", 70, gelatinReq)
     floorRecipes.set(gelatin.name, gelatin);
 
-    const bakingReq = [["Firestone", 14],
+    const identical71 = [["Firestone", 14],
                         ["Pendant", 6],
                         ["Elementstone", 6],
                         ["Gold", 14],
@@ -739,8 +739,14 @@ export function getFloorRecipes(){
                         ["Artifact", 6],
                         ["Fire", 3]
     ];
-    const baking = new Floor("Baking", 71, bakingReq)
+    const baking = new Floor("Baking", 71, identical71)
     floorRecipes.set(baking.name, baking);
+
+    const yardsale = new Floor("Yardsale", 72, identical71)
+    floorRecipes.set(yardsale.name, yardsale);
+
+    const deli = new Floor("Deli", 71, identical71)
+    floorRecipes.set(deli.name, deli);
 
     return floorRecipes;
 }
