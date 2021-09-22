@@ -364,7 +364,7 @@ function createCrafting(name){
     
     // Header
     const inventoryHeader = document.createElement("p");
-    var inventoryHeaderText = document.createTextNode("Crafting:");
+    var inventoryHeaderText = document.createTextNode("Goal:");
     inventoryHeader.appendChild(inventoryHeaderText);
     craftingContainer.appendChild(inventoryHeader);
 
