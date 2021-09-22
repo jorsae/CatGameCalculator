@@ -97,32 +97,57 @@ export class Crafting{
 
     getCraftingRequirements(useInventory=true){
         this.currentCraft.clear();
+        var inventoryCopy = new Map(this.inventory);
         
         for (const [name, quantity] of this.craftingList.entries()) {
+            var totalQuantity = quantity;
+            if(useInventory){
+                var inventoryQuantity = inventoryCopy.get(name);
+                if(inventoryQuantity !== undefined){
+                    if(quantity > inventoryQuantity){
+                        totalQuantity = quantity - inventoryQuantity;
+                        inventoryCopy.set(name, 0);
+                    }
+                    else{
+                        totalQuantity = 0;
+                        inventoryCopy.set(name, inventoryQuantity - quantity);
+                    }
+                }
+            }
             var item = this.craftingRecipes.get(name);
-            item.quantity = quantity;
-
+            item.quantity = totalQuantity;
+            
             this.getItemRequirements(item, item.quantity);
             this.addElementToCurrentCraft(item.name, item.quantity);
         }
         
+        console.log("BEFORE");
+        console.log(this.currentCraft);
+        console.log(this.currentCraft.get("Elementstone"));
         if(useInventory){
             // Remove items from craft if we have them in inventory
             for (const [name, quantity] of this.currentCraft.entries()) {
-                var craftingQuantity = this.craftingList.get(name);
-                var inventoryQuantity = this.inventory.get(name);
+                var inventoryQuantity = inventoryCopy.get(name);
+                // console.log(name + ": " + inventoryQuantity);
                 if(inventoryQuantity !== undefined){
-                    var invQuantity = inventoryQuantity;
-                    if(craftingQuantity !== undefined){
-                        if(craftingQuantity < inventoryQuantity){
-                            invQuantity = craftingQuantity;
-                        }
+                    if(quantity > inventoryQuantity){
+                        var item = this.craftingRecipes.get(name);
+                        this.subtractItemRequirements(item, inventoryQuantity);
+                        this.addElementToCurrentCraft(item.name, -inventoryQuantity);
+                        inventoryCopy.set(name, 0);
                     }
-                    var item = this.craftingRecipes.get(name);
-                    this.subtractItemRequirements(item, invQuantity);
-                    this.addElementToCurrentCraft(item.name, -invQuantity);
+                    else{
+                        console.log("Else");
+                        var item = this.craftingRecipes.get(name);
+                        this.subtractItemRequirements(item, quantity);
+                        this.addElementToCurrentCraft(item.name, -quantity);
+                        inventoryCopy.set(name, inventoryQuantity - quantity);
+                    }
                 }
             }
+            console.log("AFTER");
+            console.log(this.currentCraft);
+            console.log(this.currentCraft.get("Elementstone"));
         }
 
         // Sort items into array sorting
