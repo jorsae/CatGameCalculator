@@ -109,11 +109,18 @@ export class Crafting{
         if(useInventory){
             // Remove items from craft if we have them in inventory
             for (const [name, quantity] of this.currentCraft.entries()) {
+                var craftingQuantity = this.craftingList.get(name);
                 var inventoryQuantity = this.inventory.get(name);
                 if(inventoryQuantity !== undefined){
+                    var invQuantity = inventoryQuantity;
+                    if(craftingQuantity !== undefined){
+                        if(craftingQuantity < inventoryQuantity){
+                            invQuantity = craftingQuantity;
+                        }
+                    }
                     var item = this.craftingRecipes.get(name);
-                    this.subtractItemRequirements(item, inventoryQuantity);
-                    this.addElementToCurrentCraft(item.name, -inventoryQuantity);
+                    this.subtractItemRequirements(item, invQuantity);
+                    this.addElementToCurrentCraft(item.name, -invQuantity);
                 }
             }
         }
