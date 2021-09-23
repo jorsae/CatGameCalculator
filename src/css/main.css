@@ -162,6 +162,7 @@ li:before {
 
 /* CSS for Main Menu */
 .topnav{
+    display: flex;
     text-decoration: none;
     overflow: none;
     width: 100vw;
@@ -171,8 +172,11 @@ li:before {
     margin-top: 12px;
 }
 
-.topnav a{
+.topnav a,
+.topnav form{
     color: white;
+    margin-left: 4px;
+    margin-right: 4px;
 }
 
 .topnav a:hover{
