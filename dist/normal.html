@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Cat Game Crafting Calculator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Optimize your cat game crafting the easy way!">
+        <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/media.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157531722-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-157531722-1');
+        </script>
+        <script>
+            $(document).ready(function(){
+                $('[data-toggle="tooltip"]').tooltip({
+                    boundary: "window"
+                });
+                $('[data-toggle="popover"]').on('shown.bs.popover', function(){
+                    setTimeout(function() {
+                        $('[data-toggle="popover"]').popover("hide")}, 2000);
+                });
+            });
+        </script>
+
+        <script data-ad-client="ca-pub-6698844999459390" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </head>
+    <body>
+        <p id="versionNumber" class="version-number"></p>
+
+        <div class="topnav" id="topNav">
+            <a href="./">Home</a>
+            <a href="normal.html">Normal crafting</a>
+            <a href="event.html">Club Event</a>
+            <a href="about.html">About</a>
+            <a href="feedback.html">Feedback</a>
+            <a href="javascript:void(0);" class="hamburger-menu" id="hamburgerMenu" aria-label="Hamburger Menu">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+
+        <div id="cookiePolicyBanner" class="cookie-policy">
+            <p class="cookie-paragraph">This site uses cookies to improve your user experience. By using CatGameCalcuator, you agree to our <a href="privacy.html">use of cookies</a>&nbsp;&nbsp;&nbsp;</p>
+            <button id="cookieAccept" class="cookie-policy-close">Accept</button>
+        </div>
+        
+        <div class="settings-container">
+            <span>
+                <h5 class="settings-label">Light mode</h5>
+                <label class="switch">
+                    <input id="checkboxLightTheme" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </span>
+
+            <span>
+                <h5 class="settings-label">Inventory</h5>
+                <label class="switch">
+                    <input id="checkboxInventory" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </span>
+
+            <span>
+                <h5 class="settings-label">Crafting time</h5>
+                <label class="switch">
+                    <input id="checkboxCraftingTime" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </span>
+        </div>
+
+        <h1 class="text-center">Cat Game Calculator</h1>
+        <button id="howToUse" class="text-center no-margin">How to use&nbsp;&nbsp;<i class="fa fa-angle-double-down"></i></button>
+        <div id="guideContainer" class="guide-container">
+            <ol>
+                <p class="text-center">For more information go to <a href="index.html">home</a></p>
+                <li>Input the items you want to craft.
+                <li>Select the time you want to use crafting them (shorter time, costs more)</li>
+                <li>1 minute crafting mode, will set all crafting items to take 1 minute to craft.</li>
+                <li>Press the "Calculate" button</li>
+            </ol>
+        </div>
+
+        <p class="text-center">For info on changes and new features, join our discord:
+            <b><a href="https://discord.gg/AXbUEBs">https://discord.gg/AXbUEBs</a>
+        </p>
+
+        <div id="craftingContainer" class="crafting-container">
+            <h2>Add crafting items for a floor</h2>
+            <select id="floors" aria-label="Selection to add pre-made floors">
+            </select>
+            <button id="addFloor" data-toggle="popover" data-placement="top">Add floor</button>
+            <button id="goToCalculations" data-toggle="popover" data-placement="top">Go to calculations</button>
+        </div>
+
+        <hr>
+        <div class="crafting-time-container">
+            <h2 id="craftingModeHeader" class="text-center">Crafting Mode</h2>
+
+            <div id="craftingModeContainer" class="crafting-mode crafting-time-input">
+                <select id="craftingMode" class="crafting-time-input" aria-label="Which crafting mode to use">
+                    <option value="casual">Casual</option>
+                    <option value="semi-competitive">Semi-competitive</option>
+                    <option value="competitive">Competitive</option>
+                </select>
+            </div>
+
+            <div id="craftingTime" class="crafting-time hide-crafting-time">
+                <p class="crafting-time-input">
+                    <span class="user-input-label">Hours:</span>
+                    <input id="userTimeHours" class="user-input" aria-label="Input for crafting time hours" type="number" value="0">
+                    <input id="userTimeBoost" class="user-input" aria-label="Input for boost" type="hidden" value="1.00">
+                </p>
+                <p class="crafting-time-input">
+                    <span class="user-input-label">Minutes:</span>
+                    <input id="userTimeMinutes" class="user-input" aria-label="Input for crafting time minutes" type="number" value="1">
+                </p>
+            </div>
+
+            <div class="crafting-time">
+                <div class="crafting-time-input">
+                    <label for="crafting" class="crafting-minute">1 minute crafting</label>
+                    <input id="crafting" type="checkbox" name="crafting" class="crafting-minute">
+                </div>
+            </div>
+
+            <div class="crafting-button">
+                <button id="calculate" data-toggle="popover" data-placement="top">Calculate</button>
+                <button id="clearCrafting" data-toggle="popover" data-placement="top">Clear</button>
+                <button id="clearInventory" class="hide-inventory" data-toggle="popover" data-placement="top">Clear Inventory</button>
+            </div>
+        </div>
+
+        <div id="outputContainer" class="output-container">
+            <div class="output-total">
+                <span id="outputTotalCost"></span>
+                <p id="inventoryMessage" class="text-center"></p>
+            </div>
+            <button id="copyClipboard" data-toggle="popover" data-placement="top">Copy to clipboard</button>
+            <table id="outputTable" class="output-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Quantity</th>
+                        <th>Goal</th>
+                        <th>Cost</th>
+                        <th>Crafting method</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+
+        <script type="text/javascript" src="js/required.min.js" defer></script>
+        <script type="text/javascript" src="js/normal.min.js" defer></script>
+        <!-- TODO: Remove bootstrap. It's only used for popover message on certain button clicks -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    </body>
+</html>

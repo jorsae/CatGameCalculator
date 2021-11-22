@@ -1,0 +1,117 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .full-guide{
+        width: 100vw;
+        max-width: 100%;
+    }
+
+    .topnav{
+        font-size: 2em;
+    }
+
+    .topnav a:not(:first-child) {
+        display: none;
+    }
+    .topnav a.hamburger-menu {
+        float: right;
+        display: block;
+    }
+
+    .topnav.responsive {
+        position: relative;
+    }
+    .topnav.responsive .hamburger-menu {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topnav.responsive a {
+        float: none;
+        display: block;
+        text-align: left;
+    }
+
+    /* This is because the google play image has white-space on both edges, and apple-icon does not */
+    .google-play-icon{
+        margin-left: -16px;
+    }
+}
+
+/* SUPER SMALL devices. Mostly for iPhone 5/SE */
+@media only screen and (max-width: 340px) {
+    .topnav{
+        font-size: 1.75em;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .full-guide{
+        width: 90vw;
+        max-width: 90%;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .full-guide{
+        width: 85vw;
+        max-width: 85%;
+    }
+    
+    .crafting-container,
+    .output-table,
+    .output-container{
+        width: 80;
+        max-width: 80%;
+    }
+
+    .crafting-time-input{
+        width: 25vw;
+    }
+
+    .light-mode-container{
+        position: absolute;
+    }
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .crafting-container,
+    .output-table,
+    .output-container{
+        width: 70;
+        max-width: 70%;
+    }
+
+    .crafting-time-input{
+        width: 22vw;
+    }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .full-guide{
+        width: 60vw;
+        max-width: 60%;
+    }
+
+    .crafting-container,
+    .output-table,
+    .output-container{
+        width: 60vw;
+        max-width: 60%;
+    }
+
+    .settings-container{
+        position: absolute;
+    }
+}
+
+/* Wide screens */
+@media only screen and (min-width: 1400px) {
+    .output-table {
+        width: 55vw;
+        max-width: 55%;
+    }
+}

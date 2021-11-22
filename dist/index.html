@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title> Cat Game Crafting Calculator</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A crafting calculator for optimizing your crafting needs in Cat Game - The Cats Collector!">
+        <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+        <link rel="stylesheet" type="text/css" href="css/main.css">
+        <link rel="stylesheet" type="text/css" href="css/media.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-157531722-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'UA-157531722-1');
+        </script>
+
+        <script data-ad-client="ca-pub-6698844999459390" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    </head>
+    <body>
+        <p id="versionNumber" class="version-number"></p>
+
+        <div class="topnav" id="topNav">
+            <a href="./">Home</a>
+            <a href="normal.html">Normal crafting</a>
+            <a href="event.html">Club Event</a>
+            <a href="about.html">About</a>
+            <a href="feedback.html">Feedback</a>
+            <a href="javascript:void(0);" class="hamburger-menu" id="hamburgerMenu" aria-label="Hamburger Menu">
+                <i class="fa fa-bars"></i>
+            </a>
+        </div>
+
+        <div id="cookiePolicyBanner" class="cookie-policy">
+            <p class="cookie-paragraph">This site uses cookies to improve your user experience. By using CatGameCalcuator, you agree to our <a href="privacy.html">use of cookies</a>&nbsp;&nbsp;&nbsp;</p>
+            <button id="cookieAccept" class="cookie-policy-close">Accept</button>
+        </div>
+        
+        <div class="settings-container">
+            <span>
+                <h5 class="settings-label">Light mode</h5>
+                <label class="switch">
+                    <input id="checkboxLightTheme" type="checkbox">
+                    <span class="slider round"></span>
+                </label>
+            </span>
+        </div>
+
+        <div id="727437446">
+            <script type="text/javascript">
+                try {
+                    window._mNHandle.queue.push(function (){
+                        window._mNDetails.loadTag("727437446", "728x90", "727437446");
+                    });
+                }
+                catch (error) {}
+                </script>
+        </div>
+
+        <h1 class="text-center">Cat Game Calculator</h1>
+        <div class="calculator-selection">
+            <a href="normal.html" class="calculator-option"><img src="images/normal-crafting_logo.png" class="calculator-selection-logo" alt="Normal crafting"></a>
+            <a href="event.html" class="calculator-option"><img src="images/club-event-crafting_logo.png" class="calculator-selection-logo" alt="Club-Event crafting"></a>
+        </div>
+        
+        <p class="text-center">For <strong>mini event reminders</strong>, join our discord:
+            <strong><a href="https://discord.gg/AXbUEBs">https://discord.gg/AXbUEBs</a></strong>
+        </p>
+        
+        <div class="guide-container-wrapper">
+            <div id="guideContainer" class="full-guide">
+                <h2 class="text-center">How to use Cat Game Calculator</h2>
+                <ol>
+                    <li>First you want to input what items you want to calculate. This can be done in 2 different ways:
+                        <ol class="small">
+                            <li>By using pre-made floors, you can add crafting items for whole floors at a time. Or in the case of club events for cat/decoration at a time.</li>
+                            <li>You can scroll down to the desired crafting item and manually type or use the arrow keys to increase/decrease the value.</li>
+                        </ol>
+                    </li>
+                    <li>Select the Crafting time.
+                        <ol class="small">
+                            <li>This is the time you want to use to craft all your items.</li>
+                            <li>Lower time will mean you will craft fewer items at a time, but it will be cheaper</li>
+                            <li>Higher time will mean you will craft more items at a time, but at a increased cost</li>
+                        </ol>
+                    </li>
+                    <li>Press the "Calculate meow" button</li>
+                    <li>You can also export the calculations, by clicking the "Copy to clipboard" button and pasting it in excel/google sheet or something similar.</li>
+                </ol>
+            </div>
+
+            <div id="guideContainer" class="full-guide">
+            <h2 class="text-center">Example Usages</h2>
+                <ol>
+                    <li>I want to figure out how many materials I need for floor 18
+                        <ol class="small">
+                            <li>Select floor: 18</li>
+                            <li>Click on the "Quick calculate" button</li>
+                            <li>Done. You can now see all the materials needed for floor 18.</li>
+                            <li>Since you did not change the crafting time, the cost will be inaccurate, as this goes under the assumption that you will craft all items at the same time.</li>
+                        </ol>
+                    </li>
+                    <li>I want to be able to craft 1 Needle every 30 minutes
+                        <ol class="small">
+                            <li>Manually select 1 needle as crafting input</li>
+                            <li>Set the crafting time to 30minutes</li>
+                            <li>Press the "Calculate meow" button</li>
+                            <li>You can now see in the calculations under "Crafting method" how you need to craft</li>
+                            <li>So in this example, you need to craft:
+                                <ul class="super-small">
+                                    <p class="no-margin">String: 1 at a time, 2 times.</p>
+                                    <p class="no-margin">Wood: 1 at a time, 2 times.</p>
+                                    <p class="no-margin">Ribbon: 1 at a time, 1 time.</p>
+                                    <p class="no-margin">Metal: 2 at a time, 2 times.</p>
+                                    <p class="no-margin">Needle: 1 at a time, 1 time.</p>
+                                </ul>
+                            </li>
+                        </ol>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <script type="text/javascript" src="js/required.min.js" defer></script>
+    </body>
+</html>
