@@ -121,10 +121,14 @@ export class Crafting{
             this.addElementToCurrentCraft(item.name, item.quantity);
         }
         
+        console.log("BEFORE");
+        console.log(this.currentCraft);
+        console.log(this.currentCraft.get("Elementstone"));
         if(useInventory){
             // Remove items from craft if we have them in inventory
             for (const [name, quantity] of this.currentCraft.entries()) {
                 var inventoryQuantity = inventoryCopy.get(name);
+                // console.log(name + ": " + inventoryQuantity);
                 if(inventoryQuantity !== undefined){
                     if(quantity > inventoryQuantity){
                         var item = this.craftingRecipes.get(name);
@@ -133,6 +137,7 @@ export class Crafting{
                         inventoryCopy.set(name, 0);
                     }
                     else{
+                        console.log("Else");
                         var item = this.craftingRecipes.get(name);
                         this.subtractItemRequirements(item, quantity);
                         this.addElementToCurrentCraft(item.name, -quantity);
@@ -140,6 +145,9 @@ export class Crafting{
                     }
                 }
             }
+            console.log("AFTER");
+            console.log(this.currentCraft);
+            console.log(this.currentCraft.get("Elementstone"));
         }
 
         // Sort items into array sorting

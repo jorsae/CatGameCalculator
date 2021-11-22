@@ -484,6 +484,7 @@ describe('Crafting', () => {
         c.addItemToCrafting('Sparkles', 2);
         var originalCost = c.getTotalCost();
         assert.strictEqual(originalCost, 39650);
+        console.log(originalCost);
         
         // Clear all items
         c.addItemToCrafting('String', -10);
