@@ -7,7 +7,7 @@
 
 ## General
 This project is a calculator for the phone game "Cat Game - The Cats Collector!". <br />
-The website can be found at https://catgamecalculator.com.
+The website can be found at https://jorsae.github.io/CatGameCalculator.
 
 ## Setup
 To run this project, simply download or clone this repo, install the [Dependencies](#dependencies) and build:
